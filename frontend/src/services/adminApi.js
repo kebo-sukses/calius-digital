@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL || '';
+const API_URL = process.env.REACT_APP_BACKEND_URL || 'https://calius-digital-production.up.railway.app';
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('admin_token');
@@ -93,3 +93,4 @@ export const uploadToCloudinary = async (file, folder = 'calius') => {
 };
 
 export default adminApi;
+
