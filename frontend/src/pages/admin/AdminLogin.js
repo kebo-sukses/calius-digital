@@ -89,12 +89,11 @@ const AdminLogin = () => {
           </Button>
         </form>
 
-        <p className="text-center text-neutral-500 text-sm mt-6">
-          Default: admin / admin123
-        </p>
+        
       </div>
     </div>
   );
 };
 
 export default AdminLogin;
+
