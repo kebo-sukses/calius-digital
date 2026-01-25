@@ -26,6 +26,7 @@ import AdminPricing from "@/pages/admin/AdminPricing";
 import AdminContacts from "@/pages/admin/AdminContacts";
 import AdminOrders from "@/pages/admin/AdminOrders";
 import AdminUsers from "@/pages/admin/AdminUsers";
+import AdminSettings from "@/pages/admin/AdminSettings";
 
 // Load Midtrans Snap script
 const loadMidtransScript = () => {
@@ -72,6 +73,7 @@ function App() {
               <Route path="contacts" element={<AdminContacts />} />
               <Route path="orders" element={<AdminOrders />} />
               <Route path="users" element={<AdminUsers />} />
+              <Route path="settings" element={<AdminSettings />} />
             </Route>
           </Routes>
           <Toaster />

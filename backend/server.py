@@ -967,3 +967,137 @@ app.add_middleware(
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+
+# ==================== SITE SETTINGS MODEL ====================
+class SiteSettings(BaseModel):
+    site_name: str = "Calius Digital"
+    tagline_id: str = "Wujudkan Website Impian Bisnis Anda"
+    tagline_en: str = "Build Your Dream Business Website"
+    description_id: str = "Kami membantu bisnis Anda tampil profesional di dunia digital dengan website berkualitas tinggi dan template premium."
+    description_en: str = "We help your business look professional in the digital world with high-quality websites and premium templates."
+    logo_url: str = ""
+    favicon_url: str = ""
+    meta_title: str = "Calius Digital - Web Agency Profesional"
+    meta_description: str = "Jasa pembuatan website profesional dan template premium untuk bisnis Anda."
+    meta_keywords: str = "website, template, web development, digital agency"
+    og_image: str = ""
+    contact_email: str = ""
+    contact_phone: str = ""
+    contact_whatsapp: str = ""
+    address: str = ""
+    social_facebook: str = ""
+    social_instagram: str = ""
+    social_twitter: str = ""
+    social_linkedin: str = ""
+    social_youtube: str = ""
+
+
+# ==================== SITE SETTINGS ENDPOINTS ====================
+@api_router.get("/settings")
+async def get_site_settings():
+    settings = await db.site_settings.find_one({"_id": "site_settings"})
+    if settings:
+        settings.pop("_id", None)
+        return settings
+    # Return default settings
+    default = SiteSettings()
+    return default.model_dump()
+
+@api_router.put("/settings")
+async def update_site_settings(settings: SiteSettings, current_user: dict = Depends(get_current_user)):
+    if not current_user.get("isAdmin"):
+        raise HTTPException(status_code=403, detail="Admin access required")
+    settings_dict = settings.model_dump()
+    await db.site_settings.update_one(
+        {"_id": "site_settings"},
+        {"$set": settings_dict},
+        upsert=True
+    )
+    return {"message": "Settings updated successfully", "settings": settings_dict}
+
+# ==================== DYNAMIC SITEMAP ====================
+@app.get("/sitemap.xml")
+async def generate_sitemap():
+    from datetime import datetime
+    base_url = "https://calius.digital"
+    
+    # Get all blog posts
+    blogs = []
+    async for blog in db.blog.find({"status": "published"}).sort("createdAt", -1):
+        blog["_id"] = str(blog["_id"])
+        blogs.append(blog)
+    
+    # Get all templates  
+    templates = []
+    async for template in db.templates.find({}).sort("createdAt", -1):
+        template["_id"] = str(template["_id"])
+        templates.append(template)
+    
+    # Get all portfolio items
+    portfolio = []
+    async for item in db.portfolio.find({}).sort("createdAt", -1):
+        item["_id"] = str(item["_id"])
+        portfolio.append(item)
+    
+    # Build sitemap XML
+    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    
+    # Static pages
+    static_pages = [
+        {"url": "/", "priority": "1.0", "changefreq": "daily"},
+        {"url": "/about", "priority": "0.8", "changefreq": "monthly"},
+        {"url": "/contact", "priority": "0.8", "changefreq": "monthly"},
+        {"url": "/portfolio", "priority": "0.9", "changefreq": "weekly"},
+        {"url": "/templates", "priority": "0.9", "changefreq": "weekly"},
+        {"url": "/blog", "priority": "0.9", "changefreq": "daily"},
+        {"url": "/pricing", "priority": "0.8", "changefreq": "weekly"},
+        {"url": "/privacy-policy", "priority": "0.3", "changefreq": "yearly"},
+        {"url": "/terms-of-service", "priority": "0.3", "changefreq": "yearly"},
+    ]
+    
+    for page in static_pages:
+        sitemap += f'  <url>\n'
+        sitemap += f'    <loc>{base_url}{page["url"]}</loc>\n'
+        sitemap += f'    <changefreq>{page["changefreq"]}</changefreq>\n'
+        sitemap += f'    <priority>{page["priority"]}</priority>\n'
+        sitemap += f'  </url>\n'
+    
+    # Blog posts
+    for blog in blogs:
+        slug = blog.get("slug", blog.get("_id"))
+        updated = blog.get("updatedAt") or blog.get("createdAt") or datetime.now().isoformat()
+        if isinstance(updated, datetime):
+            updated = updated.strftime("%Y-%m-%d")
+        elif isinstance(updated, str) and "T" in updated:
+            updated = updated.split("T")[0]
+        sitemap += f'  <url>\n'
+        sitemap += f'    <loc>{base_url}/blog/{slug}</loc>\n'
+        sitemap += f'    <lastmod>{updated}</lastmod>\n'
+        sitemap += f'    <changefreq>monthly</changefreq>\n'
+        sitemap += f'    <priority>0.7</priority>\n'
+        sitemap += f'  </url>\n'
+    
+    # Templates
+    for template in templates:
+        slug = template.get("slug", template.get("_id"))
+        sitemap += f'  <url>\n'
+        sitemap += f'    <loc>{base_url}/template/{slug}</loc>\n'
+        sitemap += f'    <changefreq>monthly</changefreq>\n'
+        sitemap += f'    <priority>0.7</priority>\n'
+        sitemap += f'  </url>\n'
+    
+    # Portfolio items
+    for item in portfolio:
+        slug = item.get("slug", item.get("_id"))
+        sitemap += f'  <url>\n'
+        sitemap += f'    <loc>{base_url}/portfolio/{slug}</loc>\n'
+        sitemap += f'    <changefreq>monthly</changefreq>\n'
+        sitemap += f'    <priority>0.6</priority>\n'
+        sitemap += f'  </url>\n'
+    
+    sitemap += '</urlset>'
+    
+    from fastapi.responses import Response
+    return Response(content=sitemap, media_type="application/xml")
+
