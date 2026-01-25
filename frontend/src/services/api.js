@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL || '';
+const API_URL = process.env.REACT_APP_BACKEND_URL || 'https://calius-digital-production.up.railway.app';
 const api = axios.create({
   baseURL: `${API_URL}/api`,
   headers: { 'Content-Type': 'application/json' }
@@ -48,3 +48,4 @@ export const apiService = {
 };
 
 export default apiService;
+
