@@ -953,21 +953,6 @@ def get_default_pricing():
         {"id": "3", "name_id": "Enterprise", "name_en": "Enterprise", "description_id": "Solusi lengkap untuk bisnis besar", "description_en": "Complete solution for large businesses", "price": 15000000, "price_note_id": "Pembayaran sekali", "price_note_en": "One-time payment", "features": [{"text_id": "Unlimited Halaman", "text_en": "Unlimited Pages", "included": True}, {"text_id": "Responsive Design", "text_en": "Responsive Design", "included": True}, {"text_id": "Contact Form", "text_en": "Contact Form", "included": True}, {"text_id": "SEO Premium", "text_en": "Premium SEO", "included": True}, {"text_id": "6 Bulan Support", "text_en": "6 Months Support", "included": True}, {"text_id": "Custom Features", "text_en": "Custom Features", "included": True}, {"text_id": "E-commerce", "text_en": "E-commerce", "included": True}], "is_popular": False, "order": 3}
     ]
 
-# Include router and middleware
-app.include_router(api_router)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_credentials=True,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
-
 # ==================== SITE SETTINGS MODEL ====================
 class SiteSettings(BaseModel):
     site_name: str = "Calius Digital"
@@ -1100,4 +1085,21 @@ async def generate_sitemap():
     
     from fastapi.responses import Response
     return Response(content=sitemap, media_type="application/xml")
+
+
+
+# Include router and middleware
+app.include_router(api_router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=True,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.on_event("shutdown")
+async def shutdown_db_client():
+    client.close()
 
