@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update & Changelog - ClipPremium | Version History</title>
+    <meta name="description" content="Lihat update terbaru, changelog, dan version history dari ClipPremium AI Video Clipper.">
+    <meta name="keywords" content="ClipPremium, update, changelog, version history, release notes">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+            color: #E2E8F0;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .logo i {
+            color: #10B981;
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #94A3B8;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #10B981;
+        }
+
+        .nav-links a.active {
+            color: #10B981;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #10B981, #06D6A0);
+            border-radius: 1px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #10B981, #06D6A0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: #94A3B8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Current Version Card */
+        .current-version {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(6, 214, 160, 0.1));
+            border: 2px solid #10B981;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .current-version::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #10B981, #06D6A0, #10B981);
+        }
+
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #10B981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .version-badge i {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .current-version h2 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .version-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            color: #94A3B8;
+            font-size: 0.9rem;
+        }
+
+        .version-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .version-meta i {
+            color: #10B981;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #E2E8F0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Changelog Section */
+        .changelog-section {
+            margin-top: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            color: #10B981;
+        }
+
+        /* Changelog Entry */
+        .changelog-entry {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .changelog-entry:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+            transform: translateX(5px);
+        }
+
+        .changelog-entry.latest {
+            border-color: #10B981;
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .changelog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .changelog-version {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .changelog-date {
+            color: #64748B;
+            font-size: 0.9rem;
+        }
+
+        .changelog-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .type-feature {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60A5FA;
+        }
+
+        .type-bugfix {
+            background: rgba(245, 158, 11, 0.2);
+            color: #FBBF24;
+        }
+
+        .type-improvement {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34D399;
+        }
+
+        .type-security {
+            background: rgba(239, 68, 68, 0.2);
+            color: #F87171;
+        }
+
+        .changelog-content {
+            color: #CBD5E1;
+        }
+
+        .changelog-content h4 {
+            color: #E2E8F0;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .changelog-content ul {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .changelog-content li {
+            position: relative;
+            margin-bottom: 0.5rem;
+            padding-left: 1rem;
+        }
+
+        .changelog-content li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #10B981;
+        }
+
+        /* API Status */
+        .api-status {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .api-status h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .api-endpoint {
+            background: #1E293B;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+
+        .api-method {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .method-get {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ADE80;
+        }
+
+        .api-url {
+            color: #94A3B8;
+            word-break: break-all;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #64748B;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #64748B;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #10B981;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .download-buttons {
+                flex-direction: column;
+            }
+
+            .version-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .changelog-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-film"></i>
+                <span>ClipPremium</span>
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="ai-clip-premium.html">Download</a></li>
+                    <li><a href="updates.html" class="active">Updates</a></li>
+                    <li><a href="installation-guide.html">Install Guide</a></li>
+                    <li><a href="../contact.html">Support</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>📦 Update & Changelog</h1>
+            <p>Lihat update terbaru, changelog, dan version history dari ClipPremium AI Video Clipper</p>
+        </div>
+
+        <!-- Current Version Card -->
+        <div class="current-version" id="currentVersion">
+            <div class="loading">
+                <i class="fas fa-spinner"></i>
+                <p>Memuat informasi versi...</p>
+            </div>
+        </div>
+
+        <!-- Changelog Section -->
+        <section class="changelog-section">
+            <h2 class="section-title">
+                <i class="fas fa-history"></i>
+                Version History
+            </h2>
+            
+            <div id="changelogList">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- API Status -->
+        <section class="api-status">
+            <h3><i class="fas fa-code"></i> Update API Endpoints</h3>
+            <p style="color: #94A3B8; margin-bottom: 1rem;">Untuk developer yang ingin mengintegrasikan update checker:</p>
+            
+            <div class="api-endpoint">
+                <span class="api-method method-get">GET</span>
+                <span class="api-url">/api/version.json</span>
+                <p style="color: #64748B; font-size: 0.8rem; margin-top: 0.5rem;">Mendapatkan informasi versi terbaru dalam format JSON</p>
+            </div>
+            
+            <div class="api-endpoint">
+                <span class="api-method method-get">GET</span>
+                <span class="api-url">/api/update-check.php?action=check&current_version=X.X.X</span>
+                <p style="color: #64748B; font-size: 0.8rem; margin-top: 0.5rem;">Cek apakah ada update tersedia berdasarkan versi saat ini</p>
+            </div>
+            
+            <div class="api-endpoint">
+                <span class="api-method method-get">GET</span>
+                <span class="api-url">/api/update-check.php?action=changelog</span>
+                <p style="color: #64748B; font-size: 0.8rem; margin-top: 0.5rem;">Mendapatkan changelog dalam format text atau HTML</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 <a href="https://calius.digital">Calius Digital</a>. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">
+            <a href="../terms.html">Terms</a> • 
+            <a href="../privacy.html">Privacy</a> • 
+            <a href="../contact.html">Contact</a>
+        </p>
+    </footer>
+
+    <script>
+        // Fetch version info from API
+        async function loadVersionInfo() {
+            try {
+                const response = await fetch('../api/version.json');
+                const data = await response.json();
+                
+                renderCurrentVersion(data);
+                renderChangelog(data);
+            } catch (error) {
+                console.error('Error loading version info:', error);
+                document.getElementById('currentVersion').innerHTML = `
+                    <p style="color: #EF4444;">❌ Gagal memuat informasi versi. Silakan refresh halaman.</p>
+                `;
+            }
+        }
+
+        // Render current version card
+        function renderCurrentVersion(data) {
+            const container = document.getElementById('currentVersion');
+            
+            const html = `
+                <span class="version-badge">
+                    <i class="fas fa-circle"></i> Latest Release
+                </span>
+                <h2>ClipPremium v${data.version} ${data.version_name || ''}</h2>
+                <div class="version-meta">
+                    <span><i class="fas fa-calendar"></i> ${formatDate(data.release_date)}</span>
+                    <span><i class="fas fa-download"></i> ${data.download_size_mb} MB</span>
+                    <span><i class="fas fa-code-branch"></i> Build: ${data.build_type || 'standard'}</span>
+                    ${data.is_critical ? '<span style="color: #F87171;"><i class="fas fa-exclamation-triangle"></i> Critical Update</span>' : ''}
+                </div>
+                <div style="margin: 1rem 0; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 8px;">
+                    <h4 style="margin-bottom: 0.5rem; color: #10B981;">${data.update_notes?.title || 'Update Notes'}</h4>
+                    <p style="color: #CBD5E1; font-size: 0.95rem;">${data.update_notes?.summary || ''}</p>
+                    ${data.update_notes?.action_required ? `
+                        <p style="color: #FBBF24; font-size: 0.85rem; margin-top: 0.75rem;">
+                            <i class="fas fa-info-circle"></i> ${data.update_notes.action_required}
+                        </p>
+                    ` : ''}
+                </div>
+                <div class="download-buttons">
+                    <a href="${data.files?.lite?.url || data.download_url}" class="btn-download btn-primary">
+                        <i class="fas fa-download"></i> Download LITE (${data.files?.lite?.size_mb || data.download_size_mb} MB)
+                    </a>
+                    ${data.files?.full ? `
+                        <a href="${data.files.full.url}" class="btn-download btn-secondary">
+                            <i class="fas fa-box"></i> Download Full (${data.files.full.size_mb} MB)
+                        </a>
+                    ` : ''}
+                    <a href="installation-guide.html" class="btn-download btn-secondary">
+                        <i class="fas fa-book"></i> Installation Guide
+                    </a>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        // Render changelog list
+        function renderChangelog(data) {
+            const container = document.getElementById('changelogList');
+            
+            // Current version changelog
+            let html = `
+                <div class="changelog-entry latest">
+                    <div class="changelog-header">
+                        <div>
+                            <span class="changelog-version">v${data.version}</span>
+                            <span class="changelog-type type-feature">Feature</span>
+                        </div>
+                        <span class="changelog-date">${formatDate(data.release_date)}</span>
+                    </div>
+                    <div class="changelog-content">
+                        ${formatChangelog(data.changelog)}
+                    </div>
+                </div>
+            `;
+            
+            // Historical versions
+            if (data.update_history && data.update_history.length > 1) {
+                data.update_history.slice(1).forEach(version => {
+                    html += `
+                        <div class="changelog-entry">
+                            <div class="changelog-header">
+                                <div>
+                                    <span class="changelog-version">v${version.version}</span>
+                                    <span class="changelog-type type-${version.type}">${version.type}</span>
+                                </div>
+                                <span class="changelog-date">${formatDate(version.date)}</span>
+                            </div>
+                            <div class="changelog-content">
+                                <p>${version.summary}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            container.innerHTML = html;
+        }
+
+        // Format date
+        function formatDate(dateStr) {
+            if (!dateStr) return 'Unknown';
+            const date = new Date(dateStr);
+            return date.toLocaleDateString('id-ID', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        // Format changelog text to HTML
+        function formatChangelog(text) {
+            if (!text) return '';
+            
+            // Split by sections
+            const sections = text.split('\n\n');
+            let html = '';
+            
+            sections.forEach(section => {
+                const lines = section.split('\n');
+                const firstLine = lines[0];
+                
+                if (firstLine.includes('NEW FEATURES') || firstLine.includes('✨')) {
+                    html += '<h4><i class="fas fa-star" style="color: #FBBF24;"></i> New Features</h4><ul>';
+                    lines.slice(1).forEach(line => {
+                        if (line.trim().startsWith('•')) {
+                            html += `<li>${line.replace('•', '').trim()}</li>`;
+                        }
+                    });
+                    html += '</ul>';
+                } else if (firstLine.includes('IMPROVEMENTS') || firstLine.includes('🔧')) {
+                    html += '<h4><i class="fas fa-tools" style="color: #60A5FA;"></i> Improvements</h4><ul>';
+                    lines.slice(1).forEach(line => {
+                        if (line.trim().startsWith('•')) {
+                            html += `<li>${line.replace('•', '').trim()}</li>`;
+                        }
+                    });
+                    html += '</ul>';
+                } else if (firstLine.includes('BUG FIXES') || firstLine.includes('🐛')) {
+                    html += '<h4><i class="fas fa-bug" style="color: #F87171;"></i> Bug Fixes</h4><ul>';
+                    lines.slice(1).forEach(line => {
+                        if (line.trim().startsWith('•')) {
+                            html += `<li>${line.replace('•', '').trim()}</li>`;
+                        }
+                    });
+                    html += '</ul>';
+                } else if (firstLine.includes('NOTES') || firstLine.includes('📋')) {
+                    html += '<h4><i class="fas fa-sticky-note" style="color: #A78BFA;"></i> Notes</h4><ul>';
+                    lines.slice(1).forEach(line => {
+                        if (line.trim().startsWith('•')) {
+                            html += `<li>${line.replace('•', '').trim()}</li>`;
+                        }
+                    });
+                    html += '</ul>';
+                }
+            });
+            
+            return html || `<p>${text.replace(/\n/g, '<br>')}</p>`;
+        }
+
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', loadVersionInfo);
+    </script>
+</body>
+</html>

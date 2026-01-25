@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Clip Premium - Advanced Video Processing Tool</title>
+    <meta name="description" content="Professional AI-powered video processing software with face tracking, subtitle masking, and smart automation">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <style>
+        .product-hero {
+            background: linear-gradient(135deg, #06D6A0 0%, #FF6B35 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+        }
+        .product-hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .product-hero p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        .version-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        .download-section {
+            max-width: 1200px;
+            margin: -50px auto 60px;
+            background: #1E293B;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            border: 1px solid rgba(6, 214, 160, 0.1);
+            padding: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        .security-badge-container {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(6, 214, 160, 0.1), rgba(16, 185, 129, 0.1));
+            border-radius: 12px;
+            border: 2px solid rgba(6, 214, 160, 0.3);
+            transition: all 0.3s ease;
+        }
+        .security-badge-container:hover {
+            border-color: #06D6A0;
+            box-shadow: 0 8px 25px rgba(6, 214, 160, 0.2);
+        }
+        .virustotal-link {
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #10b981, #06d6a0);
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .virustotal-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6, 214, 160, 0.4);
+        }
+        .download-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .download-card:hover {
+            border-color: #06D6A0;
+            box-shadow: 0 8px 25px rgba(6, 214, 160, 0.15);
+        }
+        .download-card h3 {
+            color: #06D6A0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #06D6A0 0%, #FF6B35 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+        }
+        .download-btn.secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .feature-card {
+            background: #1E293B;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border: 1px solid rgba(6, 214, 160, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        .feature-card h3 {
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+        .pricing-section {
+            background: #0F172A;
+            padding: 60px 20px;
+            margin-top: 60px;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .pricing-card {
+            background: #1E293B;
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border: 1px solid rgba(6, 214, 160, 0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .pricing-card.featured {
+            border: 3px solid #06D6A0;
+            transform: scale(1.05);
+        }
+        .pricing-card .badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #06D6A0;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        .pricing-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        .pricing-card .price {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #06D6A0;
+            margin: 20px 0;
+        }
+        .pricing-card .price span {
+            font-size: 0.5em;
+            color: #cbd5e0;
+        }
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .pricing-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+        .pricing-card li:before {
+            content: "✓";
+            color: #06D6A0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .system-requirements {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            background: #1E293B;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border: 1px solid rgba(6, 214, 160, 0.1);
+        }
+        .system-requirements h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .requirement-item {
+            padding: 15px;
+            background: rgba(6, 214, 160, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid #06D6A0;
+            color: #ffffff;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .requirement-item strong {
+            display: block;
+            color: #06D6A0;
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        .stats-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+        .stat-card {
+            padding: 30px;
+            background: #1E293B;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border: 1px solid rgba(6, 214, 160, 0.1);
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #06D6A0;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: #e2e8f0;
+            font-size: 1.1em;
+        }
+        .cta-section {
+            background: linear-gradient(135deg, #06D6A0 0%, #FF6B35 100%);
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+        }
+        .cta-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .cta-section p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Component -->
+    <div data-component="header"></div>
+
+    <!-- Hero Section -->
+    <section class="product-hero">
+        <div class="version-badge">🚀 Latest Version 3.2.2</div>
+        <h1>AI Clip Premium</h1>
+        <p>Professional Video Processing with Advanced AI Face Tracking, Subtitle Masking & Smart Automation</p>
+    </section>
+
+    <!-- Download Section -->
+    <div class="download-section">
+        <h2 style="text-align: center; margin-bottom: 20px;">Get Started Now</h2>
+        
+        <!-- Security Verification Badge -->
+        <div style="text-align: center; margin-bottom: 30px; padding: 20px; background: linear-gradient(135deg, rgba(6, 214, 160, 0.1), rgba(16, 185, 129, 0.1)); border-radius: 12px; border: 2px solid rgba(6, 214, 160, 0.3);">
+            <div style="display: inline-flex; align-items: center; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 2em;">🛡️</span>
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.85em; color: #94a3b8; margin-bottom: 3px;">Security Verified</div>
+                        <div style="font-weight: bold; color: #06D6A0; font-size: 1.1em;">100% Clean & Safe</div>
+                    </div>
+                </div>
+                <a href="https://www.virustotal.com/gui/file/e4a74f7457ab7416e2da27bf716cc8b2433f9402e0cc02f6cc4a723109817fcd" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #10b981, #06d6a0); padding: 10px 20px; border-radius: 8px; transition: transform 0.2s, box-shadow 0.2s;">
+                    <img src="https://img.shields.io/badge/VirusTotal-0%2F68%20Clean-brightgreen?style=flat-square&logo=virustotal" 
+                         alt="VirusTotal Scan - 0/68 Threats Detected"
+                         style="height: 24px;">
+                    <span style="color: white; font-weight: 600; font-size: 0.9em;">View Scan Report →</span>
+                </a>
+            </div>
+            <div style="margin-top: 12px; font-size: 0.85em; color: #cbd5e0;">
+                <strong>Scanned by 68 antivirus engines</strong> • SHA-256 Verified • Last Updated: January 14, 2026
+            </div>
+        </div>
+        
+        <!-- Official Download: Installer -->
+        <div class="download-card" style="background: linear-gradient(135deg, rgba(6, 214, 160, 0.1), rgba(255, 107, 53, 0.1)); border: 2px solid #06D6A0; position: relative;">
+            <div style="position: absolute; top: -12px; right: 20px; background: #06D6A0; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.85em; font-weight: bold;">
+                ⭐ OFFICIAL RELEASE
+            </div>
+            <h3>
+                <span>💻</span> ClipPremium Official Installer
+            </h3>
+            <p><strong>Version:</strong> 3.4.4 | <strong>Size:</strong> 75 MB | <strong>Release Date:</strong> January 16, 2026</p>
+            <div style="background: rgba(6, 214, 160, 0.15); padding: 15px; border-radius: 8px; border-left: 4px solid #06D6A0; margin: 15px 0;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 0.9em;">
+                    <div>✅ <strong>Professional Installation</strong></div>
+                    <div>✅ <strong>Auto-Update Support</strong></div>
+                    <div>✅ <strong>Python Embedded</strong></div>
+                    <div>✅ <strong>Desktop Shortcuts</strong></div>
+                </div>
+            </div>
+            <div style="background: #fef3c7; padding: 12px; border-radius: 8px; border-left: 4px solid #f59e0b; margin: 15px 0; font-size: 0.9em;">
+                <strong style="color: #92400e;">⚠️ Windows Security Warning:</strong>
+                <p style="margin: 5px 0 0 0; color: #78350f;">Windows may show "isn't commonly downloaded" warning. This is normal for new software. Click "More info" → "Run anyway" to install.</p>
+            </div>
+            <p style="margin-top: 15px; color: #e2e8f0;">Complete installation package with all dependencies included. One-click setup ready for production use.</p>
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap; margin-top: 15px;">
+                <a href="../api/download.php?file=ClipPremium_LITE_v3.4.4.exe" class="download-btn" onclick="gtag('event', 'download', {'method': 'installer_exe', 'version': '3.4.4_LITE'});">
+                    📥 Download Official Installer (75 MB)
+                </a>
+                <a href="installation-guide.html" style="color: #06D6A0; text-decoration: underline; font-size: 0.95em;">
+                    📖 Installation Guide →
+                </a>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 30px; color: #cbd5e0; font-size: 0.95em;">
+            📝 By downloading, you agree to our <a href="../terms-of-service.html" style="color: #06D6A0;">Terms of Service</a> and <a href="../privacy-policy.html" style="color: #06D6A0;">Privacy Policy</a>
+        </p>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stat-card">
+            <span class="stat-number">100K+</span>
+            <span class="stat-label">Videos Processed</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">99.9%</span>
+            <span class="stat-label">Uptime</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-number">4.9★</span>
+            <span class="stat-label">User Rating</span>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>AI Face Tracking</h3>
+            <p>Advanced dynamic face detection and tracking technology powered by MediaPipe for smooth, professional results.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3>Subtitle Masking</h3>
+            <p>Intelligent subtitle area detection and masking to ensure clean, professional video output.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>GPU Acceleration</h3>
+            <p>Hardware-accelerated processing using NVIDIA CUDA, AMD, and Intel for lightning-fast rendering.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🎬</div>
+            <h3>Aspect Ratio Convert</h3>
+            <p>Smart conversion between 16:9, 9:16, 1:1 with intelligent cropping and composition.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🌐</div>
+            <h3>YouTube Integration</h3>
+            <p>Direct download and processing from YouTube with automatic format detection.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Real-time Dashboard</h3>
+            <p>Beautiful web interface with live progress tracking, queue management, and analytics.</p>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.5em; color: #ffffff;">Choose Your Plan</h2>
+        <div class="pricing-grid" style="max-width: 400px; margin: 0 auto;">
+            <div class="pricing-card">
+                <h3>Buy Now</h3>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div style="text-decoration: line-through; color: #cbd5e0; font-size: 1.3em; margin-bottom: 10px; opacity: 0.6;">
+                        Rp 3 Juta
+                    </div>
+                    <div class="price" style="margin: 0;">Rp 500 Ribu <span>/lifetime</span></div>
+                    <div style="background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%); color: white; padding: 8px 16px; border-radius: 20px; display: inline-block; margin-top: 15px; font-size: 0.85em; font-weight: 600;">
+                        🔥 Promo 100 Orang Pertama
+                    </div>
+                </div>
+                <ul>
+                    <li>5 Videos per Month (Trial)</li>
+                    <li>Basic Face Tracking</li>
+                    <li>Subtitle Masking</li>
+                    <li>1080p Export Quality</li>
+                    <li>Email Support</li>
+                    <li>Free Updates</li>
+                </ul>
+                <a href="../checkout.html?plan=personal" class="download-btn">Get Started</a>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 30px; color: #e2e8f0;">
+            💳 We accept Credit Card, Bank Transfer, and Cryptocurrency
+        </p>
+    </section>
+
+    <!-- System Requirements -->
+    <section class="system-requirements">
+        <h2>System Requirements</h2>
+        <div class="requirements-grid">
+            <div class="requirement-item">
+                <strong>Operating System</strong>
+                Windows 10/11 (64-bit)
+            </div>
+            <div class="requirement-item">
+                <strong>Processor</strong>
+                Intel Core i5 or AMD Ryzen 5 (8th gen+)
+            </div>
+            <div class="requirement-item">
+                <strong>Memory (RAM)</strong>
+                8 GB minimum, 16 GB recommended
+            </div>
+            <div class="requirement-item">
+                <strong>Graphics Card</strong>
+                NVIDIA GTX 1060+ (CUDA) or equivalent
+            </div>
+            <div class="requirement-item">
+                <strong>Storage</strong>
+                500 MB installation + workspace
+            </div>
+            <div class="requirement-item">
+                <strong>Internet</strong>
+                Required for license activation
+            </div>
+        </div>
+    </section>
+
+    <!-- Security & Trust Section -->
+    <section style="max-width: 1000px; margin: 60px auto; padding: 40px 20px;">
+        <h2 style="text-align: center; margin-bottom: 40px; color: #ffffff; font-size: 2.5em; font-weight: 800; text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1);">
+            🔒 Security & Trust
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+            <!-- VirusTotal Verification -->
+            <div style="background: linear-gradient(135deg, #d1fae5, #a7f3d0); padding: 30px; border-radius: 12px; border: 2px solid #10b981; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <div style="font-size: 3em; margin-bottom: 15px;">🛡️</div>
+                <h3 style="color: #065f46; margin-bottom: 15px; font-size: 1.4em; font-weight: 700;">VirusTotal Verified</h3>
+                <div style="background: #10b981; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+                    <div style="font-size: 2em; font-weight: bold; color: #ffffff;">0/68</div>
+                    <div style="font-size: 0.9em; color: #d1fae5; font-weight: 600;">Threats Detected</div>
+                </div>
+                <p style="color: #065f46; line-height: 1.7; margin-bottom: 15px; font-weight: 500; font-size: 0.95em;">Scanned by 68 industry-standard antivirus engines. Zero malware, zero viruses, zero threats detected.</p>
+                <a href="https://www.virustotal.com/gui/file/e4a74f7457ab7416e2da27bf716cc8b2433f9402e0cc02f6cc4a723109817fcd" 
+                   target="_blank" 
+                   style="color: #047857; text-decoration: underline; font-weight: 700; font-size: 1em;">
+                    View Full Scan Report →
+                </a>
+            </div>
+
+            <!-- Privacy -->
+            <div style="background: linear-gradient(135deg, #fed7aa, #fde68a); padding: 30px; border-radius: 12px; border: 2px solid #f97316; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <div style="font-size: 3em; margin-bottom: 15px;">🔐</div>
+                <h3 style="color: #c2410c; margin-bottom: 15px; font-size: 1.4em; font-weight: 700;">Privacy First</h3>
+                <ul style="list-style: none; padding: 0; margin: 0; text-align: left; color: #7c2d12;">
+                    <li style="padding: 8px 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: #ea580c; font-weight: bold; font-size: 1.2em;">✓</span>
+                        <span style="font-weight: 600; font-size: 0.95em;">100% offline processing</span>
+                    </li>
+                    <li style="padding: 8px 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: #ea580c; font-weight: bold; font-size: 1.2em;">✓</span>
+                        <span style="font-weight: 600; font-size: 0.95em;">No data collection</span>
+                    </li>
+                    <li style="padding: 8px 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: #ea580c; font-weight: bold; font-size: 1.2em;">✓</span>
+                        <span style="font-weight: 600; font-size: 0.95em;">No telemetry tracking</span>
+                    </li>
+                    <li style="padding: 8px 0; display: flex; align-items: center; gap: 10px;">
+                        <span style="color: #ea580c; font-weight: bold; font-size: 1.2em;">✓</span>
+                        <span style="font-weight: 600; font-size: 0.95em;">Your files stay on your PC</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Open Source Components -->
+            <div style="background: linear-gradient(135deg, #e9d5ff, #ddd6fe); padding: 30px; border-radius: 12px; border: 2px solid #8b5cf6; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <div style="font-size: 3em; margin-bottom: 15px;">📦</div>
+                <h3 style="color: #6b21a8; margin-bottom: 15px; font-size: 1.4em; font-weight: 700;">Trusted Components</h3>
+                <p style="color: #581c87; line-height: 1.7; margin-bottom: 12px; font-weight: 500; font-size: 0.95em;">Built with industry-standard open-source libraries:</p>
+                <ul style="list-style: none; padding: 0; margin: 0; text-align: left; color: #581c87; font-size: 0.9em;">
+                    <li style="padding: 5px 0; font-weight: 600;">• Python (programming)</li>
+                    <li style="padding: 5px 0; font-weight: 600;">• FFmpeg (video processing)</li>
+                    <li style="padding: 5px 0; font-weight: 600;">• OpenCV (computer vision)</li>
+                    <li style="padding: 5px 0; font-weight: 600;">• PyTorch (AI models)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Windows Security Warning Explanation -->
+        <div style="margin-top: 40px; padding: 25px; background: #fef3c7; border-radius: 12px; border-left: 5px solid #f59e0b; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
+            <h4 style="color: #92400e; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; font-size: 1.3em; font-weight: 700;">
+                <span>⚠️</span> About Windows Security Warnings
+            </h4>
+            <p style="color: #78350f; line-height: 1.8; margin-bottom: 12px; font-size: 1em;">
+                If Windows shows "Unknown Publisher" warning during installation, <strong style="color: #92400e;">this is completely normal</strong> for new software. 
+            </p>
+            <p style="color: #92400e; line-height: 1.8; font-size: 0.95em; margin-bottom: 12px;">
+                <strong style="color: #78350f;">Why it happens:</strong> ClipPremium is new software (released January 2026) without Code Signing Certificate yet. 
+                Windows requires 1000+ downloads to build "reputation". We are working on obtaining professional certificate (expected: February 2026).
+            </p>
+            <p style="color: #78350f; line-height: 1.8; margin-top: 12px; font-size: 1em;">
+                <strong style="color: #92400e;">How to install:</strong> Click "More info" → "Run anyway". VirusTotal scan above proves the software is 100% safe.
+            </p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Transform Your Video Workflow?</h2>
+        <p>Join thousands of content creators who trust AI Clip Premium</p>
+        <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="download-btn" style="font-size: 1.2em; padding: 18px 50px;">
+            Download Now - It's Free to Try!
+        </a>
+    </section>
+
+    <!-- Footer Component -->
+    <div data-component="footer"></div>
+
+    <!-- Load Components -->
+    <script src="../assets/js/head-loader.js"></script>
+    <script src="../assets/js/components.js"></script>
+</body>
+</html>

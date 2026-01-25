@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Calius Digital</title>
+    <meta name="description" content="Terms of Service untuk penggunaan ClipPremium dan layanan Calius Digital. Syarat dan ketentuan penggunaan software.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #06D6A0;
+            --secondary: #FF6B35;
+            --dark: #0d1117;
+            --darker: #010409;
+            --card-bg: #161b22;
+            --text: #e6edf3;
+            --text-muted: #8b949e;
+            --border: #30363d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+            line-height: 1.8;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 20px 60px;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        .last-updated {
+            background: var(--card-bg);
+            padding: 15px 25px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 20px;
+            border: 1px solid var(--border);
+        }
+        
+        .last-updated span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Content Sections */
+        .legal-section {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+        }
+        
+        .legal-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .legal-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 25px 0 15px;
+            color: var(--text);
+        }
+        
+        .legal-section p {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+        
+        .legal-section ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        .legal-section li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+        
+        .legal-section li::marker {
+            color: var(--primary);
+        }
+        
+        .highlight-box {
+            background: rgba(6, 214, 160, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+        }
+        
+        .highlight-box p {
+            color: var(--text);
+            margin: 0;
+        }
+        
+        .warning-box {
+            background: rgba(255, 107, 53, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+        }
+        
+        .warning-box p {
+            color: var(--text);
+            margin: 0;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .legal-section {
+                padding: 25px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-video"></i> Calius Digital
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="product/ai-clip-premium.html">ClipPremium</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>📜 Terms of Service</h1>
+            <p>Syarat dan Ketentuan Penggunaan ClipPremium</p>
+            <div class="last-updated">
+                <i class="fas fa-calendar-alt"></i> Terakhir diperbarui: <span>16 Januari 2026</span>
+            </div>
+        </div>
+
+        <!-- Section 1: Introduction -->
+        <section class="legal-section">
+            <h2><i class="fas fa-handshake"></i> 1. Penerimaan Ketentuan</h2>
+            <p>Selamat datang di ClipPremium! Dengan mengunduh, menginstal, atau menggunakan software ClipPremium ("Software"), Anda menyetujui untuk terikat dengan Terms of Service ini.</p>
+            
+            <div class="highlight-box">
+                <p><strong>📌 Penting:</strong> Jika Anda tidak setuju dengan ketentuan ini, mohon untuk tidak mengunduh atau menggunakan Software kami.</p>
+            </div>
+            
+            <p>ClipPremium dikembangkan dan dikelola oleh <strong>Calius Digital</strong>, sebuah perusahaan digital yang berbasis di Indonesia.</p>
+        </section>
+
+        <!-- Section 2: License Grant -->
+        <section class="legal-section">
+            <h2><i class="fas fa-key"></i> 2. Pemberian Lisensi</h2>
+            
+            <h3>2.1 Lisensi Trial (Gratis)</h3>
+            <p>Kami memberikan Anda lisensi terbatas, non-eksklusif, dan tidak dapat dipindahtangankan untuk:</p>
+            <ul>
+                <li>Mengunduh dan menginstal Software pada perangkat personal Anda</li>
+                <li>Menggunakan Software untuk keperluan personal atau evaluasi</li>
+                <li>Memproses hingga <strong>10 video</strong> selama periode trial</li>
+            </ul>
+            
+            <h3>2.2 Lisensi Berbayar (Personal/Agency)</h3>
+            <p>Dengan membeli lisensi, Anda mendapatkan hak tambahan:</p>
+            <ul>
+                <li><strong>Personal License:</strong> Pemrosesan video unlimited pada 1 perangkat</li>
+                <li><strong>Agency License:</strong> Pemrosesan video unlimited pada hingga 10 perangkat, dengan opsi white-label</li>
+            </ul>
+            
+            <div class="warning-box">
+                <p><strong>⚠️ Pembatasan:</strong> Lisensi terikat dengan Hardware ID (HWID) perangkat Anda. Transfer lisensi ke perangkat lain memerlukan konfirmasi dari tim support.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Usage Restrictions -->
+        <section class="legal-section">
+            <h2><i class="fas fa-ban"></i> 3. Pembatasan Penggunaan</h2>
+            <p>Anda <strong>TIDAK DIPERBOLEHKAN</strong> untuk:</p>
+            <ul>
+                <li>Memodifikasi, mendekompilasi, atau merekayasa balik (reverse engineer) Software</li>
+                <li>Mendistribusikan, menjual, atau menyewakan Software tanpa izin tertulis</li>
+                <li>Menghapus atau mengubah pemberitahuan hak cipta atau tanda kepemilikan lainnya</li>
+                <li>Menggunakan Software untuk aktivitas ilegal atau melanggar hak cipta pihak ketiga</li>
+                <li>Berbagi lisensi key dengan pihak lain</li>
+                <li>Menggunakan Software untuk membuat konten yang melanggar hukum</li>
+            </ul>
+        </section>
+
+        <!-- Section 4: Intellectual Property -->
+        <section class="legal-section">
+            <h2><i class="fas fa-copyright"></i> 4. Hak Kekayaan Intelektual</h2>
+            <p>Software ClipPremium dan semua konten terkait, termasuk namun tidak terbatas pada:</p>
+            <ul>
+                <li>Kode sumber dan compiled code</li>
+                <li>Desain antarmuka pengguna (UI/UX)</li>
+                <li>Logo, merek dagang, dan identitas visual</li>
+                <li>Dokumentasi dan materi marketing</li>
+            </ul>
+            <p>adalah milik eksklusif <strong>Calius Digital</strong> dan dilindungi oleh hukum hak cipta Indonesia dan internasional.</p>
+        </section>
+
+        <!-- Section 5: Content Ownership -->
+        <section class="legal-section">
+            <h2><i class="fas fa-video"></i> 5. Kepemilikan Konten</h2>
+            <p>Anda tetap memiliki hak penuh atas:</p>
+            <ul>
+                <li>Video yang Anda proses menggunakan Software</li>
+                <li>Output video yang dihasilkan (clips, shorts, dll.)</li>
+                <li>Konten kreatif yang Anda buat</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <p><strong>✅ Catatan:</strong> ClipPremium tidak mengklaim kepemilikan atas konten yang Anda buat. Semua output adalah milik Anda sepenuhnya.</p>
+            </div>
+            
+            <p>Namun, Anda bertanggung jawab untuk memastikan bahwa konten yang Anda proses tidak melanggar hak cipta pihak ketiga.</p>
+        </section>
+
+        <!-- Section 6: Disclaimer -->
+        <section class="legal-section">
+            <h2><i class="fas fa-exclamation-triangle"></i> 6. Disclaimer & Batasan Tanggung Jawab</h2>
+            
+            <h3>6.1 "As Is" Basis</h3>
+            <p>Software disediakan "sebagaimana adanya" (as is) tanpa jaminan apapun, baik tersurat maupun tersirat, termasuk namun tidak terbatas pada jaminan kelayakan jual atau kesesuaian untuk tujuan tertentu.</p>
+            
+            <h3>6.2 Batasan Tanggung Jawab</h3>
+            <p>Calius Digital tidak bertanggung jawab atas:</p>
+            <ul>
+                <li>Kehilangan data atau kerusakan file</li>
+                <li>Kerugian bisnis atau kehilangan keuntungan</li>
+                <li>Kerusakan perangkat keras atau software</li>
+                <li>Masalah yang timbul dari penggunaan API pihak ketiga (Google, OpenAI, dll.)</li>
+            </ul>
+        </section>
+
+        <!-- Section 7: Third Party Services -->
+        <section class="legal-section">
+            <h2><i class="fas fa-plug"></i> 7. Layanan Pihak Ketiga</h2>
+            <p>ClipPremium terintegrasi dengan berbagai layanan pihak ketiga:</p>
+            <ul>
+                <li><strong>Google Gemini API:</strong> Untuk analisis video dengan AI</li>
+                <li><strong>Groq API:</strong> Untuk transkripsi Whisper (gratis)</li>
+                <li><strong>FFmpeg:</strong> Untuk pemrosesan video</li>
+                <li><strong>yt-dlp:</strong> Untuk mengunduh video dari YouTube</li>
+            </ul>
+            <p>Penggunaan layanan ini tunduk pada terms of service masing-masing provider.</p>
+        </section>
+
+        <!-- Section 8: Updates -->
+        <section class="legal-section">
+            <h2><i class="fas fa-sync-alt"></i> 8. Pembaruan Software</h2>
+            <p>Calius Digital berhak untuk:</p>
+            <ul>
+                <li>Merilis pembaruan, patch, atau versi baru Software</li>
+                <li>Mengubah atau menghentikan fitur tertentu</li>
+                <li>Memperbarui Terms of Service ini sewaktu-waktu</li>
+            </ul>
+            <p>Pembaruan Terms of Service akan diumumkan melalui website dan/atau notifikasi dalam aplikasi.</p>
+        </section>
+
+        <!-- Section 9: Termination -->
+        <section class="legal-section">
+            <h2><i class="fas fa-power-off"></i> 9. Penghentian</h2>
+            <p>Lisensi Anda dapat dihentikan jika:</p>
+            <ul>
+                <li>Anda melanggar ketentuan dalam Terms of Service ini</li>
+                <li>Anda terlibat dalam aktivitas fraud atau penyalahgunaan</li>
+                <li>Kami mendeteksi penggunaan lisensi yang tidak sah</li>
+            </ul>
+            <p>Setelah penghentian, Anda harus menghapus semua salinan Software dari perangkat Anda.</p>
+        </section>
+
+        <!-- Section 10: Contact -->
+        <section class="legal-section">
+            <h2><i class="fas fa-envelope"></i> 10. Kontak</h2>
+            <p>Untuk pertanyaan atau keluhan terkait Terms of Service ini, hubungi kami melalui:</p>
+            <ul>
+                <li><strong>Email:</strong> support@calius.digital</li>
+                <li><strong>WhatsApp:</strong> +62 812 6067 561</li>
+                <li><strong>Website:</strong> <a href="https://calius.digital" style="color: var(--primary);">https://calius.digital</a></li>
+            </ul>
+        </section>
+
+        <!-- Section 11: Governing Law -->
+        <section class="legal-section">
+            <h2><i class="fas fa-gavel"></i> 11. Hukum yang Berlaku</h2>
+            <p>Terms of Service ini diatur oleh dan ditafsirkan sesuai dengan hukum Republik Indonesia. Setiap sengketa akan diselesaikan melalui pengadilan yang berwenang di Indonesia.</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="product/ai-clip-premium.html">ClipPremium</a>
+            <a href="terms-of-service.html">Terms of Service</a>
+            <a href="privacy-policy.html">Privacy Policy</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <p>© 2026 Calius Digital. All rights reserved.</p>
+    </footer>
+</body>
+</html>

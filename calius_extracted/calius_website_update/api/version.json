@@ -1,0 +1,85 @@
+{
+  "version": "3.4.4",
+  "version_name": "LITE Edition",
+  "version_code": 344,
+  "build_type": "lite",
+  "download_url": "https://calius.digital/api/download.php?file=ClipPremium_LITE_v3.4.4.exe",
+  "download_size_mb": 77,
+  "changelog": "🎉 Version 3.4.4 LITE - Smaller, Faster, Better!\n\n✨ NEW FEATURES:\n• Groq API Integration - FREE transcription (14,400 req/day)\n• 3-Level Fallback: Groq → Whisper → Placeholder\n• Video Library Metadata Display (Viral Score, Headline)\n• Bilingual AI Analysis (Indonesian + English)\n• LITE Build - Only 77MB installer!\n\n🔧 IMPROVEMENTS:\n• 60% smaller app size (~200MB vs 2.7GB)\n• Faster transcription via cloud API\n• Better timestamp parsing\n• Enhanced clip metadata extraction\n• Improved installation process\n\n🐛 BUG FIXES:\n• Fixed duplicate bilingual timestamps\n• Fixed result.json clip parsing\n• Fixed email module import error\n• Improved error handling\n\n📋 NOTES:\n• Configure Groq API key in API Keys tab\n• Get FREE key: console.groq.com/keys\n• No local Whisper needed (cloud transcription)",
+  "changelog_html": "<h3>🎉 Version 3.4.4 LITE</h3><p><strong>Smaller, Faster, Better!</strong></p><ul><li>✨ Groq API - FREE cloud transcription</li><li>📦 LITE Build - Only 77MB installer</li><li>🌐 Bilingual AI Analysis (ID + EN)</li><li>📊 Video Library Metadata</li><li>🐛 Multiple bug fixes</li></ul>",
+  "is_critical": false,
+  "force_update": false,
+  "release_date": "2026-01-16",
+  "min_version_required": "3.0.0",
+  "update_notes": {
+    "title": "LITE Edition + Groq API",
+    "summary": "Build LITE dengan Groq API untuk transcription cloud GRATIS. Ukuran installer hanya 77MB!",
+    "action_required": "Setelah update, buka API Keys tab dan masukkan Groq API key Anda untuk transcription gratis.",
+    "highlights": [
+      "Installer 60% lebih kecil",
+      "Transcription cloud GRATIS via Groq",
+      "Bilingual AI Analysis",
+      "Video Library dengan metadata"
+    ]
+  },
+  "files": {
+    "lite": {
+      "filename": "ClipPremium_LITE_v3.4.4.exe",
+      "url": "https://calius.digital/api/download.php?file=ClipPremium_LITE_v3.4.4.exe",
+      "size_mb": 77,
+      "sha256": "",
+      "description": "Recommended - Cloud transcription via Groq API"
+    },
+    "full": {
+      "filename": "ClipPremium_Setup_v3.4.4.exe",
+      "url": "https://calius.digital/api/download.php?file=ClipPremium_Setup_v3.4.4.exe",
+      "size_mb": 250,
+      "sha256": "",
+      "description": "Includes local Whisper model (offline transcription)"
+    }
+  },
+  "features": {
+    "face_tracking": true,
+    "subtitle_masking": true,
+    "pdf_analysis": true,
+    "gpu_acceleration": true,
+    "batch_processing": true,
+    "groq_transcription": true,
+    "bilingual_analysis": true,
+    "video_library_metadata": true
+  },
+  "system_requirements": {
+    "os": "Windows 10/11 (64-bit)",
+    "ram_min": "8 GB",
+    "ram_recommended": "16 GB",
+    "storage_lite": "300 MB",
+    "storage_full": "3 GB",
+    "internet": "Required for Groq API transcription"
+  },
+  "support": {
+    "email": "support@calius.digital",
+    "whatsapp": "+628126067561",
+    "website": "https://calius.digital",
+    "docs": "https://calius.digital/product/installation-guide.html"
+  },
+  "update_history": [
+    {
+      "version": "3.4.4",
+      "date": "2026-01-16",
+      "type": "feature",
+      "summary": "LITE Edition + Groq API Integration"
+    },
+    {
+      "version": "3.4.3",
+      "date": "2026-01-14",
+      "type": "bugfix",
+      "summary": "License system improvements"
+    },
+    {
+      "version": "3.4.2",
+      "date": "2026-01-12",
+      "type": "feature",
+      "summary": "Video Library improvements"
+    }
+  ]
+}

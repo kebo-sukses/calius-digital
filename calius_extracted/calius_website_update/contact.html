@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Contact Us - Calius Digital</title>
+    <meta name="description" content="Get in touch with Calius Digital. We're here to help with any questions about our premium website templates.">
+    <meta name="keywords" content="contact calius digital, support, help, customer service">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="/assets/images/logo1.webp">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    
+    <style>
+        .contact-hero {
+            padding-top: calc(var(--header-height) + var(--spacing-2xl));
+            padding-bottom: var(--spacing-2xl);
+            background: linear-gradient(135deg, #06D6A0 0%, #FF6B35 100%);
+            color: white;
+            text-align: center;
+        }
+
+        /* Subtitle badge: semi-transparent box for better readability */
+        .contact-hero p {
+            display: inline-block;
+            background: rgba(0,0,0,0.22);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .contact-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+        
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: var(--spacing-2xl);
+            margin-top: var(--spacing-2xl);
+        }
+        
+        .contact-form-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-2xl);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .contact-info-section {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+        
+        .contact-info-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .contact-info-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-info-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+        
+        .contact-info-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .contact-info-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .contact-info-text a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .form-success {
+            display: none;
+            padding: var(--spacing-lg);
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--success-color);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-lg);
+            color: var(--success-color);
+        }
+        
+        .form-success.show {
+            display: block;
+        }
+        
+        .faq-section {
+            margin-top: var(--spacing-3xl);
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .faq-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform var(--transition-fast);
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-base);
+            color: var(--text-secondary);
+            padding-top: 0;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-top: var(--spacing-md);
+        }
+        
+        @media (max-width: 1024px) {
+            .contact-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Improve visibility of CTA buttons inside contact info cards */
+        .contact-info-card .btn {
+            display: inline-block;
+            padding: 0.6rem 1.1rem;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #06D6A0 0%, #0396A6 100%);
+            color: #ffffff !important;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(37,99,235,0.18);
+            text-decoration: none;
+            border: none;
+            transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+        }
+
+        .contact-info-card .btn:hover,
+        .contact-info-card .btn:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(37,99,235,0.22);
+            filter: saturate(1.05);
+            outline: none;
+        }
+
+        .contact-info-card .btn:focus-visible {
+            outline: 3px solid rgba(37,99,235,0.15);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 600px) {
+            .contact-info-card .btn {
+                width: 100%;
+                text-align: center;
+                padding: 0.75rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1 data-i18n="contact.title">Contact Us</h1>
+            <p data-i18n="contact.subtitle">Get in touch with our team. We're here to help!</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="section">
+        <div class="container">
+            <div class="contact-layout">
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <h2 style="margin-bottom: var(--spacing-lg);">Send us a Message</h2>
+                    
+                    <div class="contact-form-cta" style="background:white;border-radius:var(--radius-lg);padding:var(--spacing-2xl);box-shadow:var(--shadow-sm);">
+                        <h2 style="margin-bottom:var(--spacing-md);">Contact Us</h2>
+                        <p>If you prefer, please email us directly at <a href="mailto:admin@calius.digital">admin@calius.digital</a> or start a WhatsApp chat:</p>
+                        <p style="margin-top:var(--spacing-sm);"><a href="https://wa.me/628126067561" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a></p>
+                        <p style="margin-top:var(--spacing-md);color:var(--text-secondary);">Removing the form reduces spam and allows faster direct support.</p>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="contact-info-section">
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon">📧</div>
+                        <h3 class="contact-info-title">Email Us</h3>
+                        <div class="contact-info-text">
+                            <p>For general inquiries:</p>
+                            <a href="mailto:admin@calius.digital">admin@calius.digital</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon">📱</div>
+                        <h3 class="contact-info-title">WhatsApp</h3>
+                        <div class="contact-info-text">
+                            <p>Chat with us on WhatsApp</p>
+                            <p>Available Monday - Friday</p>
+                            <p>9:00 AM - 6:00 PM (GMT+7)</p>
+                            <a href="https://wa.me/628126067561" class="btn btn-primary btn-sm" style="margin-top: var(--spacing-sm);" target="_blank" rel="noopener noreferrer">
+                                Chat on WhatsApp
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon">⏰</div>
+                        <h3 class="contact-info-title">Response Time</h3>
+                        <div class="contact-info-text">
+                            <p>We typically respond within:</p>
+                            <p><strong>24 hours</strong> for email inquiries</p>
+                            <p><strong>2 hours</strong> for live chat</p>
+                            <p><strong>Instant</strong> for urgent issues</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-card">
+                        <div class="contact-info-icon">🌐</div>
+                        <h3 class="contact-info-title">Follow Us</h3>
+                        <div class="contact-info-text">
+                            <p>Stay connected on social media</p>
+                            <div class="social-links">
+                                <a href="https://www.facebook.com/Calius.Digital.Marketing" class="social-link" title="Facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook - Calius Digital">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path fill="currentColor" d="M22 12c0-5.522-4.477-10-10-10S2 6.478 2 12c0 4.991 3.657 9.128 8.438 9.877v-6.99H7.898v-2.887h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.772-1.63 1.562v1.875h2.773l-.443 2.887h-2.33v6.99C18.343 21.128 22 16.991 22 12z"/>
+                                    </svg>
+                                </a>
+
+                                <a href="https://www.linkedin.com/company/calius-digital-merketing/" class="social-link" title="LinkedIn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn - Calius Digital">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path fill="currentColor" d="M20.447 20.452h-3.554v-5.569c0-1.328-.024-3.038-1.852-3.038-1.853 0-2.136 1.445-2.136 2.94v5.667H9.351V9h3.414v1.561h.049c.476-.9 1.637-1.848 3.368-1.848 3.6 0 4.267 2.37 4.267 5.451v6.288zM5.337 7.433c-1.144 0-2.07-.927-2.07-2.07 0-1.144.926-2.07 2.07-2.07 1.144 0 2.07.926 2.07 2.07 0 1.143-.926 2.07-2.07 2.07zM6.999 20.452H3.673V9h3.326v11.452z"/>
+                                    </svg>
+                                </a>
+
+                                <a href="https://whatsapp.com/channel/0029VbBYMaV8aKvHj7iVee1F" class="social-link" title="WhatsApp Channel" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Channel - Calius Digital">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <path fill="currentColor" d="M20.52 3.48A11.95 11.95 0 0012 0C5.373 0 .09 4.96.09 11.07c0 1.94.51 3.83 1.48 5.48L0 24l7.7-2.02A11.95 11.95 0 0012 22c6.627 0 11.91-4.96 11.91-11.07 0-2.97-1.19-5.76-3.39-7.45z"/>
+                                        <path fill="#fff" d="M17.3 14.1c-.2-.1-1.1-.5-1.3-.5-.2 0-.3-.1-.5.1-.2.2-.9.5-1.1.6-.2.1-.4.05-.6-.2-.2-.2-.9-1.1-1.1-1.3-.2-.2-.05-.3.1-.5.1-.1.2-.3.3-.5.1-.1.05-.4 0-.6-.05-.2-.5-1.1-.7-1.5-.2-.4-.4-.3-.6-.3-.2 0-.4 0-.6 0-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 1.9 2.9 4.8 3.9 1.2.4 1.7.4 2.3.3.6-.1 1.9-.8 2.2-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.6-.3z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq-section" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Quick answers to common questions</p>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I download my purchased template?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>After completing your purchase, you'll receive an email with a download link. You can also access your downloads from your account dashboard. The download link is valid for 1 year and allows up to 5 downloads.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I get a refund if I'm not satisfied?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We offer a 30-day money-back guarantee. If you're not satisfied with your purchase for any reason, contact us within 30 days for a full refund. No questions asked.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do I get lifetime updates?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! All our templates come with lifetime updates at no additional cost. Whenever we release new features, improvements, or security patches, you'll get them for free.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I use the template for multiple websites?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Each license allows you to use the template on one website. If you need to use it on multiple sites, you'll need to purchase additional licenses. We offer volume discounts for multiple purchases.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What kind of support do you provide?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We provide comprehensive support including email support, live chat, detailed documentation, and video tutorials. Our support team is available Monday-Friday, 9 AM - 6 PM GMT+7.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are the templates mobile-friendly?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! All our templates are built with a mobile-first approach and are fully responsive. They look perfect on all devices including smartphones, tablets, and desktops.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container text-center">
+            <h2 class="section-title">Still Have Questions?</h2>
+            <p class="section-subtitle">Don't hesitate to reach out. We're here to help!</p>
+            <a href="mailto:support@calius.digital" class="btn btn-primary btn-lg">Email Us</a>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/components.js"></script>
+    <!-- language.js removed (English-only site) -->
+    <script src="/assets/js/main.js"></script>
+    
+    <script>
+        // Contact form submission
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            try {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="loading"></span> Sending...';
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // Show success message
+                document.getElementById('form-success').classList.add('show');
+                this.reset();
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('form-success').classList.remove('show');
+                }, 5000);
+                
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+                
+            } catch (error) {
+                console.error('Form submission error:', error);
+                alert('Failed to send message. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+        
+        // FAQ accordion
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const isActive = this.classList.contains('active');
+                
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
+    
+        <!-- WhatsApp FAB -->
+        <div class="whatsapp-fab" aria-hidden="false">
+            <a href="https://wa.me/628126067561" title="Chat on WhatsApp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path fill="currentColor" d="M20.52 3.48A11.95 11.95 0 0012 0C5.373 0 .09 4.96.09 11.07c0 1.94.51 3.83 1.48 5.48L0 24l7.7-2.02A11.95 11.95 0 0012 22c6.627 0 11.91-4.96 11.91-11.07 0-2.97-1.19-5.76-3.39-7.45zM12 20.3c-1.9 0-3.73-.5-5.31-1.44l-.38-.23-4.58 1.2 1.24-4.26-.25-.4A8.3 8.3 0 013.7 11.07c0-4.58 4.05-8.3 9.3-8.3 2.48 0 4.78.96 6.53 2.7a8.99 8.99 0 012.7 6.53c0 4.58-4.05 8.3-9.3 8.3z"/>
+                    <path fill="#fff" d="M17.3 14.1c-.2-.1-1.1-.5-1.3-.5-.2 0-.3-.1-.5.1-.2.2-.9.5-1.1.6-.2.1-.4.05-.6-.2-.2-.2-.9-1.1-1.1-1.3-.2-.2-.05-.3.1-.5.1-.1.2-.3.3-.5.1-.1.05-.4 0-.6-.05-.2-.5-1.1-.7-1.5-.2-.4-.4-.3-.6-.3-.2 0-.4 0-.6 0-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 1.9 2.9 4.8 3.9 1.2.4 1.7.4 2.3.3.6-.1 1.9-.8 2.2-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.6-.3z"/>
+                </svg>
+                <span class="sr-only">Chat on WhatsApp</span>
+            </a>
+        </div>
+
+</body>
+</html>

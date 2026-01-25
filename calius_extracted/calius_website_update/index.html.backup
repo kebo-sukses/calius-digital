@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" 
+    data-page-title="Calius Digital - Premium High-Speed Website Templates"
+    data-page-description="Buy premium website templates with guaranteed high-speed performance. Business, E-commerce, Portfolio, Landing Page & Restaurant templates. Instant download, lifetime updates."
+    data-page-keywords="premium templates, website templates, high speed templates, responsive templates, business templates, ecommerce templates"
+    data-page-url="https://calius.digital/"
+    data-og-image="https://calius.digital/assets/images/og-image.jpg">
+<head>
+    <!-- Page styles (critical styles loaded early to avoid FOUC) -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Calius Digital - Premium High-Speed Website Templates</title>
+    <meta name="description" content="Buy premium website templates with guaranteed high-speed performance. Business, E-commerce, Portfolio, Landing Page & Restaurant templates. Instant download, lifetime updates.">
+    <meta name="keywords" content="premium templates, website templates, high speed templates, responsive templates, business templates, ecommerce templates">
+    <meta name="author" content="Calius Digital">
+    <meta name="robots" content="index, follow">
+
+    <!-- Google Search Console verification -->
+    <meta name="google-site-verification" content="f4fda0e5f4997677">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calius.digital/">
+    <meta property="og:title" content="Calius Digital - Premium High-Speed Website Templates">
+    <meta property="og:description" content="Buy premium website templates with guaranteed high-speed performance. Instant download, lifetime updates.">
+    <meta property="og:image" content="https://calius.digital/assets/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://calius.digital/">
+    <meta property="twitter:title" content="Calius Digital - Premium High-Speed Website Templates">
+    <meta property="twitter:description" content="Buy premium website templates with guaranteed high-speed performance.">
+    <meta property="twitter:image" content="https://calius.digital/assets/images/og-image.jpg">
+
+    <!-- Critical inline CSS: minimal styles to prevent FOUC while full CSS loads -->
+    <style>
+         html,body{background:#ffffff;color:#1f2937;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;margin:0;padding:0}
+         .container{width:100%;max-width:1280px;margin:0 auto;padding:0 1rem}
+         .header, #header-placeholder{height:70px}
+         .logo img,.site-logo{height:40px;display:block}
+         .nav-menu{display:flex;gap:1rem;align-items:center}
+         .hero{padding-top:calc(70px + 2rem);padding-bottom:2rem}
+         h1,h2,h3{color:#1f2937;margin:0 0 1rem}
+         a{color:#2563eb;text-decoration:none}
+         img{max-width:100%;height:auto;display:block}
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="/assets/images/logo1.webp">
+    <link rel="apple-touch-icon" href="/assets/images/logo1.webp">
+
+    <!-- DNS Prefetch & Preconnect -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/assets/css/main.css" as="style">
+    <link rel="preload" href="/assets/images/logo1.png" as="image">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2563eb">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calius.digital/">
+</head>
+<body>
+    
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title" data-i18n="hero.title">
+                Premium High-Speed Website Templates
+            </h1>
+            <p class="hero-subtitle" data-i18n="hero.subtitle">
+                Build stunning websites with our lightning-fast templates. Perfect for businesses, e-commerce, portfolios, and more.
+            </p>
+            <div class="hero-cta">
+                <a href="/templates.html" class="btn btn-primary btn-lg" data-i18n="hero.cta.browse">
+                    Browse Templates
+                </a>
+                <a href="/about.html" class="btn btn-outline btn-lg" data-i18n="hero.cta.learn">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Why Choose Calius Digital?</h2>
+            <p class="section-subtitle">
+                We provide premium templates with unmatched performance and quality
+            </p>
+            
+            <div class="grid grid-3 features-grid">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-icon" style="font-size: 3rem; margin-bottom: 1rem;">⚡</div>
+                        <h3 class="card-title">Lightning Fast</h3>
+                        <p class="card-text">
+                            All templates achieve 95+ PageSpeed scores with optimized code and assets.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-icon" style="font-size: 3rem; margin-bottom: 1rem;">📱</div>
+                        <h3 class="card-title">Fully Responsive</h3>
+                        <p class="card-text">
+                            Perfect display on all devices - desktop, tablet, and mobile.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-icon" style="font-size: 3rem; margin-bottom: 1rem;">🔄</div>
+                        <h3 class="card-title">Lifetime Updates</h3>
+                        <p class="card-text">
+                            Get free updates forever. We continuously improve our templates.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-icon" style="font-size: 3rem; margin-bottom: 1rem;">🎨</div>
+                        <h3 class="card-title">Easy Customization</h3>
+                        <p class="card-text">
+                            Clean, well-documented code makes customization simple and fast.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-icon" style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+                        <h3 class="card-title">Secure Code</h3>
+                        <p class="card-text">
+                            Built with security best practices and regular security updates.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-icon" style="font-size: 3rem; margin-bottom: 1rem;">💬</div>
+                        <h3 class="card-title">Premium Support</h3>
+                        <p class="card-text">
+                            Get help from our expert team whenever you need assistance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section" style="background-color: var(--bg-secondary);">
+        <div class="container">
+            <h2 class="section-title">Template Categories</h2>
+            <p class="section-subtitle">
+                Choose from our diverse collection of professional templates
+            </p>
+            
+            <div class="grid grid-3">
+                <a href="/templates.html?category=business" class="card" style="text-decoration: none;">
+                    <div class="card-body text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">💼</div>
+                        <h3 class="card-title" data-i18n="category.business">Business</h3>
+                        <p class="card-text">Professional templates for corporate websites</p>
+                    </div>
+                </a>
+                
+                <a href="/templates.html?category=ecommerce" class="card" style="text-decoration: none;">
+                    <div class="card-body text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🛒</div>
+                        <h3 class="card-title" data-i18n="category.ecommerce">E-commerce</h3>
+                        <p class="card-text">Complete solutions for online stores</p>
+                    </div>
+                </a>
+                
+                <a href="/templates.html?category=portfolio" class="card" style="text-decoration: none;">
+                    <div class="card-body text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🎨</div>
+                        <h3 class="card-title" data-i18n="category.portfolio">Portfolio</h3>
+                        <p class="card-text">Showcase your creative work beautifully</p>
+                    </div>
+                </a>
+                
+                <a href="/templates.html?category=landing-page" class="card" style="text-decoration: none;">
+                    <div class="card-body text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🚀</div>
+                        <h3 class="card-title" data-i18n="category.landing-page">Landing Page</h3>
+                        <p class="card-text">High-converting pages for campaigns</p>
+                    </div>
+                </a>
+                
+                <a href="/templates.html?category=restaurant" class="card" style="text-decoration: none;">
+                    <div class="card-body text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🍽️</div>
+                        <h3 class="card-title" data-i18n="category.restaurant">Restaurant</h3>
+                        <p class="card-text">Delicious templates for food businesses</p>
+                    </div>
+                </a>
+                
+                <a href="/templates.html" class="card" style="text-decoration: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <div class="card-body text-center">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">✨</div>
+                        <h3 class="card-title" style="color: white;">View All</h3>
+                        <p class="card-text" style="color: rgba(255,255,255,0.9);">Browse our complete collection</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+        <div class="container text-center">
+            <h2 class="section-title">Ready to Build Your Dream Website?</h2>
+            <p class="section-subtitle">
+                Join thousands of satisfied customers worldwide
+            </p>
+            <a href="/templates.html" class="btn btn-primary btn-lg">
+                Browse Templates Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Latest Blog Previews -->
+    <section class="section" id="home-latest-blogs">
+        <div class="container">
+            <h2 class="section-title">Latest From Our Blog</h2>
+            <p class="section-subtitle">Read the latest articles, tips and tutorials from Calius Digital.</p>
+
+            <div id="latest-blogs-grid" class="grid grid-3" style="margin-top: var(--spacing-lg);">
+                <!-- JS will inject up to 3 blog cards here -->
+                <div class="loading-spinner" style="grid-column: 1 / -1;">
+                    <div class="loading" style="width: 40px; height: 40px; border-width: 4px;"></div>
+                    <p style="margin-top: 1rem;">Loading articles...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts (Deferred for Performance) -->
+    <script src="/assets/js/components.js" defer></script>
+    <!-- language.js removed (English-only site) -->
+    <script src="/assets/js/lazy-load.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
+    
+        <script>
+        // Load latest 3 published blog posts into the home page
+        (function(){
+            async function loadLatestBlogs() {
+                try {
+                    const res = await fetch('/data/blog.json');
+                    if (!res.ok) return showError();
+                    const data = await res.json();
+                    const posts = (data.posts || []).filter(p => p.status === 'published')
+                        .sort((a,b) => new Date(b.publishDate) - new Date(a.publishDate))
+                        .slice(0,3);
+
+                    const grid = document.getElementById('latest-blogs-grid');
+                    if (!grid) return;
+
+                    if (posts.length === 0) {
+                        grid.innerHTML = '<div class="no-results" style="grid-column:1/-1"><p>No recent articles.</p></div>';
+                        return;
+                    }
+
+                    grid.innerHTML = posts.map(post => {
+                        const title = (post.title && (post.title.en || post.title)) || post.slug || 'Untitled';
+                        const excerpt = (post.excerpt && (post.excerpt.en || post.excerpt)) || (post.content ? stripTags(post.content).slice(0,140) + '...' : '');
+                        const img = post.featuredImage || '/assets/images/og-image.jpg';
+                        const slug = post.slug || '';
+                        const url = '/blog-detail.html?slug=' + encodeURIComponent(slug);
+
+                        return `
+                            <article class="card">
+                                <img src="${img}" alt="${escapeHtml(title)}" class="card-image thumb-border" loading="lazy">
+                                <div class="card-body">
+                                    <h3 class="card-title">${escapeHtml(title)}</h3>
+                                    <p class="card-text">${escapeHtml(excerpt)}</p>
+                                    <a href="${url}" class="btn btn-sm btn-primary">Read More</a>
+                                </div>
+                            </article>
+                        `;
+                    }).join('');
+
+                } catch (err) {
+                    console.error('Failed to load latest blogs', err);
+                    showError();
+                }
+            }
+
+            function showError(){
+                const grid = document.getElementById('latest-blogs-grid');
+                if (!grid) return;
+                grid.innerHTML = '<div class="no-results" style="grid-column:1/-1"><p>Unable to load articles right now.</p></div>';
+            }
+
+            function stripTags(str){
+                return str ? str.replace(/<[^>]*>/g,'') : '';
+            }
+
+            function escapeHtml(s){
+                if (!s) return '';
+                return String(s).replace(/[&<>"']/g, function(c){
+                    return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;" }[c];
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', loadLatestBlogs);
+        })();
+        </script>
+</body>
+</html>
+<!-- WhatsApp FAB -->
+<div class="whatsapp-fab" aria-hidden="false">
+    <a href="https://wa.me/628126067561" title="Chat on WhatsApp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="currentColor" d="M20.52 3.48A11.95 11.95 0 0012 0C5.373 0 .09 4.96.09 11.07c0 1.94.51 3.83 1.48 5.48L0 24l7.7-2.02A11.95 11.95 0 0012 22c6.627 0 11.91-4.96 11.91-11.07 0-2.97-1.19-5.76-3.39-7.45zM12 20.3c-1.9 0-3.73-.5-5.31-1.44l-.38-.23-4.58 1.2 1.24-4.26-.25-.4A8.3 8.3 0 013.7 11.07c0-4.58 4.05-8.3 9.3-8.3 2.48 0 4.78.96 6.53 2.7a8.99 8.99 0 012.7 6.53c0 4.58-4.05 8.3-9.3 8.3z"/>
+            <path fill="#fff" d="M17.3 14.1c-.2-.1-1.1-.5-1.3-.5-.2 0-.3-.1-.5.1-.2.2-.9.5-1.1.6-.2.1-.4.05-.6-.2-.2-.2-.9-1.1-1.1-1.3-.2-.2-.05-.3.1-.5.1-.1.2-.3.3-.5.1-.1.05-.4 0-.6-.05-.2-.5-1.1-.7-1.5-.2-.4-.4-.3-.6-.3-.2 0-.4 0-.6 0-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 1.9 2.9 4.8 3.9 1.2.4 1.7.4 2.3.3.6-.1 1.9-.8 2.2-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.6-.3z"/>
+        </svg>
+        <span class="sr-only">Chat on WhatsApp</span>
+    </a>
+</div>

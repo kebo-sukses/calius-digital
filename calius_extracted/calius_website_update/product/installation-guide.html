@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Guide - ClipPremium | Panduan Download & Instalasi</title>
+    <meta name="description" content="Panduan lengkap download dan instalasi ClipPremium untuk semua browser - Chrome, Firefox, Edge, Opera, dan lainnya.">
+    <meta name="keywords" content="ClipPremium, installation guide, panduan download, cara install, browser security warning">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/images/favicon.ico">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --secondary: #3B82F6;
+            --accent: #F59E0B;
+            --dark: #0F172A;
+            --dark-card: #1E293B;
+            --dark-border: #334155;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+            --success: #10B981;
+            --info: #3B82F6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        /* Navigation */
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--dark-border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+        
+        .logo i {
+            color: var(--primary);
+            font-size: 1.75rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn-download {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem 3rem;
+            background: linear-gradient(180deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%);
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+        
+        /* Important Notice */
+        .notice-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        
+        .notice-box i {
+            color: var(--warning);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            margin-top: 0.25rem;
+        }
+        
+        .notice-box h3 {
+            color: var(--warning);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .notice-box p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* Browser Guide Cards */
+        .browser-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .section-title i {
+            color: var(--primary);
+        }
+        
+        .browser-card {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .browser-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .browser-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--dark-border);
+            cursor: pointer;
+        }
+        
+        .browser-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .browser-icon.chrome {
+            background: linear-gradient(135deg, #4285F4, #34A853, #FBBC05, #EA4335);
+        }
+        
+        .browser-icon.edge {
+            background: linear-gradient(135deg, #0078D4, #00BCF2);
+        }
+        
+        .browser-icon.firefox {
+            background: linear-gradient(135deg, #FF7139, #FF9500);
+        }
+        
+        .browser-icon.opera {
+            background: linear-gradient(135deg, #FF1B2D, #A4070A);
+        }
+        
+        .browser-icon.brave {
+            background: linear-gradient(135deg, #FB542B, #FF7A00);
+        }
+        
+        .browser-icon.safari {
+            background: linear-gradient(135deg, #006CFF, #00D4FF);
+        }
+        
+        .browser-info h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .browser-info span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .browser-badge {
+            margin-left: auto;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .badge-popular {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--primary);
+        }
+        
+        .badge-common {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--secondary);
+        }
+        
+        .expand-icon {
+            color: var(--text-muted);
+            transition: transform 0.3s;
+        }
+        
+        .browser-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+        
+        .browser-content {
+            padding: 1.5rem;
+            display: none;
+        }
+        
+        .browser-card.expanded .browser-content {
+            display: block;
+        }
+        
+        /* Steps */
+        .steps {
+            counter-reset: step-counter;
+        }
+        
+        .step {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .step:last-child {
+            margin-bottom: 0;
+        }
+        
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .step-content p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        /* Code/Key highlights */
+        .key-highlight {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--primary);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        
+        .action-highlight {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--secondary);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+        
+        .warning-highlight {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+        
+        /* Screenshot placeholder */
+        .screenshot {
+            background: var(--dark);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .screenshot i {
+            font-size: 3rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        
+        .screenshot p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* Tips Section */
+        .tips-section {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+            border: 1px solid var(--dark-border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .tips-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .tips-section h2 i {
+            color: var(--accent);
+        }
+        
+        .tip-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+        
+        .tip-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .tip-item i {
+            color: var(--primary);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+        
+        .tip-item p {
+            color: var(--text-secondary);
+        }
+        
+        .tip-item strong {
+            color: var(--text-primary);
+        }
+        
+        /* Troubleshooting */
+        .troubleshoot-section {
+            margin: 3rem 0;
+        }
+        
+        .troubleshoot-item {
+            background: var(--dark-card);
+            border: 1px solid var(--dark-border);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        
+        .troubleshoot-question {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .troubleshoot-question:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .troubleshoot-question i.icon {
+            color: var(--danger);
+            font-size: 1.25rem;
+        }
+        
+        .troubleshoot-question span {
+            flex: 1;
+            font-weight: 600;
+        }
+        
+        .troubleshoot-answer {
+            padding: 0 1.5rem 1.5rem;
+            padding-left: 3.5rem;
+            color: var(--text-secondary);
+            display: none;
+        }
+        
+        .troubleshoot-item.expanded .troubleshoot-answer {
+            display: block;
+        }
+        
+        .troubleshoot-answer ul {
+            margin-top: 0.5rem;
+            padding-left: 1.25rem;
+        }
+        
+        .troubleshoot-answer li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(59, 130, 246, 0.15));
+            border-radius: 24px;
+            margin-top: 3rem;
+        }
+        
+        .cta-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--dark-border);
+            color: var(--text-primary);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: rgba(16, 185, 129, 0.1);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            border-top: 1px solid var(--dark-border);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            .section-title {
+                font-size: 1.35rem;
+            }
+            
+            .browser-header {
+                flex-wrap: wrap;
+            }
+            
+            .browser-badge {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .browser-card {
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .browser-card:nth-child(1) { animation-delay: 0.1s; }
+        .browser-card:nth-child(2) { animation-delay: 0.2s; }
+        .browser-card:nth-child(3) { animation-delay: 0.3s; }
+        .browser-card:nth-child(4) { animation-delay: 0.4s; }
+        .browser-card:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-film"></i>
+                ClipPremium
+            </a>
+            <div class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="ai-clip-premium.html">Product</a>
+                <a href="../contact.html">Support</a>
+                <a href="ai-clip-premium.html" class="btn-download">
+                    <i class="fas fa-download"></i> Download
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>📥 Panduan Download & Instalasi</h1>
+        <p>Ikuti langkah-langkah berikut untuk mengunduh dan menginstal ClipPremium dengan aman di komputer Anda</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Important Notice -->
+        <div class="notice-box">
+            <i class="fas fa-shield-alt"></i>
+            <div>
+                <h3>⚠️ Mengapa Browser Memblokir Download?</h3>
+                <p>Browser modern seperti Chrome, Edge, dan Firefox memiliki fitur keamanan yang secara otomatis memblokir file .exe yang jarang didownload. Ini adalah fitur keamanan normal, <strong>bukan berarti file berbahaya</strong>. ClipPremium adalah aplikasi yang aman dan telah diverifikasi. Ikuti panduan di bawah untuk melewati peringatan ini dengan aman.</p>
+            </div>
+        </div>
+
+        <!-- Browser Guides -->
+        <section class="browser-section">
+            <h2 class="section-title">
+                <i class="fas fa-globe"></i>
+                Panduan Download per Browser
+            </h2>
+
+            <!-- Google Chrome -->
+            <div class="browser-card expanded" id="chrome">
+                <div class="browser-header" onclick="toggleCard('chrome')">
+                    <div class="browser-icon chrome">
+                        <i class="fab fa-chrome" style="color: white;"></i>
+                    </div>
+                    <div class="browser-info">
+                        <h3>Google Chrome</h3>
+                        <span>Browser paling populer di dunia</span>
+                    </div>
+                    <span class="browser-badge badge-popular">Paling Populer</span>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="browser-content">
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Klik tombol Download</h4>
+                                <p>Klik tombol <span class="key-highlight"><i class="fas fa-download"></i> Download Official Installer</span> pada halaman produk ClipPremium.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Peringatan "File Berbahaya" Muncul</h4>
+                                <p>Chrome akan menampilkan pesan <span class="warning-highlight">"ClipPremium_LITE.exe is not commonly downloaded"</span> atau <span class="warning-highlight">"This file may be dangerous"</span> di bagian bawah layar.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Klik tanda panah (^) di samping "Discard"</h4>
+                                <p>Di pojok kanan notifikasi download, klik <span class="action-highlight"><i class="fas fa-caret-up"></i> tanda panah kecil</span> untuk melihat opsi tambahan.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Pilih "Keep" atau "Keep anyway"</h4>
+                                <p>Pilih opsi <span class="key-highlight"><i class="fas fa-check"></i> Keep</span> atau <span class="key-highlight"><i class="fas fa-check"></i> Keep anyway</span> untuk melanjutkan download.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Buka file installer</h4>
+                                <p>Setelah download selesai, klik file <span class="key-highlight">ClipPremium_LITE_v3.4.4.exe</span> di folder Downloads untuk memulai instalasi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Microsoft Edge -->
+            <div class="browser-card" id="edge">
+                <div class="browser-header" onclick="toggleCard('edge')">
+                    <div class="browser-icon edge">
+                        <i class="fab fa-edge" style="color: white;"></i>
+                    </div>
+                    <div class="browser-info">
+                        <h3>Microsoft Edge</h3>
+                        <span>Browser bawaan Windows 10/11</span>
+                    </div>
+                    <span class="browser-badge badge-common">Default Windows</span>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="browser-content">
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Klik tombol Download</h4>
+                                <p>Klik tombol <span class="key-highlight"><i class="fas fa-download"></i> Download Official Installer</span> pada halaman produk.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>SmartScreen Warning Muncul</h4>
+                                <p>Edge akan menampilkan peringatan <span class="warning-highlight">"ClipPremium_LITE.exe isn't commonly downloaded"</span> dengan opsi untuk menyimpan atau membuang file.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Klik ikon "..." (More actions)</h4>
+                                <p>Di notifikasi download, klik <span class="action-highlight"><i class="fas fa-ellipsis-h"></i> titik tiga</span> untuk melihat opsi tambahan.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Pilih "Keep" → "Keep anyway"</h4>
+                                <p>Klik <span class="key-highlight"><i class="fas fa-check"></i> Keep</span>, kemudian jika muncul peringatan lagi, klik <span class="key-highlight"><i class="fas fa-check"></i> Keep anyway</span>.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Jalankan Installer</h4>
+                                <p>Klik <span class="key-highlight"><i class="fas fa-folder-open"></i> Open file</span> atau buka folder Downloads dan double-click file installer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mozilla Firefox -->
+            <div class="browser-card" id="firefox">
+                <div class="browser-header" onclick="toggleCard('firefox')">
+                    <div class="browser-icon firefox">
+                        <i class="fab fa-firefox-browser" style="color: white;"></i>
+                    </div>
+                    <div class="browser-info">
+                        <h3>Mozilla Firefox</h3>
+                        <span>Browser open-source populer</span>
+                    </div>
+                    <span class="browser-badge badge-common">Open Source</span>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="browser-content">
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Klik tombol Download</h4>
+                                <p>Klik tombol <span class="key-highlight"><i class="fas fa-download"></i> Download Official Installer</span> pada halaman produk.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Dialog Download Muncul</h4>
+                                <p>Firefox akan menampilkan dialog <span class="warning-highlight">"This file may harm your computer"</span> atau peringatan serupa.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Klik "Allow download" atau "Save File"</h4>
+                                <p>Pilih <span class="key-highlight"><i class="fas fa-check"></i> Allow download</span> atau <span class="key-highlight"><i class="fas fa-save"></i> Save File</span> untuk melanjutkan.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Buka Downloads Library</h4>
+                                <p>Klik ikon <span class="action-highlight"><i class="fas fa-download"></i> download</span> di toolbar atau tekan <span class="key-highlight">Ctrl + J</span> untuk melihat file.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">5</div>
+                            <div class="step-content">
+                                <h4>Jalankan File</h4>
+                                <p>Double-click file <span class="key-highlight">ClipPremium_LITE_v3.4.4.exe</span> untuk memulai instalasi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opera -->
+            <div class="browser-card" id="opera">
+                <div class="browser-header" onclick="toggleCard('opera')">
+                    <div class="browser-icon opera">
+                        <i class="fab fa-opera" style="color: white;"></i>
+                    </div>
+                    <div class="browser-info">
+                        <h3>Opera / Opera GX</h3>
+                        <span>Browser dengan fitur VPN built-in</span>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="browser-content">
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Klik tombol Download</h4>
+                                <p>Klik tombol download pada halaman produk ClipPremium.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Peringatan Keamanan Muncul</h4>
+                                <p>Opera mungkin menampilkan peringatan <span class="warning-highlight">"This type of file can harm your computer"</span>.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Klik "Keep" atau "Download anyway"</h4>
+                                <p>Pilih <span class="key-highlight"><i class="fas fa-check"></i> Keep</span> untuk melanjutkan download.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Akses File dari Sidebar</h4>
+                                <p>Klik ikon <span class="action-highlight"><i class="fas fa-download"></i> Downloads</span> di sidebar kiri Opera untuk melihat dan membuka file.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brave Browser -->
+            <div class="browser-card" id="brave">
+                <div class="browser-header" onclick="toggleCard('brave')">
+                    <div class="browser-icon brave">
+                        <i class="fas fa-shield-alt" style="color: white;"></i>
+                    </div>
+                    <div class="browser-info">
+                        <h3>Brave Browser</h3>
+                        <span>Browser dengan fokus privasi</span>
+                    </div>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="browser-content">
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Klik tombol Download</h4>
+                                <p>Brave menggunakan mesin Chromium yang sama dengan Chrome.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Peringatan Serupa Chrome Muncul</h4>
+                                <p>Brave akan menampilkan peringatan yang mirip dengan Google Chrome.</p>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Ikuti Langkah Chrome</h4>
+                                <p>Klik <span class="action-highlight"><i class="fas fa-caret-up"></i> tanda panah</span> → <span class="key-highlight"><i class="fas fa-check"></i> Keep</span> untuk melanjutkan download.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section class="tips-section">
+            <h2><i class="fas fa-lightbulb"></i> Tips Penting</h2>
+            <div class="tip-item">
+                <i class="fas fa-check-circle"></i>
+                <p><strong>Selalu download dari sumber resmi:</strong> Pastikan Anda hanya download dari website resmi <a href="https://calius.digital" style="color: var(--primary);">calius.digital</a> untuk menghindari file berbahaya.</p>
+            </div>
+            <div class="tip-item">
+                <i class="fas fa-shield-alt"></i>
+                <p><strong>File aman & terverifikasi:</strong> ClipPremium telah melewati pengecekan keamanan dan tidak mengandung virus atau malware. Peringatan browser adalah fitur standar untuk semua file .exe baru.</p>
+            </div>
+            <div class="tip-item">
+                <i class="fas fa-folder-open"></i>
+                <p><strong>Lokasi file download:</strong> Secara default, file akan tersimpan di folder <span class="key-highlight">C:\Users\[Username]\Downloads</span></p>
+            </div>
+            <div class="tip-item">
+                <i class="fas fa-user-shield"></i>
+                <p><strong>Windows SmartScreen:</strong> Saat pertama kali menjalankan installer, Windows mungkin menampilkan "Windows protected your PC". Klik <span class="key-highlight">More info</span> → <span class="key-highlight">Run anyway</span>.</p>
+            </div>
+        </section>
+
+        <!-- Troubleshooting -->
+        <section class="troubleshoot-section">
+            <h2 class="section-title">
+                <i class="fas fa-wrench"></i>
+                Troubleshooting
+            </h2>
+
+            <div class="troubleshoot-item expanded" id="trouble1">
+                <div class="troubleshoot-question" onclick="toggleTrouble('trouble1')">
+                    <i class="fas fa-exclamation-triangle icon"></i>
+                    <span>File download langsung terhapus/diblokir</span>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="troubleshoot-answer">
+                    <p>Jika file langsung terhapus setelah download:</p>
+                    <ul>
+                        <li>Matikan sementara antivirus (Windows Defender/third-party)</li>
+                        <li>Tambahkan folder Downloads ke whitelist antivirus</li>
+                        <li>Coba download ulang file</li>
+                        <li>Restore file dari karantina antivirus jika diperlukan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="troubleshoot-item" id="trouble2">
+                <div class="troubleshoot-question" onclick="toggleTrouble('trouble2')">
+                    <i class="fas fa-exclamation-triangle icon"></i>
+                    <span>Tidak ada opsi "Keep" atau "Keep anyway"</span>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="troubleshoot-answer">
+                    <p>Jika opsi Keep tidak muncul:</p>
+                    <ul>
+                        <li>Pastikan Anda mengklik tanda panah (^) atau titik tiga (...) di samping notifikasi</li>
+                        <li>Coba klik kanan pada notifikasi download</li>
+                        <li>Buka halaman Downloads browser (Ctrl+J) dan cari opsi di sana</li>
+                        <li>Coba gunakan browser lain sebagai alternatif</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="troubleshoot-item" id="trouble3">
+                <div class="troubleshoot-question" onclick="toggleTrouble('trouble3')">
+                    <i class="fas fa-exclamation-triangle icon"></i>
+                    <span>Download sangat lambat atau gagal</span>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="troubleshoot-answer">
+                    <p>Untuk masalah kecepatan download:</p>
+                    <ul>
+                        <li>Periksa koneksi internet Anda</li>
+                        <li>Matikan VPN jika sedang digunakan</li>
+                        <li>Coba di waktu yang berbeda (hindari jam sibuk)</li>
+                        <li>Clear cache browser dan coba lagi</li>
+                        <li>Gunakan download manager seperti IDM atau Free Download Manager</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="troubleshoot-item" id="trouble4">
+                <div class="troubleshoot-question" onclick="toggleTrouble('trouble4')">
+                    <i class="fas fa-exclamation-triangle icon"></i>
+                    <span>"Windows protected your PC" saat instalasi</span>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="troubleshoot-answer">
+                    <p>Ini adalah Windows SmartScreen protection:</p>
+                    <ul>
+                        <li>Klik <strong>"More info"</strong> pada dialog yang muncul</li>
+                        <li>Tombol <strong>"Run anyway"</strong> akan muncul</li>
+                        <li>Klik "Run anyway" untuk melanjutkan instalasi</li>
+                        <li>Ini normal untuk aplikasi baru yang belum memiliki sertifikat digital populer</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="troubleshoot-item" id="trouble5">
+                <div class="troubleshoot-question" onclick="toggleTrouble('trouble5')">
+                    <i class="fas fa-exclamation-triangle icon"></i>
+                    <span>Antivirus memblokir atau menghapus file</span>
+                    <i class="fas fa-chevron-down expand-icon"></i>
+                </div>
+                <div class="troubleshoot-answer">
+                    <p>Untuk mengatasi false positive antivirus:</p>
+                    <ul>
+                        <li><strong>Windows Defender:</strong> Settings → Virus & threat protection → Exclusions → Add ClipPremium folder</li>
+                        <li><strong>Avast/AVG:</strong> Settings → Exceptions → Add file path</li>
+                        <li><strong>Kaspersky:</strong> Settings → Additional → Threats and Exclusions → Add</li>
+                        <li><strong>Norton:</strong> Settings → Antivirus → Scans and Risks → Add exception</li>
+                        <li>Atau matikan sementara real-time protection selama instalasi</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2>🚀 Siap Menginstal ClipPremium?</h2>
+            <p>Download sekarang dan mulai buat konten viral dengan AI-powered video clipping!</p>
+            <div class="cta-buttons">
+                <a href="ai-clip-premium.html" class="btn-primary">
+                    <i class="fas fa-download"></i> Download ClipPremium
+                </a>
+                <a href="https://wa.me/628126067561?text=Halo,%20saya%20butuh%20bantuan%20instalasi%20ClipPremium" class="btn-secondary" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Bantuan via WhatsApp
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 <a href="https://calius.digital">Calius Digital</a>. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">ClipPremium v3.4.4 LITE | AI-Powered Video Content Generator</p>
+    </footer>
+
+    <script>
+        // Toggle browser card expansion
+        function toggleCard(id) {
+            const card = document.getElementById(id);
+            card.classList.toggle('expanded');
+        }
+        
+        // Toggle troubleshooting item
+        function toggleTrouble(id) {
+            const item = document.getElementById(id);
+            item.classList.toggle('expanded');
+        }
+        
+        // Auto-expand first browser card on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // First card (Chrome) is already expanded via HTML class
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

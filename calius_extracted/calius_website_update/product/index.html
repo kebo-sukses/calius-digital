@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en" 
+    data-page-title="Our Products - Calius Digital"
+    data-page-description="Browse our collection of premium products. Website Templates, Software Tools, and Digital Solutions with instant access."
+    data-page-keywords="products, website templates, software tools, digital solutions, calius digital products"
+    data-page-url="https://calius.digital/product/">
+<head>
+    <!-- Page styles (critical styles loaded early to avoid FOUC) -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Our Products - Calius Digital</title>
+    <meta name="description" content="Browse our collection of premium products. Website Templates, Software Tools, and Digital Solutions with instant access.">
+    <meta name="keywords" content="products, website templates, software tools, digital solutions, calius digital products">
+    <meta name="author" content="Calius Digital">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calius.digital/product/">
+    <meta property="og:title" content="Our Products - Calius Digital">
+    <meta property="og:description" content="Browse our collection of premium products. Website Templates, Software Tools, and Digital Solutions with instant access.">
+    <meta property="og:image" content="https://calius.digital/assets/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://calius.digital/product/">
+    <meta property="twitter:title" content="Our Products - Calius Digital">
+    <meta property="twitter:description" content="Browse our collection of premium products. Website Templates, Software Tools, and Digital Solutions with instant access.">
+    <meta property="twitter:image" content="https://calius.digital/assets/images/og-image.jpg">
+
+    <!-- Critical inline CSS: minimal styles to prevent FOUC while full CSS loads -->
+    <style>
+        html,body{background:#0A0E27;color:#ffffff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;margin:0;padding:0}
+        .container{width:100%;max-width:1280px;margin:0 auto;padding:0 1rem}
+        .header, #header-placeholder{height:70px}
+        .logo img,.site-logo{height:40px;display:block}
+        .nav-menu{display:flex;gap:1rem;align-items:center}
+        .hero{padding-top:calc(70px + 2rem);padding-bottom:2rem}
+        h1,h2,h3{color:#ffffff;margin:0 0 1rem}
+        a{color:#06D6A0;text-decoration:none}
+        img{max-width:100%;height:auto;display:block}
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/images/logo1.png">
+    <link rel="apple-touch-icon" href="/assets/images/logo1.png">
+
+    <!-- DNS Prefetch & Preconnect -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/assets/css/main.css" as="style">
+    <link rel="preload" href="/assets/images/logo1.png" as="image">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0A0E27">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calius.digital/product/">
+
+    <!-- Page-specific styles -->
+    <style>
+        .products-header {
+            padding-top: calc(var(--header-height) + var(--spacing-2xl));
+            padding-bottom: var(--spacing-2xl);
+            background: linear-gradient(135deg, #06D6A0 0%, #FF6B35 100%);
+            color: white;
+            text-align: center;
+        }
+        /* Subtitle badge: semi-transparent box for better readability */
+        .products-header p {
+            display: inline-block;
+            background: rgba(0,0,0,0.22);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            color: #ffffff;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+        
+        .filters-section {
+            background-color: #1E293B;
+            padding: var(--spacing-lg) 0;
+            border-bottom: 1px solid rgba(6, 214, 160, 0.1);
+            position: sticky;
+            top: var(--header-height);
+            z-index: 100;
+        }
+        
+        .filters-container {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+        
+        .filter-btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid rgba(6, 214, 160, 0.2);
+            background-color: rgba(6, 214, 160, 0.05);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 0.875rem;
+            color: #ffffff;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active,
+        .template-filter-btn:hover,
+        .template-filter-btn.active {
+            background-color: #06D6A0;
+            color: #0A0E27;
+            border-color: #06D6A0;
+            transform: translateY(-2px);
+        }
+        
+        .template-filter-btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid rgba(6, 214, 160, 0.2);
+            background-color: rgba(6, 214, 160, 0.05);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 0.875rem;
+            color: #ffffff;
+        }
+        
+        .template-card {
+            background: #1E293B;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all var(--transition-base);
+            border: 1px solid rgba(6, 214, 160, 0.1);
+        }
+        
+        .template-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+        
+        .template-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background-color: var(--bg-secondary);
+        }
+        
+        /* Premium placeholder for template previews */
+        .template-placeholder {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            transition: transform 300ms ease, box-shadow 300ms ease;
+        }
+        
+        .template-placeholder::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .template-placeholder-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .template-placeholder-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .template-placeholder-category {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+        
+        .template-card:hover .template-placeholder {
+            transform: scale(1.05);
+        }
+        
+        .template-content {
+            padding: var(--spacing-lg);
+        }
+        
+        .template-category {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(6, 214, 160, 0.1);
+            color: #06D6A0;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .template-title {
+            font-size: clamp(1.0rem, 2.5vw, 1.25rem);
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: #ffffff;
+        }
+        
+        .template-description {
+            color: #e2e8f0;
+            font-size: clamp(0.85rem, 2.2vw, 0.95rem);
+            margin-bottom: var(--spacing-md);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Slightly tighter card padding for compact layouts */
+        .template-content { padding: clamp(0.6rem, 1.2vw, 1rem); }
+
+        /* Larger spacing on desktop for readability */
+        @media (min-width: 1024px) {
+          .template-title { font-size: 1.35rem; }
+          .template-description { font-size: 0.95rem; -webkit-line-clamp: 3; }
+          .template-image { height: 300px; }
+        }
+        
+        .template-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            font-size: 0.875rem;
+            color: #cbd5e0;
+        }
+        
+        .template-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .template-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .template-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #06D6A0;
+        }
+        
+        .template-price-old {
+            font-size: 1rem;
+            color: #cbd5e0;
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+        }
+        
+        .template-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        .badge {
+            position: absolute;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .badge-featured {
+            background-color: #FF6B35;
+            color: white;
+        }
+        
+        .badge-bestseller {
+            background-color: #FF6B35;
+            color: white;
+        }
+        
+        .badge-new {
+            background-color: #06D6A0;
+            color: #0A0E27;
+            font-weight: 700;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: var(--spacing-3xl);
+            color: #cbd5e0;
+        }
+        
+        .loading-spinner {
+            text-align: center;
+            padding: var(--spacing-3xl);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <div class="mobile-overlay" aria-hidden="true"></div>
+
+    <!-- Products Header -->
+    <section class="products-header">
+        <div class="container">
+            <h1>Our Products</h1>
+            <p>Choose from our collection of premium digital products</p>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label style="font-weight: 600; margin-right: 0.5rem;">Category:</label>
+                    <button class="filter-btn active" data-filter="all">All Products</button>
+                    <button class="filter-btn" data-filter="templates">Templates</button>
+                    <button class="filter-btn" data-filter="software">Software</button>
+                    <button class="filter-btn" data-filter="coming-soon">Coming Soon</button>
+                </div>
+                
+                <div class="filter-group" style="margin-left: auto;">
+                    <label style="font-weight: 600; margin-right: 0.5rem;">Sort:</label>
+                    <select id="sort-select" class="form-select" style="padding: 0.5rem; border-radius: 0.5rem; background: #1E293B; color: #ffffff; border: 1px solid rgba(6, 214, 160, 0.2);">
+                        <option value="featured">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Products Grid -->
+    <section class="section" style="padding-top: 3rem;">
+        <div class="container">
+            <div id="products-grid" class="grid grid-3">
+                <div class="loading-spinner">
+                    <div class="loading" style="width: 40px; height: 40px; border-width: 4px;"></div>
+                    <p style="margin-top: 1rem; color: #cbd5e0;">Loading products...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section (shown when Templates product is clicked or category selected) -->
+    <section id="templates-section" class="section" style="display: none; padding-top: 3rem; background: #0F172A;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <div>
+                    <h2 style="color: #ffffff; margin-bottom: 0.5rem;">Website Templates</h2>
+                    <p style="color: #cbd5e0;">Premium responsive templates for your business</p>
+                </div>
+                <button id="back-to-products" class="btn btn-secondary">← Back to Products</button>
+            </div>
+            
+            <!-- Template Filters -->
+            <div style="background: #1E293B; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label style="font-weight: 600; margin-right: 0.5rem;">Template Type:</label>
+                        <button class="template-filter-btn active" data-filter="all">All</button>
+                        <button class="template-filter-btn" data-filter="business">Business</button>
+                        <button class="template-filter-btn" data-filter="ecommerce">E-commerce</button>
+                        <button class="template-filter-btn" data-filter="portfolio">Portfolio</button>
+                        <button class="template-filter-btn" data-filter="landing-page">Landing Page</button>
+                        <button class="template-filter-btn" data-filter="restaurant">Restaurant</button>
+                    </div>
+                    
+                    <div class="filter-group" style="margin-left: auto;">
+                        <select id="template-sort-select" class="form-select" style="padding: 0.5rem; border-radius: 0.5rem; background: #1E293B; color: #ffffff; border: 1px solid rgba(6, 214, 160, 0.2);">
+                            <option value="popular">Most Popular</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest First</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="templates-grid" class="grid grid-3">
+                <div class="loading-spinner">
+                    <div class="loading" style="width: 40px; height: 40px; border-width: 4px;"></div>
+                    <p style="margin-top: 1rem; color: #cbd5e0;">Loading templates...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/lazy-load.js"></script>
+    <script src="/assets/js/main.js"></script>
+    
+    <script>
+        let allProducts = [];
+        let allTemplates = [];
+        let currentProductFilter = 'all';
+        let currentTemplateFilter = 'all';
+        let currentProductSort = 'featured';
+        let currentTemplateSort = 'popular';
+        let viewMode = 'products'; // 'products' or 'templates'
+        
+        // Category gradient mapping for premium look
+        const categoryGradients = {
+            templates: 'linear-gradient(135deg, #06D6A0 0%, #0396A6 100%)',
+            software: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
+            business: 'linear-gradient(135deg, #06D6A0 0%, #0396A6 100%)',
+            ecommerce: 'linear-gradient(135deg, #0396A6 0%, #06D6A0 100%)',
+            portfolio: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
+            'landing-page': 'linear-gradient(135deg, #F7931E 0%, #FF6B35 100%)',
+            restaurant: 'linear-gradient(135deg, #FF6B35 0%, #06D6A0 100%)',
+            default: 'linear-gradient(135deg, #06D6A0 0%, #FF6B35 100%)'
+        };
+        
+        function getCategoryGradient(category) {
+            return categoryGradients[category] || categoryGradients.default;
+        }
+        
+        // Format price to IDR (Rupiah) with dot separators
+        function formatIDR(amount) {
+            if (!amount) return 'TBA';
+            return 'Rp. ' + amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+        
+        // Load main products
+        async function loadProducts() {
+            const grid = document.getElementById('products-grid');
+            
+            try {
+                console.log('[Products] Starting to load from: /data/products.json');
+                
+                const response = await fetch('/data/products.json');
+                console.log('[Products] Response status:', response.status, response.statusText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const text = await response.text();
+                console.log('[Products] Raw response length:', text.length);
+                
+                let data;
+                try {
+                    data = JSON.parse(text);
+                    console.log('[Products] JSON parsed successfully:', data);
+                } catch (jsonError) {
+                    console.error('[Products] JSON Parse Error:', jsonError);
+                    console.error('[Products] Raw text:', text.substring(0, 200));
+                    throw new Error('Invalid JSON format');
+                }
+                
+                if (!data || !data.products || !Array.isArray(data.products)) {
+                    throw new Error('Invalid data structure: missing products array');
+                }
+                
+                allProducts = data.products;
+                console.log('[Products] Loaded', allProducts.length, 'products');
+                
+                if (allProducts.length === 0) {
+                    showProductError('No products available at this time.');
+                    return;
+                }
+                
+                displayProducts();
+                
+            } catch (error) {
+                console.error('[Products] Error:', error);
+                console.error('[Products] Stack:', error.stack);
+                
+                // Show detailed error message
+                let errorMsg = 'Failed to load products.';
+                if (error.message.includes('404')) {
+                    errorMsg = 'Products data file not found. Please upload products.json to /data/ folder.';
+                } else if (error.message.includes('JSON')) {
+                    errorMsg = 'Products data format is invalid. Please check products.json file.';
+                } else if (error.message.includes('NetworkError') || error.message.includes('Failed to fetch')) {
+                    errorMsg = 'Network error. Please check your connection and try again.';
+                }
+                
+                showProductError(errorMsg + ' (Error: ' + error.message + ')');
+            }
+        }
+        
+        // Load templates
+        async function loadTemplates() {
+            const grid = document.getElementById('templates-grid');
+            
+            try {
+                console.log('[Templates] Starting to load from: /data/templates.json');
+                
+                const response = await fetch('/data/templates.json');
+                console.log('[Templates] Response status:', response.status, response.statusText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const text = await response.text();
+                console.log('[Templates] Raw response length:', text.length);
+                
+                let data;
+                try {
+                    data = JSON.parse(text);
+                    console.log('[Templates] JSON parsed successfully:', data);
+                } catch (jsonError) {
+                    console.error('[Templates] JSON Parse Error:', jsonError);
+                    throw new Error('Invalid JSON format');
+                }
+                
+                if (!data || !data.templates || !Array.isArray(data.templates)) {
+                    throw new Error('Invalid data structure: missing templates array');
+                }
+                
+                allTemplates = data.templates;
+                console.log('[Templates] Loaded', allTemplates.length, 'templates');
+                
+                if (allTemplates.length === 0) {
+                    showTemplateError('No templates available at this time.');
+                    return;
+                }
+                
+                displayTemplates();
+                
+            } catch (error) {
+                console.error('[Templates] Error:', error);
+                console.error('[Templates] Stack:', error.stack);
+                
+                let errorMsg = 'Failed to load templates.';
+                if (error.message.includes('404')) {
+                    errorMsg = 'Templates data file not found.';
+                } else if (error.message.includes('JSON')) {
+                    errorMsg = 'Templates data format is invalid.';
+                }
+                
+                showTemplateError(errorMsg + ' (Error: ' + error.message + ')');
+            }
+        }
+        
+        // Display templates in detail view
+        function displayTemplates() {
+            let templates = [...allTemplates];
+            
+            // Filter
+            if (currentTemplateFilter !== 'all') {
+                templates = templates.filter(t => t.category === currentTemplateFilter);
+            }
+            
+            // Sort
+            switch(currentTemplateSort) {
+                case 'price-low':
+                    templates.sort((a, b) => (a.salePrice || a.price) - (b.salePrice || b.price));
+                    break;
+                case 'price-high':
+                    templates.sort((a, b) => (b.salePrice || b.price) - (a.salePrice || a.price));
+                    break;
+                case 'newest':
+                    templates.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+                    break;
+                default: // popular
+                    templates.sort((a, b) => b.downloads - a.downloads);
+            }
+            
+            const grid = document.getElementById('templates-grid');
+            const lang = 'en';
+            
+            if (templates.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <p>No template b) => {
+                        const priceA = a.salePrice || a.price || 0;
+                        const priceB = b.salePrice || b.price || 0;
+                        return priceB - priceA;
+                    });
+                    break;
+                case 'newest':
+                    products.sort((a, b) => a.new ? -1 : 1);
+                    break;
+                default: // featured
+                    products.sort((a, b) => {
+                        if (a.featured && !b.featured) return -1;
+                        if (!a.featured && b.featured) return 1;
+                        if (a.bestseller && !b.bestseller) return -1;
+                        if (!a.bestseller && b.bestseller) return 1;
+                        return 0;
+                    });
+            }
+            
+            const grid = document.getElementById('products-grid');
+            const lang = 'en';
+            
+            if (products.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <p>No products found in this category.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = products.map(product => {
+                const title = (product.name && (product.name[lang] || product.name.en)) || product.slug;
+                const desc = (product.description && (product.description[lang] || product.description.en)) || '';
+                const gradient = getCategoryGradient(product.category);
+                const isComingSoon = product.status === 'coming-soon';
+                const buttonText = product.buttonText ? (product.buttonText[lang] || product.buttonText.en) : 'Learn More';
+                
+                // Handle different link types
+                let linkAction = '';
+                if (product.id === 'templates') {
+                    linkAction = `onclick="showTemplatesView(); return false;" href="#templates-section"`;
+                } else {
+                    linkAction = `href="${product.link || '#'}"`;
+                    if (product.link && product.link.startsWith('http')) {
+                        linkAction += ` target="_blank" rel="noopener noreferrer"`;
+                    }
+                }
+                
+                return `
+                <div class="template-card" style="position: relative;">
+                    <div style="
+                        position: relative; 
+                        overflow: hidden; 
+                        height: 280px; 
+                        background: ${gradient};
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 2rem;
+                    ">
+                        ${isComingSoon ? `
+                            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); backdrop-filter: blur(2px); z-index: 1;"></div>
+                        ` : ''}
+                        <div style="position: relative; z-index: 2; text-align: center; color: white;">
+                            <h3 style="font-size: 2rem; font-weight: 800; margin: 0 0 1rem; text-shadow: 0 4px 12px rgba(0,0,0,0.3);">${title}</h3>
+                            ${isComingSoon ? `<p style="font-size: 1.1rem; font-weight: 600; background: rgba(255,107,53,0.9); padding: 0.5rem 1rem; border-radius: 2rem; display: inline-block;">Coming ${product.comingSoonDate || 'Soon'}</p>` : ''}
+                        </div>
+                        ${product.featured ? '<span class="badge badge-featured" style="z-index: 3; position: absolute; top: 12px; right: 12px;">Featured</span>' : ''}
+                        ${product.bestseller ? '<span class="badge badge-bestseller" style="z-index: 3; position: absolute; top: ' + (product.featured ? '48px' : '12px') + '; right: 12px;">Bestseller</span>' : ''}
+                        ${product.new ? '<span class="badge badge-new" style="z-index: 3; position: absolute; top: ' + ((product.featured ? 48 : 0) + (product.bestseller ? 36 : 0) + 12) + 'px; right: 12px;">New</span>' : ''}
+                    </div>
+                    <div class="template-content">
+                        <span class="template-category">${product.category}</span>
+                        <h3 class="template-title">${title}</h3>
+                        <p class="template-description">${desc}</p>
+                        
+                        ${product.features && product.features.length > 0 ? `
+                        <div style="margin: 1rem 0;">
+           View switching functions
+        function showProductsView() {
+            viewMode = 'products';
+            document.getElementById('products-grid').parentElement.style.display = 'block';
+            document.getElementById('templates-section').style.display = 'none';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function showTemplatesView() {
+            viewMode = 'templates';
+            document.getElementById('products-grid').parentElement.style.display = 'none';
+            document.getElementById('templates-section').style.display = 'block';
+            if (allTemplates.length === 0) {
+                loadTemplates();
+            }
+            window.scrollTo({ top: document.getElementById('templates-section').offsetTop - 100, behavior: 'smooth' });
+        }
+        
+        // Product filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentProductFilter = this.dataset.filter;
+                displayProducts();
+            });
+        });
+        
+        // Product sort select
+        document.getElementById('sort-select').addEventListener('change', function() {
+            currentProductSort = this.value;
+            displayProducts();
+        });
+        
+        // Template filter buttons
+        document.querySelectorAll('.template-filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.template-filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentTemplateFilter = this.dataset.filter;
+                displayTemplates();
+            });
+        });
+        
+        // Template sort select
+        document.getElementById('template-sort-select').addEventListener('change', function() {
+            currentTemplateSort = this.value;
+            displayTemplates();
+        });
+        
+        // Back to products button
+        document.getElementById('back-to-products').addEventListener('click', showProductsView                               <div style="display: flex; flex-direction: column; gap: 0.25rem;">
+                                            <span style="font-size: 0.875rem; color: #cbd5e0; text-decoration: line-through;">${formatIDR(product.price)}</span>
+                                            <span class="template-price">${formatIDR(product.salePrice)}</span>
+                                        </div>
+                                    ` : `
+                                        <span class="template-price">${formatIDR(product.price)}</span>
+                                    `}
+                                    ${product.promoLabel ? `<div style="font-size: 0.75rem; color: #FF6B35; font-weight: 600; margin-top: 0.25rem;">${product.promoLabel}</div>` : ''}
+                                ` : ''}
+                            </div>
+                            <div class="template-actions">
+                                <a ${linkAction} class="btn ${isComingSoon ? 'btn-secondary' : 'btn-primary'} btn-sm">
+                                    ${buttonText}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `}).join('');   if (!response.ok) throw new Error('Network response not ok');
+                const data = await response.json();
+                allTemplates = data.templates || [];
+                displayTemplates();
+            } catch (error) {
+                console.error('Error loading templates:', error);
+                showError('Failed to load products. Please try again.');
+            }
+        }
+        
+        // Display templates
+        function displayTemplates() {
+            let templates = [...allTemplates];
+            
+            // Filter
+            if (currentFilter !== 'all') {
+                templates = templates.filter(t => t.category === currentFilter);
+            }
+            
+            // Sort
+            switch(currentSort) {
+                case 'price-low':
+                    templates.sort((a, b) => (a.salePrice || a.price) - (b.salePrice || b.price));
+                    break;
+                case 'price-high':
+                    templates.sort((a, b) => (b.salePrice || b.price) - (a.salePrice || a.price));
+                    break;
+                case 'newest':
+                    templates.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+                    break;
+                default: // popular
+                    templates.sort((a, b) => b.downloads - a.downloads);
+            }
+            
+            const grid = document.getElementById('templates-grid');
+            const lang = 'en';
+            
+            if (templates.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-results">
+                        <p>No products found in this category.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = templates.map(template => {
+                const title = (template.name && (template.name[lang] || template.name.en || template.name)) || template.slug || 'Untitled';
+                const desc = (template.description && (template.description[lang] || template.description.en || template.description)) || '';
+                const categoryLabel = template.category ? template.category.charAt(0).toUpperCase() + template.category.slice(1).replace('-', ' ') : 'Template';
+                
+                // Map category to image filename
+                const imageMap = {
+                    'business': '../assets/images/templates/Pro%20Business.jpg',
+                    'ecommerce': '../assets/images/templates/E-commerce.jpg',
+                    'portfolio': '../assets/images/templates/Portfolio%20Pro.jpg',
+                    'landing-page': '../assets/images/templates/Landing%20Page.jpg',
+                    'restaurant': '../assets/images/templates/Restaurant.jpg'
+                };
+                const imageUrl = imageMap[template.category] || '../assets/images/templates/Pro%20Business.jpg';
+                
+                return `
+                <div class="template-card">
+                    <div style="
+                        position: relative; 
+                        overflow: hidden; 
+                        height: 250px; 
+                        background-color: #1E293B;
+                        background-image: url('${imageUrl}');
+                        background-size: cover;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                    ">
+                        <div style="
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%);
+                            z-index: 1;
+                        "></div>
+                        <div class="template-placeholder-content" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; z-index: 2; padding: 1.5rem; text-align: center; color: white;">
+                            <h4 class="template-placeholder-title">${title}</h4>
+                            <p class="template-placeholder-category">${categoryLabel}</p>
+                        </div>
+                        ${template.featured ? '<span class="badge badge-featured" style="z-index: 3; position: absolute; top: 12px; right: 12px;">Featured</span>' : ''}
+                        ${template.bestseller ? '<span class="badge badge-bestseller" style="z-index: 3; position: absolute; top: 40px; right: 12px;">Bestseller</span>' : ''}
+                        ${template.new ? '<span class="badge badge-new" style="z-index: 3; position: absolute; top: ' + (template.featured || template.bestseller ? '68px' : '12px') + '; right: 12px;">New</span>' : ''}
+                    </div>
+                    <div class="template-content">
+                        <span class="template-category">${template.category}</span>
+                        <h3 class="template-title">${title}</h3>
+                        <p class="template-description">${desc}</p>
+                        
+                        <div class="template-meta">
+                            <span class="template-meta-item">📄 ${template.pages} pages</span>
+                            <span class="template-meta-item">⭐ ${template.rating.toFixed(1)}</span>
+                            <span class="template-meta-item">⬇️ ${template.downloads}</span>
+                        </div>
+                        
+        const viewParam = urlParams.get('view');
+        
+        if (viewParam === 'templates' || window.location.hash === '#templates-section') {
+            // Show templates view directly
+            setTimeout(() => showTemplatesView(), 100);
+        } else if (categoryParam) {
+            currentProductFilter = categoryParam;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === categoryParam);
+            });
+        }
+        
+        // Error handling helpers
+        function showProductError(message) {
+            const grid = document.getElementById('products-grid');
+            if (!grid) return;
+            grid.innerHTML = `
+                <div class="no-results">
+                    <p>${message || 'Failed to load products. Please try again later.'}</p>
+                    <div style="margin-top:1rem;">
+                        <button id="products-retry" class="btn btn-primary">Try Again</button>
+                    </div>
+                </div>
+            `;
+
+            const btn = document.getElementById('products-retry');
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    grid.innerHTML = `
+                        <div class="loading-spinner">
+                            <div class="loading" style="width: 40px; height: 40px; border-width: 4px;"></div>
+                            <p style="margin-top: 1rem; color: #cbd5e0;">Loading products...</p>
+                        </div>`;
+                    loadProducts();
+                });
+            }
+        }
+        
+        function showTemplateError(message) {
+            const grid = document.getElementById('templates-grid');
+            if (!grid) return;
+            grid.innerHTML = `
+                <div class="no-results">
+                    <p>${message || 'Failed to load templates. Please try again later.'}</p>
+                    <div style="margin-top:1rem;">
+                        <button id="templates-retry" class="btn btn-primary">Try Again</button>
+                    </div>
+                </div>
+            `;
+
+            const btn = document.getElementById('templates-retry');
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    grid.innerHTML = `
+                        <div class="loading-spinner">
+                            <div class="loading" style="width: 40px; height: 40px; border-width: 4px;"></div>
+                            <p style="margin-top: 1rem; color: #cbd5e0;">Loading templates...</p>
+                        </div>`;
+                    loadTemplates();
+                });
+            }
+        }
+
+        // Initialize - load main products first
+        document.addEventListener('DOMContentLoaded', loadProduct
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get('category');
+        if (categoryParam) {
+            currentFilter = categoryParam;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === categoryParam);
+            });
+        }
+        
+        // Show error + retry button helper
+        function showError(message) {
+            const grid = document.getElementById('templates-grid');
+            if (!grid) return;
+            grid.innerHTML = `
+                <div class="no-results">
+                    <p>${message || 'Failed to load products. Please try again later.'}</p>
+                    <div style="margin-top:1rem;">
+                        <button id="templates-retry" class="btn btn-primary">Try Again</button>
+                    </div>
+                </div>
+            `;
+
+            const btn = document.getElementById('templates-retry');
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    grid.innerHTML = `
+                        <div class="loading-spinner">
+                            <div class="loading" style="width: 40px; height: 40px; border-width: 4px;"></div>
+                            <p style="margin-top: 1rem; color: #cbd5e0;">Loading products...</p>
+                        </div>`;
+                    loadTemplates();
+                });
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadTemplates);
+    </script>
+    
+    <!-- WhatsApp FAB -->
+    <div class="whatsapp-fab" aria-hidden="false">
+        <a href="https://wa.me/628126067561" title="Chat on WhatsApp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill="currentColor" d="M20.52 3.48A11.95 11.95 0 0012 0C5.373 0 .09 4.96.09 11.07c0 1.94.51 3.83 1.48 5.48L0 24l7.7-2.02A11.95 11.95 0 0012 22c6.627 0 11.91-4.96 11.91-11.07 0-2.97-1.19-5.76-3.39-7.45zM12 20.3c-1.9 0-3.73-.5-5.31-1.44l-.38-.23-4.58 1.2 1.24-4.26-.25-.4A8.3 8.3 0 013.7 11.07c0-4.58 4.05-8.3 9.3-8.3 2.48 0 4.78.96 6.53 2.7a8.99 8.99 0 012.7 6.53c0 4.58-4.05 8.3-9.3 8.3z"/>
+                <path fill="#fff" d="M17.3 14.1c-.2-.1-1.1-.5-1.3-.5-.2 0-.3-.1-.5.1-.2.2-.9.5-1.1.6-.2.1-.4.05-.6-.2-.2-.2-.9-1.1-1.1-1.3-.2-.2-.05-.3.1-.5.1-.1.2-.3.3-.5.1-.1.05-.4 0-.6-.05-.2-.5-1.1-.7-1.5-.2-.4-.4-.3-.6-.3-.2 0-.4 0-.6 0-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 1.9 2.9 4.8 3.9 1.2.4 1.7.4 2.3.3.6-.1 1.9-.8 2.2-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.6-.3z"/>
+            </svg>
+            <span class="sr-only">Chat on WhatsApp</span>
+        </a>
+    </div>
+
+</body>
+</html>

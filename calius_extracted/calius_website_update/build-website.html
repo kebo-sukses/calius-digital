@@ -1,0 +1,780 @@
+﻿<!DOCTYPE html>
+<html lang="en"
+    data-page-title="Build Website - Jasa Pembuatan Website Profesional | Calius Digital"
+    data-page-description="Layanan pembuatan website profesional mulai dari 99rb. Next.js technology, ready 24 hours, free hosting. Pilih paket sesuai kebutuhan bisnis Anda."
+    data-page-keywords="jasa pembuatan website, build website, website murah, website profesional, next.js, landing page"
+    data-page-url="https://calius.digital/build-website.html">
+<head>
+    <!-- Page styles (critical styles loaded early to avoid FOUC) -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+
+    <!-- Basic Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Build Website - Jasa Pembuatan Website Profesional | Calius Digital</title>
+    <meta name="description" content="Layanan pembuatan website profesional mulai dari 99rb. Next.js technology, ready 24 hours, free hosting. Pilih paket sesuai kebutuhan bisnis Anda.">
+    <meta name="keywords" content="jasa pembuatan website, build website, website murah, website profesional, next.js, landing page">
+    <meta name="author" content="Calius Digital">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://calius.digital/build-website.html">
+    <meta property="og:title" content="Build Website - Jasa Pembuatan Website Profesional | Calius Digital">
+    <meta property="og:description" content="Layanan pembuatan website profesional mulai dari 99rb. Next.js technology, ready 24 hours, free hosting.">
+    <meta property="og:image" content="https://calius.digital/assets/images/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://calius.digital/build-website.html">
+    <meta property="twitter:title" content="Build Website - Jasa Pembuatan Website Profesional | Calius Digital">
+    <meta property="twitter:description" content="Layanan pembuatan website profesional mulai dari 99rb. Next.js technology, ready 24 hours, free hosting.">
+    <meta property="twitter:image" content="https://calius.digital/assets/images/og-image.jpg">
+
+    <!-- Critical inline CSS: minimal styles to prevent FOUC while full CSS loads -->
+    <style>
+        html,body{background:#0A0E27;color:#ffffff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;margin:0;padding:0}
+        .container{width:100%;max-width:1280px;margin:0 auto;padding:0 1rem}
+        .header, #header-placeholder{height:70px}
+        .logo img,.site-logo{height:40px;display:block}
+        .nav-menu{display:flex;gap:1rem;align-items:center}
+        .hero{padding-top:calc(70px + 2rem);padding-bottom:2rem}
+        h1,h2,h3{color:#ffffff;margin:0 0 1rem}
+        a{color:#06D6A0;text-decoration:none}
+        img{max-width:100%;height:auto;display:block}
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="/assets/images/logo1.webp">
+    <link rel="apple-touch-icon" href="/assets/images/logo1.webp">
+
+    <!-- DNS Prefetch & Preconnect -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/assets/css/main.css" as="style">
+    <link rel="preload" href="/assets/images/logo1.png" as="image">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0A0E27">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://calius.digital/build-website.html">
+
+    <!-- Page-specific styles -->
+    <style>
+        /* ========== HERO SECTION ========== */
+        .build-hero {
+            padding-top: calc(var(--header-height) + var(--spacing-3xl));
+            padding-bottom: var(--spacing-3xl);
+            background: linear-gradient(135deg, #06D6A0 0%, #FF6B35 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .build-hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+
+        .build-hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .build-hero .highlight-badge {
+            display: inline-block;
+            background: rgba(0,0,0,0.22);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* ========== FEATURES BANNER ========== */
+        .features-banner {
+            background: #1E293B;
+            padding: var(--spacing-xl) 0;
+            border-bottom: 1px solid rgba(6, 214, 160, 0.1);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+        }
+
+        .feature-text {
+            color: #CBD5E1;
+            font-size: 0.9rem;
+        }
+
+        .feature-text strong {
+            color: #06D6A0;
+            display: block;
+            font-size: 1rem;
+        }
+
+        /* ========== PRICING SECTION ========== */
+        .pricing-section {
+            padding: var(--spacing-3xl) 0;
+            background: #0A0E27;
+        }
+
+        .pricing-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .pricing-header h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .pricing-header p {
+            color: #94A3B8;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background: #1E293B;
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.5rem;
+            border: 1px solid rgba(6, 214, 160, 0.15);
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(6, 214, 160, 0.15);
+            border-color: rgba(6, 214, 160, 0.4);
+        }
+
+        /* Card Variants */
+        .pricing-card.starter {
+            border-top: 4px solid #64748B;
+        }
+
+        .pricing-card.professional {
+            border-top: 4px solid #06D6A0;
+        }
+
+        .pricing-card.enterprise {
+            border-top: 4px solid #FF6B35;
+            background: linear-gradient(180deg, #1E293B 0%, #2D3A52 100%);
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(255, 107, 53, 0.2);
+        }
+
+        .pricing-card.enterprise:hover {
+            transform: scale(1.02) translateY(-8px);
+            box-shadow: 0 25px 50px rgba(255, 107, 53, 0.3);
+        }
+
+        .pricing-card.custom {
+            border-top: 4px solid #8B5CF6;
+            background: linear-gradient(135deg, #1E293B 0%, #2E1E4A 100%);
+        }
+
+        /* Badges */
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            right: 1.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-badge.best-value {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .pricing-badge.popular {
+            background: linear-gradient(135deg, #06D6A0 0%, #0396A6 100%);
+            color: #0A0E27;
+        }
+
+        /* Card Content */
+        .pricing-tier {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card.starter .pricing-tier { color: #64748B; }
+        .pricing-card.professional .pricing-tier { color: #06D6A0; }
+        .pricing-card.enterprise .pricing-tier { color: #FF6B35; }
+        .pricing-card.custom .pricing-tier { color: #8B5CF6; }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-description {
+            color: #94A3B8;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            min-height: 40px;
+        }
+
+        .pricing-price {
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .pricing-card.enterprise .pricing-amount {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .pricing-period {
+            font-size: 0.9rem;
+            color: #64748B;
+            margin-left: 0.25rem;
+        }
+
+        /* Features List */
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem 0;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.6rem 0;
+            color: #CBD5E1;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 0.7rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .pricing-card.starter .pricing-features li::before {
+            background: rgba(100, 116, 139, 0.2);
+            color: #64748B;
+        }
+
+        .pricing-card.professional .pricing-features li::before {
+            background: rgba(6, 214, 160, 0.2);
+            color: #06D6A0;
+        }
+
+        .pricing-card.enterprise .pricing-features li::before {
+            background: rgba(255, 107, 53, 0.2);
+            color: #FF6B35;
+        }
+
+        .pricing-card.custom .pricing-features li::before {
+            background: rgba(139, 92, 246, 0.2);
+            color: #8B5CF6;
+        }
+
+        .pricing-features .highlight {
+            color: #06D6A0;
+            font-weight: 600;
+        }
+
+        /* CTA Buttons */
+        .pricing-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .pricing-cta.whatsapp {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .pricing-cta.whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            background: linear-gradient(135deg, #2EE370 0%, #159A8A 100%);
+        }
+
+        .pricing-cta.enterprise-cta {
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .pricing-cta.enterprise-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+        }
+
+        .pricing-cta.custom-cta {
+            background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .pricing-cta.custom-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.5);
+        }
+
+        .pricing-cta svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ========== WHY CHOOSE US SECTION ========== */
+        .why-section {
+            padding: var(--spacing-3xl) 0;
+            background: #1E293B;
+        }
+
+        .why-section h2 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .why-card {
+            background: #0A0E27;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(6, 214, 160, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .why-card:hover {
+            border-color: rgba(6, 214, 160, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .why-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .why-card h3 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .why-card p {
+            color: #94A3B8;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* ========== CTA SECTION ========== */
+        .cta-section {
+            padding: var(--spacing-3xl) 0;
+            background: linear-gradient(135deg, #06D6A0 0%, #0396A6 100%);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: white;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cta-section p {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            color: #0A0E27;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: #0A0E27;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .pricing-card.enterprise {
+                transform: scale(1);
+            }
+            .pricing-card.enterprise:hover {
+                transform: translateY(-8px);
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .pricing-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <div class="mobile-overlay" aria-hidden="true"></div>
+
+    <!-- Hero Section -->
+    <section class="build-hero">
+        <div class="container">
+            <h1>🚀 Build Your Dream Website</h1>
+            <p>Layanan pembuatan website profesional dengan teknologi modern. Cepat, handal, dan terjangkau untuk semua kebutuhan bisnis Anda.</p>
+            <span class="highlight-badge">✨ Mulai dari Rp 99.000 saja!</span>
+        </div>
+    </section>
+
+    <!-- Features Banner -->
+    <section class="features-banner">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">⚡</span>
+                    <span class="feature-text"><strong>Next.js Technology</strong>Performa Super Cepat</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🕐</span>
+                    <span class="feature-text"><strong>Ready 24 Hours</strong>Selesai Dalam Sehari</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎁</span>
+                    <span class="feature-text"><strong>Free Hosting</strong>Gratis Domain & Hosting</span>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📱</span>
+                    <span class="feature-text"><strong>Mobile Responsive</strong>Tampil Sempurna di Semua Device</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="pricing-header">
+                <h2>Pilih Paket Website Anda</h2>
+                <p>Solusi website profesional untuk setiap kebutuhan bisnis Anda dengan teknologi modern</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- PAKET 1 - STARTER (99rb) -->
+                <div class="pricing-card starter">
+                    <span class="pricing-tier">Starter</span>
+                    <h3 class="pricing-title">Paket Hemat</h3>
+                    <p class="pricing-description">Website cepat & ringan untuk memulai bisnis online Anda</p>
+                    
+                    <div class="pricing-price">
+                        <span class="pricing-amount">Rp 99rb</span>
+                        <span class="pricing-period">/ sekali bayar</span>
+                    </div>
+
+                    <ul class="pricing-features">
+                        <li><span class="highlight">Next.js Tech</span> - Performa Super Cepat</li>
+                        <li><span class="highlight">Ready 24 Hours</span> - Selesai Dalam Sehari</li>
+                        <li><span class="highlight">Free Hosting</span> - Gratis Domain & Hosting</li>
+                        <li>1 Halaman Landing Page</li>
+                        <li>Desain Responsive Mobile</li>
+                        <li>Integrasi WhatsApp</li>
+                        <li>SSL Certificate (HTTPS)</li>
+                    </ul>
+
+                    <a href="https://wa.me/628126067561?text=Halo%2C%20saya%20mau%20pesan%20Website%20Hemat%2099rb." 
+                       class="pricing-cta whatsapp" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        Pesan via WhatsApp
+                    </a>
+                </div>
+
+                <!-- PAKET 2 - PROFESSIONAL (800rb) -->
+                <div class="pricing-card professional">
+                    <span class="pricing-badge popular">Popular</span>
+                    <span class="pricing-tier">Professional</span>
+                    <h3 class="pricing-title">Paket Bisnis</h3>
+                    <p class="pricing-description">Website lengkap untuk bisnis yang ingin tampil profesional</p>
+                    
+                    <div class="pricing-price">
+                        <span class="pricing-amount">Rp 800rb</span>
+                        <span class="pricing-period">/ sekali bayar</span>
+                    </div>
+
+                    <ul class="pricing-features">
+                        <li>Semua fitur Paket Hemat</li>
+                        <li>5-7 Halaman Website</li>
+                        <li>Custom Design Premium</li>
+                        <li>SEO Basic Optimization</li>
+                        <li>Google Analytics Setup</li>
+                        <li>Contact Form Terintegrasi</li>
+                        <li>Revisi 3x</li>
+                        <li>Support 30 Hari</li>
+                    </ul>
+
+                    <a href="https://wa.me/628126067561?text=Halo%2C%20saya%20tertarik%20Paket%20Professional%20800rb." 
+                       class="pricing-cta whatsapp" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        Pesan via WhatsApp
+                    </a>
+                </div>
+
+                <!-- PAKET 3 - ENTERPRISE (4jt) - BEST VALUE -->
+                <div class="pricing-card enterprise">
+                    <span class="pricing-badge best-value">🔥 Best Value</span>
+                    <span class="pricing-tier">Enterprise</span>
+                    <h3 class="pricing-title">Paket Premium</h3>
+                    <p class="pricing-description">Solusi lengkap untuk bisnis skala besar dengan fitur advanced</p>
+                    
+                    <div class="pricing-price">
+                        <span class="pricing-amount">Rp 4jt</span>
+                        <span class="pricing-period">/ sekali bayar</span>
+                    </div>
+
+                    <ul class="pricing-features">
+                        <li>Semua fitur Paket Bisnis</li>
+                        <li>10-15 Halaman Website</li>
+                        <li>E-commerce Integration</li>
+                        <li>Payment Gateway Setup</li>
+                        <li>Admin Dashboard CMS</li>
+                        <li>Advanced SEO & Schema</li>
+                        <li>Blog/News System</li>
+                        <li>Revisi Unlimited</li>
+                        <li>Priority Support 90 Hari</li>
+                        <li>Training & Dokumentasi</li>
+                    </ul>
+
+                    <a href="https://wa.me/628126067561?text=Halo%2C%20saya%20ingin%20konsultasi%20Paket%20Enterprise%204jt." 
+                       class="pricing-cta enterprise-cta" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        Konsultasi Sekarang
+                    </a>
+                </div>
+
+                <!-- PAKET 4 - CUSTOM -->
+                <div class="pricing-card custom">
+                    <span class="pricing-tier">Custom</span>
+                    <h3 class="pricing-title">Paket Khusus</h3>
+                    <p class="pricing-description">Butuh solusi unik? Kami siap membantu kebutuhan spesifik Anda</p>
+                    
+                    <div class="pricing-price">
+                        <span class="pricing-amount">Ask Me</span>
+                        <span class="pricing-period">/ custom quote</span>
+                    </div>
+
+                    <ul class="pricing-features">
+                        <li>Konsultasi Kebutuhan Lengkap</li>
+                        <li>Custom Features Development</li>
+                        <li>API Integration</li>
+                        <li>Multi-language Support</li>
+                        <li>Custom Admin Panel</li>
+                        <li>Mobile App Connection</li>
+                        <li>Dedicated Developer</li>
+                        <li>SLA & Maintenance Contract</li>
+                        <li>24/7 Priority Support</li>
+                    </ul>
+
+                    <a href="https://wa.me/628126067561?text=Halo%2C%20saya%20ingin%20diskusi%20kebutuhan%20website%20custom%20saya." 
+                       class="pricing-cta custom-cta" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                        </svg>
+                        Diskusi Kebutuhan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-section">
+        <div class="container">
+            <h2>Mengapa Memilih Kami?</h2>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-icon">🚀</div>
+                    <h3>Teknologi Modern</h3>
+                    <p>Menggunakan Next.js & React untuk performa website yang super cepat dan SEO-friendly.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">💰</div>
+                    <h3>Harga Terjangkau</h3>
+                    <p>Website profesional mulai dari Rp 99.000. Kualitas premium dengan harga bersahabat.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">⏰</div>
+                    <h3>Pengerjaan Cepat</h3>
+                    <p>Website Anda bisa online dalam 24 jam. Kami bekerja cepat tanpa mengorbankan kualitas.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🎨</div>
+                    <h3>Desain Modern</h3>
+                    <p>Tampilan website yang menarik, profesional, dan responsive di semua perangkat.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">🔒</div>
+                    <h3>Keamanan Terjamin</h3>
+                    <p>SSL Certificate gratis untuk keamanan data dan kepercayaan pengunjung.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-icon">📞</div>
+                    <h3>Support Responsif</h3>
+                    <p>Tim support siap membantu Anda kapanpun dibutuhkan via WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Siap Memulai Proyek Website Anda?</h2>
+            <p>Konsultasi GRATIS! Ceritakan kebutuhan bisnis Anda dan kami akan membantu menemukan solusi terbaik.</p>
+            <a href="https://wa.me/628126067561?text=Halo%2C%20saya%20ingin%20konsultasi%20tentang%20pembuatan%20website." 
+               class="cta-button" 
+               target="_blank" 
+               rel="noopener noreferrer">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                </svg>
+                Konsultasi Gratis via WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="/assets/js/components.js"></script>
+    <script src="/assets/js/lazy-load.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+    <!-- WhatsApp FAB -->
+    <div class="whatsapp-fab" aria-hidden="false">
+        <a href="https://wa.me/628126067561" title="Chat on WhatsApp" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path fill="currentColor" d="M20.52 3.48A11.95 11.95 0 0012 0C5.373 0 .09 4.96.09 11.07c0 1.94.51 3.83 1.48 5.48L0 24l7.7-2.02A11.95 11.95 0 0012 22c6.627 0 11.91-4.96 11.91-11.07 0-2.97-1.19-5.76-3.39-7.45zM12 20.3c-1.9 0-3.73-.5-5.31-1.44l-.38-.23-4.58 1.2 1.24-4.26-.25-.4A8.3 8.3 0 013.7 11.07c0-4.58 4.05-8.3 9.3-8.3 2.48 0 4.78.96 6.53 2.7a8.99 8.99 0 012.7 6.53c0 4.58-4.05 8.3-9.3 8.3z"/>
+                <path fill="#fff" d="M17.3 14.1c-.2-.1-1.1-.5-1.3-.5-.2 0-.3-.1-.5.1-.2.2-.9.5-1.1.6-.2.1-.4.05-.6-.2-.2-.2-.9-1.1-1.1-1.3-.2-.2-.05-.3.1-.5.1-.1.2-.3.3-.5.1-.1.05-.4 0-.6-.05-.2-.5-1.1-.7-1.5-.2-.4-.4-.3-.6-.3-.2 0-.4 0-.6 0-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.2.2 1.9 2.9 4.8 3.9 1.2.4 1.7.4 2.3.3.6-.1 1.9-.8 2.2-1.6.3-.8.3-1.5.2-1.6-.1-.1-.3-.2-.6-.3z"/>
+            </svg>
+            <span class="sr-only">Chat on WhatsApp</span>
+        </a>
+    </div>
+
+</body>
+</html>

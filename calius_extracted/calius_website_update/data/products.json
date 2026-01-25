@@ -1,0 +1,159 @@
+{
+  "products": [
+    {
+      "id": "templates",
+      "slug": "website-templates",
+      "name": {
+        "en": "Website Templates",
+        "id": "Template Website"
+      },
+      "category": "templates",
+      "description": {
+        "en": "Premium, responsive website templates for business, e-commerce, portfolio, and more. Ready-to-use designs that are fully customizable and SEO-optimized.",
+        "id": "Template website premium dan responsif untuk bisnis, e-commerce, portfolio, dan lainnya. Desain siap pakai yang dapat disesuaikan dan dioptimalkan untuk SEO."
+      },
+      "features": [
+        "Responsive Design",
+        "SEO Optimized",
+        "Multiple Layouts",
+        "Easy Customization",
+        "Cross-browser Compatible"
+      ],
+      "price": 1500000,
+      "salePrice": null,
+      "status": "available",
+      "featured": true,
+      "image": "../assets/images/products/templates-preview.jpg",
+      "link": "#templates-section",
+      "buttonText": {
+        "en": "Browse Templates",
+        "id": "Lihat Template"
+      }
+    },
+    {
+      "id": "ai-clip-premium",
+      "slug": "ai-clip-premium",
+      "name": {
+        "en": "AI Clip Premium",
+        "id": "AI Clip Premium"
+      },
+      "category": "software",
+      "description": {
+        "en": "Advanced AI-powered video editing software with automatic face tracking, subtitle masking, and intelligent cropping. Perfect for content creators and professional video editors.",
+        "id": "Software editing video bertenaga AI dengan pelacakan wajah otomatis, masking subtitle, dan pemotongan cerdas. Sempurna untuk content creator dan editor video profesional."
+      },
+      "features": [
+        "AI Face Tracking",
+        "Smart Subtitle Masking",
+        "Auto Crop to Focus",
+        "Batch Processing",
+        "Professional Quality Output"
+      ],
+      "price": 3000000,
+      "salePrice": 500000,
+      "status": "available",
+      "featured": true,
+      "bestseller": true,
+      "image": "../assets/images/products/ai-clip-premium.jpg",
+      "link": "/product/ai-clip-premium.html",
+      "buttonText": {
+        "en": "Get AI Clip Premium",
+        "id": "Dapatkan AI Clip Premium"
+      },
+      "promoLabel": "🔥 Promo 100 Orang Pertama"
+    },
+    {
+      "id": "cms",
+      "slug": "content-management-system",
+      "name": {
+        "en": "Custom CMS",
+        "id": "CMS Kustom"
+      },
+      "category": "software",
+      "description": {
+        "en": "Powerful and flexible Content Management System tailored to your business needs. Manage your website content, users, and data with ease through an intuitive admin panel.",
+        "id": "Sistem Manajemen Konten yang powerful dan fleksibel disesuaikan dengan kebutuhan bisnis Anda. Kelola konten website, pengguna, dan data dengan mudah melalui panel admin yang intuitif."
+      },
+      "features": [
+        "User-friendly Admin Panel",
+        "Custom Post Types",
+        "Role-based Access Control",
+        "Media Management",
+        "SEO Tools Built-in",
+        "Multi-language Support"
+      ],
+      "price": 5000000,
+      "salePrice": null,
+      "status": "available",
+      "featured": false,
+      "image": "../assets/images/products/cms-preview.jpg",
+      "link": "https://wa.me/628126067561?text=Hi%20Calius%20Digital,%20I'm%20interested%20in%20Custom%20CMS",
+      "buttonText": {
+        "en": "Request Demo",
+        "id": "Minta Demo"
+      }
+    },
+    {
+      "id": "spoiler-ai",
+      "slug": "spoiler-ai",
+      "name": {
+        "en": "Spoiler AI",
+        "id": "Spoiler AI"
+      },
+      "category": "software",
+      "description": {
+        "en": "Revolutionary AI tool that analyzes and predicts story outcomes, generates alternative plot scenarios, and provides intelligent content recommendations. Perfect for writers, content creators, and entertainment enthusiasts.",
+        "id": "Tool AI revolusioner yang menganalisis dan memprediksi hasil cerita, menghasilkan skenario plot alternatif, dan memberikan rekomendasi konten cerdas. Sempurna untuk penulis, content creator, dan penggemar hiburan."
+      },
+      "features": [
+        "AI Story Analysis",
+        "Plot Prediction",
+        "Alternative Scenarios",
+        "Character Development Insights",
+        "Content Recommendations"
+      ],
+      "price": null,
+      "salePrice": null,
+      "status": "coming-soon",
+      "featured": false,
+      "new": true,
+      "image": "../assets/images/products/spoiler-ai-preview.jpg",
+      "link": "https://wa.me/628126067561?text=Hi%20Calius%20Digital,%20I'm%20interested%20in%20Spoiler%20AI%20updates",
+      "buttonText": {
+        "en": "Notify Me",
+        "id": "Beritahu Saya"
+      },
+      "comingSoonDate": "Q2 2026"
+    }
+  ],
+  "categories": [
+    {
+      "id": "all",
+      "name": {
+        "en": "All Products",
+        "id": "Semua Produk"
+      }
+    },
+    {
+      "id": "templates",
+      "name": {
+        "en": "Templates",
+        "id": "Template"
+      }
+    },
+    {
+      "id": "software",
+      "name": {
+        "en": "Software",
+        "id": "Software"
+      }
+    },
+    {
+      "id": "coming-soon",
+      "name": {
+        "en": "Coming Soon",
+        "id": "Segera Hadir"
+      }
+    }
+  ]
+}
