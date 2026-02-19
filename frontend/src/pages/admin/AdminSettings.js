@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/ta
 import { Settings, Globe, Image, Share2, Phone, Mail, Save, Loader2, Check, Upload, ExternalLink } from 'lucide-react';
 import { useToast } from '../../hooks/use-toast';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL || 'https://calius-digital-production.up.railway.app';
+const API_URL = process.env.REACT_APP_BACKEND_URL || '';
 
 const AdminSettings = () => {
   const { t } = useLanguage();
@@ -452,7 +452,7 @@ const AdminSettings = () => {
                   Sitemap website Anda otomatis di-generate dan diperbarui setiap kali ada blog post baru.
                 </p>
                 <a 
-                  href="https://calius-digital-production.up.railway.app/sitemap.xml"
+                  href="/sitemap.xml"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-blue-700 underline flex items-center gap-1"
