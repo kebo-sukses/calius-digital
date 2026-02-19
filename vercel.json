@@ -1,31 +1,21 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/build",
-  "installCommand": "cd frontend && npm install",
-  "framework": null,
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api" },
-    { "source": "/sitemap.xml", "destination": "/api" },
-    { "source": "/((?!api|sitemap.xml).*)", "destination": "/index.html" }
-  ],
-  "functions": {
-    "api/index.py": {
-      "runtime": "python3.9",
-      "maxDuration": 30
+  "builds": [
+    {
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    },
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
     }
-  },
-  "env": {
-    "MONGO_URL": "@mongo_url",
-    "DB_NAME": "@db_name",
-    "JWT_SECRET_KEY": "@jwt_secret_key",
-    "CLOUDINARY_CLOUD_NAME": "@cloudinary_cloud_name",
-    "CLOUDINARY_API_KEY": "@cloudinary_api_key",
-    "CLOUDINARY_API_SECRET": "@cloudinary_api_secret",
-    "RESEND_API_KEY": "@resend_api_key",
-    "ADMIN_EMAIL": "@admin_email",
-    "SENDER_EMAIL": "@sender_email",
-    "MIDTRANS_SERVER_KEY": "@midtrans_server_key",
-    "MIDTRANS_CLIENT_KEY": "@midtrans_client_key"
-  }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.py" },
+    { "src": "/sitemap.xml", "dest": "/api/index.py" },
+    { "src": "/(.*)", "dest": "/frontend/$1" }
+  ]
 }
