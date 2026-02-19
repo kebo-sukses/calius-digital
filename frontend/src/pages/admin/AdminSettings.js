@@ -81,7 +81,7 @@ const AdminSettings = () => {
     formData.append('file', file);
     
     try {
-      const response = await fetch(`${API_URL}/api/upload`, {
+      const response = await fetch(`${API_URL}/api/upload?folder=settings`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
