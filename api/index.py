@@ -503,6 +503,22 @@ async def init_admin():
     await db.users.insert_one(admin_data)
     return {"success": True, "message": "Admin created", "username": "admin", "password": "admin123"}
 
+@api_router.post("/auth/reset-admin")
+async def reset_admin():
+    """Reset admin password to default - TEMPORARY ENDPOINT"""
+    # Find admin user
+    admin = await db.users.find_one({"role": "admin"})
+    if not admin:
+        raise HTTPException(status_code=404, detail="No admin user found")
+    
+    # Update password to Calius2026!
+    new_password = get_password_hash("Calius2026!")
+    await db.users.update_one(
+        {"role": "admin"},
+        {"$set": {"password": new_password, "username": "Jeslius"}}
+    )
+    return {"success": True, "message": "Admin password reset", "username": "Jeslius", "password": "Calius2026!"}
+
 # ==================== ADMIN ROUTES ====================
 
 # Dashboard Stats
