@@ -786,6 +786,50 @@ async def delete_cloudinary_image(public_id: str, user: dict = Depends(require_e
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+# ==================== UPLOAD ENDPOINT ====================
+
+@api_router.post("/upload")
+async def upload_file(
+    file: UploadFile = File(...),
+    folder: str = Query("calius"),
+    user: dict = Depends(require_editor)
+):
+    """Upload file to Cloudinary"""
+    if not os.environ.get("CLOUDINARY_API_SECRET"):
+        raise HTTPException(status_code=500, detail="Cloudinary not configured")
+    
+    ALLOWED_FOLDERS = ["calius", "templates", "portfolio", "blog", "users", "settings"]
+    if folder not in ALLOWED_FOLDERS:
+        raise HTTPException(status_code=400, detail="Invalid folder")
+    
+    # Check file type
+    allowed_types = ["image/jpeg", "image/png", "image/gif", "image/webp", "image/svg+xml"]
+    if file.content_type not in allowed_types:
+        raise HTTPException(status_code=400, detail=f"File type {file.content_type} not allowed")
+    
+    # Check file size (max 5MB)
+    contents = await file.read()
+    if len(contents) > 5 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File too large (max 5MB)")
+    
+    try:
+        # Upload to Cloudinary
+        import io
+        result = cloudinary.uploader.upload(
+            io.BytesIO(contents),
+            folder=folder,
+            resource_type="image"
+        )
+        return {
+            "success": True,
+            "url": result.get("secure_url"),
+            "public_id": result.get("public_id"),
+            "width": result.get("width"),
+            "height": result.get("height")
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
+
 # ==================== PAYMENT ROUTES ====================
 
 @api_router.post("/payments/create-token")
@@ -989,9 +1033,7 @@ async def get_site_settings():
     return default.model_dump()
 
 @api_router.put("/settings")
-async def update_site_settings(settings: SiteSettings, current_user: dict = Depends(get_current_user)):
-    if not current_user.get("isAdmin"):
-        raise HTTPException(status_code=403, detail="Admin access required")
+async def update_site_settings(settings: SiteSettings, current_user: dict = Depends(require_admin)):
     settings_dict = settings.model_dump()
     await db.site_settings.update_one(
         {"_id": "site_settings"},
