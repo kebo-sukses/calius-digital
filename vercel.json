@@ -4,6 +4,7 @@
   "outputDirectory": "frontend/build",
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.py" },
-    { "source": "/sitemap.xml", "destination": "/api/index.py" }
+    { "source": "/sitemap.xml", "destination": "/api/index.py" },
+    { "source": "/((?!static|favicon|manifest|robots|logo).*)", "destination": "/index.html" }
   ]
 }
