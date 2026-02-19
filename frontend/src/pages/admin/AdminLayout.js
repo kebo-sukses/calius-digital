@@ -145,5 +145,3 @@ const AdminLayout = () => {
 };
 
 export default AdminLayout;
-
-export default AdminLayout;
