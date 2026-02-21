@@ -27,6 +27,12 @@ export const adminApi = {
   updateUser: (id, data) => api.put(`/admin/users/${id}`, data).then(res => res.data),
   deleteUser: (id) => api.delete(`/admin/users/${id}`).then(res => res.data),
 
+  // Services
+  getServices: () => api.get('/services').then(res => res.data),
+  createService: (data) => api.post('/admin/services', data).then(res => res.data),
+  updateService: (id, data) => api.put(`/admin/services/${id}`, data).then(res => res.data),
+  deleteService: (id) => api.delete(`/admin/services/${id}`).then(res => res.data),
+
   // Templates
   getTemplates: () => api.get('/templates').then(res => res.data),
   createTemplate: (data) => api.post('/admin/templates', data).then(res => res.data),

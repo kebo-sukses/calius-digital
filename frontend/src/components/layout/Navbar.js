@@ -3,12 +3,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useSiteSettings } from '@/context/SiteSettingsContext';
 import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { language, toggleLanguage, t } = useLanguage();
+  const { settings } = useSiteSettings();
   const location = useLocation();
 
   useEffect(() => {
@@ -44,10 +46,20 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2" data-testid="logo">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF4500] to-[#FF6B35] flex items-center justify-center">
-              <span className="text-white font-bold text-xl">C</span>
-            </div>
-            <span className="text-xl font-bold text-white">Calius</span>
+            {settings.logo_url ? (
+              <img 
+                src={settings.logo_url} 
+                alt={settings.site_name || 'Calius'} 
+                className="h-10 w-auto object-contain"
+              />
+            ) : (
+              <>
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF4500] to-[#FF6B35] flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">C</span>
+                </div>
+                <span className="text-xl font-bold text-white">{settings.site_name || 'Calius'}</span>
+              </>
+            )}
           </Link>
 
           {/* Desktop Navigation */}

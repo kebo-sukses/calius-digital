@@ -3,12 +3,13 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import {
   LayoutDashboard, FileText, Image, MessageSquare, Users, Package,
-  CreditCard, Mail, Settings, LogOut, Menu, X, ChevronDown
+  CreditCard, Mail, Settings, LogOut, Menu, X, ChevronDown, Briefcase
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const menuItems = [
   { path: '/admin', icon: LayoutDashboard, label: 'Dashboard', exact: true },
+  { path: '/admin/services', icon: Briefcase, label: 'Services' },
   { path: '/admin/templates', icon: Package, label: 'Templates' },
   { path: '/admin/portfolio', icon: Image, label: 'Portfolio' },
   { path: '/admin/blog', icon: FileText, label: 'Blog' },

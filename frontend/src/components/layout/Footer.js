@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useSiteSettings } from '@/context/SiteSettingsContext';
 
 const Footer = () => {
   const { t, language } = useLanguage();
+  const { settings } = useSiteSettings();
 
   const footerLinks = {
     services: [
@@ -32,10 +34,20 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF4500] to-[#FF6B35] flex items-center justify-center">
-                <span className="text-white font-bold text-xl">C</span>
-              </div>
-              <span className="text-xl font-bold text-white">Calius Digital</span>
+              {settings.logo_url ? (
+                <img 
+                  src={settings.logo_url} 
+                  alt={settings.site_name || 'Calius Digital'} 
+                  className="h-10 w-auto object-contain"
+                />
+              ) : (
+                <>
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF4500] to-[#FF6B35] flex items-center justify-center">
+                    <span className="text-white font-bold text-xl">C</span>
+                  </div>
+                  <span className="text-xl font-bold text-white">{settings.site_name || 'Calius Digital'}</span>
+                </>
+              )}
             </Link>
             <p className="text-neutral-400 mb-6 max-w-sm">
               {t('footer.description')}

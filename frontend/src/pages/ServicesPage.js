@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, ShoppingCart, Rocket, Code2, Check, ArrowRight } from 'lucide-react';
+import { 
+  Building2, ShoppingCart, Rocket, Code2, Check, ArrowRight, X,
+  Layout, FileText, Image, Utensils, Briefcase, Globe, Smartphone,
+  Database, Server, Layers, PenTool, Camera, Monitor, Zap, ExternalLink
+} from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { apiService } from '@/services/api';
 import { Button } from '@/components/ui/button';
@@ -11,6 +15,32 @@ const iconMap = {
   ShoppingCart: ShoppingCart,
   Rocket: Rocket,
   Code2: Code2,
+  Code: Code2,
+  Layout: Layout,
+  FileText: FileText,
+  Image: Image,
+  Utensils: Utensils,
+  Briefcase: Briefcase,
+  Globe: Globe,
+  Smartphone: Smartphone,
+  Database: Database,
+  Server: Server,
+  Layers: Layers,
+  PenTool: PenTool,
+  Camera: Camera,
+  Monitor: Monitor,
+  Zap: Zap,
+};
+
+// Template category labels for display
+const templateCategoryLabels = {
+  'business': { id: 'Template Bisnis', en: 'Business Templates' },
+  'ecommerce': { id: 'Template E-Commerce', en: 'E-Commerce Templates' },
+  'portfolio': { id: 'Template Portfolio', en: 'Portfolio Templates' },
+  'landing-page': { id: 'Template Landing Page', en: 'Landing Page Templates' },
+  'restaurant': { id: 'Template Restoran', en: 'Restaurant Templates' },
+  'blog': { id: 'Template Blog', en: 'Blog Templates' },
+  'creative': { id: 'Template Kreatif', en: 'Creative Templates' },
 };
 
 const formatPrice = (price) => {
@@ -86,26 +116,61 @@ const ServicesPage = () => {
 
                         {/* Features */}
                         <ul className="space-y-2 mb-6">
-                          {service.features.map((feature, i) => (
-                            <li key={i} className="flex items-center gap-2 text-neutral-300">
-                              <Check size={16} className="text-[#FF4500]" />
-                              <span>{feature}</span>
-                            </li>
-                          ))}
+                          {service.included_features && service.included_features.length > 0 ? (
+                            // Use new included_features format
+                            service.included_features.map((feature, i) => (
+                              <li key={i} className={`flex items-center gap-2 ${feature.included ? 'text-neutral-300' : 'text-neutral-500'}`}>
+                                {feature.included ? (
+                                  <Check size={16} className="text-[#FF4500]" />
+                                ) : (
+                                  <X size={16} className="text-neutral-600" />
+                                )}
+                                <span className={!feature.included ? 'line-through' : ''}>
+                                  {language === 'id' ? feature.text_id : feature.text_en}
+                                </span>
+                              </li>
+                            ))
+                          ) : (
+                            // Fallback to old features format
+                            service.features?.map((feature, i) => (
+                              <li key={i} className="flex items-center gap-2 text-neutral-300">
+                                <Check size={16} className="text-[#FF4500]" />
+                                <span>{feature}</span>
+                              </li>
+                            ))
+                          )}
                         </ul>
 
                         {/* Price & CTA */}
-                        <div className="flex items-center justify-between pt-6 border-t border-white/10">
-                          <div>
-                            <span className="text-sm text-neutral-500">{t('services.startFrom')}</span>
-                            <div className="text-2xl font-bold text-[#FF4500]">{formatPrice(service.price_start)}</div>
+                        <div className="pt-6 border-t border-white/10">
+                          <div className="flex items-center justify-between mb-4">
+                            <div>
+                              <span className="text-sm text-neutral-500">{t('services.startFrom')}</span>
+                              <div className="text-2xl font-bold text-[#FF4500]">{formatPrice(service.price_start)}</div>
+                            </div>
+                            <Link to="/contact">
+                              <Button className="bg-[#FF4500] hover:bg-[#FF5722] text-white rounded-full">
+                                {language === 'id' ? 'Konsultasi' : 'Consult'}
+                                <ArrowRight className="ml-2" size={16} />
+                              </Button>
+                            </Link>
                           </div>
-                          <Link to="/contact">
-                            <Button className="bg-[#FF4500] hover:bg-[#FF5722] text-white rounded-full">
-                              {language === 'id' ? 'Konsultasi' : 'Consult'}
-                              <ArrowRight className="ml-2" size={16} />
-                            </Button>
-                          </Link>
+                          
+                          {/* Template Link Button */}
+                          {service.template_category && (
+                            <Link to={`/templates?category=${service.template_category}`} className="block">
+                              <Button 
+                                variant="outline" 
+                                className="w-full border-[#FF4500]/50 text-[#FF4500] hover:bg-[#FF4500]/10 rounded-full"
+                              >
+                                <ExternalLink className="mr-2" size={16} />
+                                {language === 'id' 
+                                  ? `Lihat ${templateCategoryLabels[service.template_category]?.id || 'Template'}`
+                                  : `View ${templateCategoryLabels[service.template_category]?.en || 'Templates'}`
+                                }
+                              </Button>
+                            </Link>
+                          )}
                         </div>
                       </div>
                     </div>

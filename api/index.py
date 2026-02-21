@@ -245,6 +245,8 @@ class ServiceModel(BaseModel):
     price_start: int
     image: Optional[str] = None
     order: int = 0
+    template_category: Optional[str] = None  # Link to template category
+    included_features: Optional[List[dict]] = None  # [{text_id, text_en, included}]
 
 class TemplateCreate(BaseModel):
     slug: str
@@ -337,8 +339,27 @@ async def root():
 async def get_services():
     services = await db.services.find({}, {"_id": 0}).sort("order", 1).to_list(100)
     if not services:
-        return get_default_services()
+        # Seed default services to database
+        defaults = get_default_services()
+        for s in defaults:
+            # Check if already exists before inserting
+            existing = await db.services.find_one({"id": s["id"]})
+            if not existing:
+                s["created_at"] = datetime.now(timezone.utc).isoformat()
+                await db.services.insert_one(s)
+        return defaults
     return services
+
+# Admin endpoint to reset services (cleanup duplicates)
+@api_router.post("/admin/services/reset")
+async def reset_services(user: dict = Depends(require_admin)):
+    # Delete all services and re-seed with defaults
+    await db.services.delete_many({})
+    defaults = get_default_services()
+    for s in defaults:
+        s["created_at"] = datetime.now(timezone.utc).isoformat()
+        await db.services.insert_one(s)
+    return {"success": True, "message": f"Reset {len(defaults)} services"}
 
 @api_router.get("/services/{slug}")
 async def get_service(slug: str):
@@ -597,6 +618,43 @@ async def delete_template(template_id: str, user: dict = Depends(require_editor)
         raise HTTPException(status_code=404, detail="Template not found")
     return {"success": True}
 
+# Services Management
+@api_router.post("/admin/services")
+async def create_service(data: ServiceModel, user: dict = Depends(require_editor)):
+    service_data = data.model_dump()
+    service_data["id"] = str(uuid.uuid4())
+    service_data["created_at"] = datetime.now(timezone.utc).isoformat()
+    await db.services.insert_one(service_data)
+    return {"success": True, "id": service_data["id"]}
+
+@api_router.put("/admin/services/{service_id}")
+async def update_service(service_id: str, data: ServiceModel, user: dict = Depends(require_editor)):
+    update_data = data.model_dump()
+    update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
+    update_data["id"] = service_id  # Ensure ID is preserved
+    # Use upsert to handle both existing and default services
+    result = await db.services.update_one(
+        {"id": service_id}, 
+        {"$set": update_data},
+        upsert=True
+    )
+    return {"success": True}
+
+@api_router.delete("/admin/services/{service_id}")
+async def delete_service(service_id: str, user: dict = Depends(require_editor)):
+    # First ensure services are in database
+    services = await db.services.find({}, {"_id": 0}).to_list(100)
+    if not services:
+        defaults = get_default_services()
+        for s in defaults:
+            s["created_at"] = datetime.now(timezone.utc).isoformat()
+            await db.services.insert_one(s)
+    
+    result = await db.services.delete_one({"id": service_id})
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Service not found")
+    return {"success": True}
+
 # Portfolio Management
 @api_router.post("/admin/portfolio")
 async def create_portfolio(data: PortfolioCreate, user: dict = Depends(require_editor)):
@@ -788,6 +846,23 @@ async def delete_cloudinary_image(public_id: str, user: dict = Depends(require_e
 
 # ==================== UPLOAD ENDPOINT ====================
 
+@api_router.get("/cloudinary-debug")
+async def cloudinary_debug():
+    """Debug Cloudinary configuration"""
+    cloud_name = os.environ.get("CLOUDINARY_CLOUD_NAME", "")
+    api_key = os.environ.get("CLOUDINARY_API_KEY", "")
+    api_secret = os.environ.get("CLOUDINARY_API_SECRET", "")
+    
+    return {
+        "cloud_name_raw_len": len(cloud_name),
+        "cloud_name_stripped": cloud_name.strip()[:5] + "..." if cloud_name.strip() else "EMPTY",
+        "api_key_raw_len": len(api_key),
+        "api_key_stripped": api_key.strip()[:5] + "..." if api_key.strip() else "EMPTY",
+        "api_secret_raw_len": len(api_secret),
+        "api_secret_stripped": api_secret.strip()[:5] + "..." if api_secret.strip() else "EMPTY",
+        "configured": bool(cloud_name.strip() and api_key.strip() and api_secret.strip())
+    }
+
 @api_router.post("/upload")
 async def upload_file(
     file: UploadFile = File(...),
@@ -795,29 +870,43 @@ async def upload_file(
     user: dict = Depends(require_editor)
 ):
     """Upload file to Cloudinary"""
-    if not os.environ.get("CLOUDINARY_API_SECRET"):
+    # Configure Cloudinary with stripped values to remove any newlines
+    cloud_name = os.environ.get("CLOUDINARY_CLOUD_NAME", "").strip()
+    api_key = os.environ.get("CLOUDINARY_API_KEY", "").strip()
+    api_secret = os.environ.get("CLOUDINARY_API_SECRET", "").strip()
+    
+    if not cloud_name or not api_key or not api_secret:
+        logger.error(f"Cloudinary not configured: cloud={bool(cloud_name)}, key={bool(api_key)}, secret={bool(api_secret)}")
         raise HTTPException(status_code=500, detail="Cloudinary not configured")
     
-    ALLOWED_FOLDERS = ["calius", "templates", "portfolio", "blog", "users", "settings"]
+    # Re-configure cloudinary with stripped values
+    cloudinary.config(
+        cloud_name=cloud_name,
+        api_key=api_key,
+        api_secret=api_secret,
+        secure=True
+    )
+    
+    ALLOWED_FOLDERS = ["calius", "templates", "portfolio", "blog", "users", "settings", "uploads"]
     if folder not in ALLOWED_FOLDERS:
-        raise HTTPException(status_code=400, detail="Invalid folder")
+        raise HTTPException(status_code=400, detail=f"Invalid folder: {folder}")
     
     # Check file type
     allowed_types = ["image/jpeg", "image/png", "image/gif", "image/webp", "image/svg+xml"]
     if file.content_type not in allowed_types:
         raise HTTPException(status_code=400, detail=f"File type {file.content_type} not allowed")
     
-    # Check file size (max 5MB)
+    # Check file size (max 10MB)
     contents = await file.read()
-    if len(contents) > 5 * 1024 * 1024:
-        raise HTTPException(status_code=400, detail="File too large (max 5MB)")
+    if len(contents) > 10 * 1024 * 1024:
+        raise HTTPException(status_code=400, detail="File too large (max 10MB)")
     
     try:
         # Upload to Cloudinary
         import io
         result = cloudinary.uploader.upload(
             io.BytesIO(contents),
-            folder=folder,
+            folder=f"calius/{folder}",
             resource_type="image"
         )
         return {
@@ -828,6 +917,7 @@ async def upload_file(
             "height": result.get("height")
         }
     except Exception as e:
+        logger.error(f"Upload error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Upload failed: {str(e)}")
 
 # ==================== PAYMENT ROUTES ====================

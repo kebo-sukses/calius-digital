@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { AuthProvider } from "@/context/AuthContext";
+import { SiteSettingsProvider } from "@/context/SiteSettingsContext";
 import { Toaster } from "@/components/ui/toaster";
 import Layout from "@/components/layout/Layout";
 
@@ -27,6 +28,7 @@ import AdminContacts from "@/pages/admin/AdminContacts";
 import AdminOrders from "@/pages/admin/AdminOrders";
 import AdminUsers from "@/pages/admin/AdminUsers";
 import AdminSettings from "@/pages/admin/AdminSettings";
+import AdminServices from "@/pages/admin/AdminServices";
 
 // Load Midtrans Snap script
 const loadMidtransScript = () => {
@@ -48,8 +50,9 @@ function App() {
   return (
     <AuthProvider>
       <LanguageProvider>
-        <BrowserRouter>
-          <Routes>
+        <SiteSettingsProvider>
+          <BrowserRouter>
+            <Routes>
             {/* Public Routes */}
             <Route path="/" element={<Layout><HomePage /></Layout>} />
             <Route path="/services" element={<Layout><ServicesPage /></Layout>} />
@@ -65,6 +68,7 @@ function App() {
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
+              <Route path="services" element={<AdminServices />} />
               <Route path="templates" element={<AdminTemplates />} />
               <Route path="portfolio" element={<AdminPortfolio />} />
               <Route path="blog" element={<AdminBlog />} />
@@ -76,8 +80,9 @@ function App() {
               <Route path="settings" element={<AdminSettings />} />
             </Route>
           </Routes>
-          <Toaster />
-        </BrowserRouter>
+            <Toaster />
+          </BrowserRouter>
+        </SiteSettingsProvider>
       </LanguageProvider>
     </AuthProvider>
   );

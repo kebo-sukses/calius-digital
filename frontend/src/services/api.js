@@ -7,6 +7,9 @@ const api = axios.create({
 });
 
 export const apiService = {
+  // Site Settings (public)
+  getSettings: () => api.get('/settings').then(res => res.data),
+  
   // Services
   getServices: () => api.get('/services').then(res => res.data),
   getService: (slug) => api.get(`/services/${slug}`).then(res => res.data),
