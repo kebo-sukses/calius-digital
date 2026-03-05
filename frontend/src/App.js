@@ -10,6 +10,8 @@ import Layout from "@/components/layout/Layout";
 import HomePage from "@/pages/HomePage";
 import ServicesPage from "@/pages/ServicesPage";
 import TemplatesPage from "@/pages/TemplatesPage";
+import TemplateCategoryPage from "@/pages/TemplateCategoryPage";
+import TemplateDetailPage from "@/pages/TemplateDetailPage";
 import PortfolioPage from "@/pages/PortfolioPage";
 import PricingPage from "@/pages/PricingPage";
 import BlogPage from "@/pages/BlogPage";
@@ -58,6 +60,8 @@ function App() {
             <Route path="/services" element={<Layout><ServicesPage /></Layout>} />
             <Route path="/services/:slug" element={<Layout><ServicesPage /></Layout>} />
             <Route path="/templates" element={<Layout><TemplatesPage /></Layout>} />
+            <Route path="/templates/:category" element={<Layout><TemplateCategoryPage /></Layout>} />
+            <Route path="/templates/:category/:slug" element={<Layout><TemplateDetailPage /></Layout>} />
             <Route path="/portfolio" element={<Layout><PortfolioPage /></Layout>} />
             <Route path="/pricing" element={<Layout><PricingPage /></Layout>} />
             <Route path="/blog" element={<Layout><BlogPage /></Layout>} />

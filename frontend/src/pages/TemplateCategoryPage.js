@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Star, Download, ExternalLink, ShoppingCart } from 'lucide-react';
+import { Star, Download, ExternalLink, ShoppingCart, ChevronRight, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { apiService } from '@/services/api';
 import { Button } from '@/components/ui/button';
@@ -16,6 +16,53 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 
+/**
+ * Category metadata configuration
+ * Centralized definition for all template categories — easy to extend
+ */
+const CATEGORY_META = {
+  business: {
+    slug: 'business',
+    label_id: 'Bisnis',
+    label_en: 'Business',
+    description_id: 'Template profesional untuk perusahaan, startup, dan agensi.',
+    description_en: 'Professional templates for companies, startups, and agencies.',
+    icon: '💼',
+  },
+  ecommerce: {
+    slug: 'ecommerce',
+    label_id: 'E-Commerce',
+    label_en: 'E-Commerce',
+    description_id: 'Template toko online dengan fitur keranjang belanja dan pembayaran.',
+    description_en: 'Online store templates with shopping cart and payment features.',
+    icon: '🛒',
+  },
+  portfolio: {
+    slug: 'portfolio',
+    label_id: 'Portfolio',
+    label_en: 'Portfolio',
+    description_id: 'Template showcase untuk desainer, fotografer, dan kreator.',
+    description_en: 'Showcase templates for designers, photographers, and creators.',
+    icon: '🎨',
+  },
+  'landing-page': {
+    slug: 'landing-page',
+    label_id: 'Landing Page',
+    label_en: 'Landing Page',
+    description_id: 'Template landing page untuk konversi tinggi dan kampanye marketing.',
+    description_en: 'High-converting landing page templates for marketing campaigns.',
+    icon: '🚀',
+  },
+  restaurant: {
+    slug: 'restaurant',
+    label_id: 'Restoran',
+    label_en: 'Restaurant',
+    description_id: 'Template untuk restoran, kafe, dan bisnis kuliner.',
+    description_en: 'Templates for restaurants, cafes, and culinary businesses.',
+    icon: '🍽️',
+  },
+};
+
 const formatPrice = (price) => {
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -24,40 +71,42 @@ const formatPrice = (price) => {
   }).format(price);
 };
 
-const categories = [
-  { id: 'all', label_id: 'Semua', label_en: 'All' },
-  { id: 'business', label_id: 'Bisnis', label_en: 'Business' },
-  { id: 'ecommerce', label_id: 'E-Commerce', label_en: 'E-Commerce' },
-  { id: 'portfolio', label_id: 'Portfolio', label_en: 'Portfolio' },
-  { id: 'landing-page', label_id: 'Landing Page', label_en: 'Landing Page' },
-  { id: 'restaurant', label_id: 'Restoran', label_en: 'Restaurant' },
-];
-
-const TemplatesPage = () => {
+const TemplateCategoryPage = () => {
+  const { category } = useParams();
+  const navigate = useNavigate();
   const { t, language } = useLanguage();
   const { toast } = useToast();
+
   const [templates, setTemplates] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('all');
   const [loading, setLoading] = useState(true);
   const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [selectedTemplate, setSelectedTemplate] = useState(null);
   const [checkoutForm, setCheckoutForm] = useState({ name: '', email: '', phone: '' });
   const [processing, setProcessing] = useState(false);
 
+  // Get category metadata or redirect if invalid
+  const categoryMeta = useMemo(() => CATEGORY_META[category], [category]);
+
   useEffect(() => {
+    if (!categoryMeta) {
+      navigate('/templates', { replace: true });
+      return;
+    }
+
     const fetchTemplates = async () => {
       setLoading(true);
       try {
-        const data = await apiService.getTemplates(activeCategory);
+        const data = await apiService.getTemplates(category);
         setTemplates(data);
       } catch (error) {
-        console.error('Error:', error);
+        console.error('Error fetching templates:', error);
       } finally {
         setLoading(false);
       }
     };
+
     fetchTemplates();
-  }, [activeCategory]);
+  }, [category, categoryMeta, navigate]);
 
   const handleBuyNow = (template) => {
     setSelectedTemplate(template);
@@ -67,7 +116,7 @@ const TemplatesPage = () => {
   const handleCheckout = async () => {
     if (!checkoutForm.name || !checkoutForm.email) {
       toast({
-        title: language === 'id' ? 'Error' : 'Error',
+        title: 'Error',
         description: language === 'id' ? 'Nama dan email wajib diisi' : 'Name and email are required',
         variant: 'destructive',
       });
@@ -119,11 +168,8 @@ const TemplatesPage = () => {
             setProcessing(false);
           },
         });
-      } else {
-        // Fallback to redirect URL
-        if (response.redirect_url) {
-          window.open(response.redirect_url, '_blank');
-        }
+      } else if (response.redirect_url) {
+        window.open(response.redirect_url, '_blank');
       }
     } catch (error) {
       console.error('Checkout error:', error);
@@ -145,44 +191,67 @@ const TemplatesPage = () => {
     window.open(`https://wa.me/628126067561?text=${message}`, '_blank');
   };
 
+  // If category is invalid, don't render (will redirect)
+  if (!categoryMeta) return null;
+
+  const categoryLabel = language === 'id' ? categoryMeta.label_id : categoryMeta.label_en;
+  const categoryDescription = language === 'id' ? categoryMeta.description_id : categoryMeta.description_en;
+
   return (
     <div className="min-h-screen bg-[#050505]">
       {/* Header */}
       <section className="pt-32 pb-16 bg-gradient-to-b from-[#0a0a0a] to-[#050505]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">{t('templates.title')}</h1>
-          <p className="text-lg text-neutral-400 max-w-2xl mx-auto">{t('templates.subtitle')}</p>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          {/* Breadcrumb */}
+          <nav className="flex items-center gap-2 text-sm text-neutral-500 mb-8">
+            <Link to="/" className="hover:text-white transition-colors">
+              {t('nav.home')}
+            </Link>
+            <ChevronRight size={14} />
+            <Link to="/templates" className="hover:text-white transition-colors">
+              {t('nav.templates')}
+            </Link>
+            <ChevronRight size={14} />
+            <span className="text-[#FF4500]">{categoryLabel}</span>
+          </nav>
+
+          <div className="flex items-center gap-4 mb-4">
+            <Link
+              to="/templates"
+              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-neutral-400 hover:text-white transition-all"
+              aria-label="Back to templates"
+            >
+              <ArrowLeft size={20} />
+            </Link>
+            <div>
+              <div className="flex items-center gap-3">
+                <span className="text-3xl">{categoryMeta.icon}</span>
+                <h1 className="text-4xl md:text-5xl font-bold text-white">
+                  {language === 'id' ? 'Template' : ''} {categoryLabel} {language === 'en' ? 'Templates' : ''}
+                </h1>
+              </div>
+              <p className="text-lg text-neutral-400 mt-2 ml-12">{categoryDescription}</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="py-8 border-b border-white/10">
+      {/* Category Navigation Pills */}
+      <section className="py-6 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((cat) => (
-              cat.id === 'all' ? (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory('all')}
-                  data-testid={`filter-${cat.id}`}
-                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === 'all'
-                      ? 'bg-[#FF4500] text-white'
-                      : 'bg-white/5 text-neutral-400 hover:bg-white/10 hover:text-white border border-white/10'
-                  }`}
-                >
-                  {language === 'id' ? cat.label_id : cat.label_en}
-                </button>
-              ) : (
-                <Link
-                  key={cat.id}
-                  to={`/templates/${cat.id}`}
-                  data-testid={`filter-${cat.id}`}
-                  className="px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-white/5 text-neutral-400 hover:bg-white/10 hover:text-white border border-white/10"
-                >
-                  {language === 'id' ? cat.label_id : cat.label_en}
-                </Link>
-              )
+            {Object.values(CATEGORY_META).map((cat) => (
+              <Link
+                key={cat.slug}
+                to={`/templates/${cat.slug}`}
+                className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
+                  category === cat.slug
+                    ? 'bg-[#FF4500] text-white'
+                    : 'bg-white/5 text-neutral-400 hover:bg-white/10 hover:text-white border border-white/10'
+                }`}
+              >
+                {cat.icon} {language === 'id' ? cat.label_id : cat.label_en}
+              </Link>
             ))}
           </div>
         </div>
@@ -197,6 +266,24 @@ const TemplatesPage = () => {
                 <div key={i} className="animate-pulse rounded-2xl bg-neutral-800 h-96" />
               ))}
             </div>
+          ) : templates.length === 0 ? (
+            <div className="text-center py-20">
+              <span className="text-6xl mb-6 block">{categoryMeta.icon}</span>
+              <h3 className="text-xl font-semibold text-white mb-2">
+                {language === 'id' ? 'Belum ada template' : 'No templates yet'}
+              </h3>
+              <p className="text-neutral-400 mb-6">
+                {language === 'id'
+                  ? `Template ${categoryLabel} sedang dalam pengembangan. Nantikan segera!`
+                  : `${categoryLabel} templates are under development. Coming soon!`}
+              </p>
+              <Link to="/templates">
+                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+                  <ArrowLeft size={16} className="mr-2" />
+                  {language === 'id' ? 'Kembali ke Template' : 'Back to Templates'}
+                </Button>
+              </Link>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {templates.map((template, index) => (
@@ -205,7 +292,6 @@ const TemplatesPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  data-testid={`template-card-${template.slug}`}
                   className="group relative overflow-hidden rounded-2xl bg-neutral-900 border border-white/10 hover:border-[#FF4500]/50 transition-all duration-300"
                 >
                   {/* Image */}
@@ -216,7 +302,7 @@ const TemplatesPage = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent" />
-                    
+
                     {/* Badges */}
                     <div className="absolute top-4 left-4 flex flex-wrap gap-2">
                       {template.is_featured && (
@@ -244,7 +330,7 @@ const TemplatesPage = () => {
                     {/* Hover Actions */}
                     <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity bg-black/60">
                       <Link
-                        to={`/templates/${template.category}/${template.slug}`}
+                        to={`/templates/${category}/${template.slug}`}
                         className="p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
                       >
                         <ExternalLink size={20} />
@@ -262,19 +348,19 @@ const TemplatesPage = () => {
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-xs font-medium text-neutral-500 uppercase tracking-wider">
-                        {template.category}
+                        {categoryLabel}
                       </span>
                       <div className="flex items-center gap-1">
                         <Star size={14} className="text-yellow-400" fill="currentColor" />
                         <span className="text-sm text-neutral-400">{template.rating}</span>
                       </div>
                     </div>
-                    
-                    <h3 className="text-lg font-bold text-white mb-2">
-                      <Link to={`/templates/${template.category}/${template.slug}`} className="hover:text-[#FF4500] transition-colors">
+
+                    <Link to={`/templates/${category}/${template.slug}`}>
+                      <h3 className="text-lg font-bold text-white mb-2 hover:text-[#FF4500] transition-colors">
                         {template.name}
-                      </Link>
-                    </h3>
+                      </h3>
+                    </Link>
                     <p className="text-sm text-neutral-400 line-clamp-2 mb-4">
                       {language === 'id' ? template.description_id : template.description_en}
                     </p>
@@ -288,7 +374,7 @@ const TemplatesPage = () => {
                       ))}
                     </div>
 
-                    {/* Price & Actions */}
+                    {/* Price & Downloads */}
                     <div className="flex items-center justify-between pt-4 border-t border-white/10">
                       <div>
                         {template.sale_price ? (
@@ -308,7 +394,7 @@ const TemplatesPage = () => {
 
                     {/* Action Buttons */}
                     <div className="flex gap-3 mt-4">
-                      <Link to={`/templates/${template.category}/${template.slug}`} className="flex-1">
+                      <Link to={`/templates/${category}/${template.slug}`} className="flex-1">
                         <Button
                           variant="outline"
                           className="w-full border-white/20 text-white hover:bg-white/10 rounded-lg"
@@ -318,7 +404,6 @@ const TemplatesPage = () => {
                       </Link>
                       <Button
                         onClick={() => handleBuyNow(template)}
-                        data-testid={`buy-${template.slug}`}
                         className="flex-1 bg-[#FF4500] hover:bg-[#FF5722] text-white rounded-lg"
                       >
                         {t('templates.buyNow')}
@@ -385,10 +470,11 @@ const TemplatesPage = () => {
               <Button
                 onClick={handleCheckout}
                 disabled={processing}
-                data-testid="checkout-submit"
                 className="w-full bg-[#FF4500] hover:bg-[#FF5722] text-white h-12 font-semibold"
               >
-                {processing ? (language === 'id' ? 'Memproses...' : 'Processing...') : (language === 'id' ? 'Bayar Sekarang' : 'Pay Now')}
+                {processing
+                  ? (language === 'id' ? 'Memproses...' : 'Processing...')
+                  : (language === 'id' ? 'Bayar Sekarang' : 'Pay Now')}
               </Button>
             </div>
           </div>
@@ -398,4 +484,4 @@ const TemplatesPage = () => {
   );
 };
 
-export default TemplatesPage;
+export default TemplateCategoryPage;
