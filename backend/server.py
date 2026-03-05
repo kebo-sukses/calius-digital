@@ -359,7 +359,11 @@ async def get_templates(category: Optional[str] = None):
         query["category"] = category
     templates = await db.templates.find(query, {"_id": 0}).to_list(100)
     if not templates:
-        return get_default_templates()
+        # Fallback to defaults but still respect category filter
+        defaults = get_default_templates()
+        if category and category != "all":
+            defaults = [t for t in defaults if t["category"] == category]
+        return defaults
     return templates
 
 @api_router.get("/templates/{slug}")
