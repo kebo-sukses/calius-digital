@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Star, Download, ExternalLink, ShoppingCart, ChevronRight, ArrowLeft } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { templateService } from '@/services/templateService';
 import { apiService } from '@/services/api';
 import { Button } from '@/components/ui/button';
 import {
@@ -96,7 +97,7 @@ const TemplateCategoryPage = () => {
     const fetchTemplates = async () => {
       setLoading(true);
       try {
-        const data = await apiService.getTemplates(category);
+        const data = await templateService.getTemplates(category);
         setTemplates(data);
       } catch (error) {
         console.error('Error fetching templates:', error);

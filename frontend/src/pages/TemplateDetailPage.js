@@ -15,6 +15,7 @@ import {
   MessageCircle,
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { templateService } from '@/services/templateService';
 import { apiService } from '@/services/api';
 import { Button } from '@/components/ui/button';
 import {
@@ -74,7 +75,7 @@ const TemplateDetailPage = () => {
     const fetchTemplate = async () => {
       setLoading(true);
       try {
-        const data = await apiService.getTemplate(slug);
+        const data = await templateService.getTemplate(slug);
         if (!data) {
           navigate('/templates', { replace: true });
           return;
