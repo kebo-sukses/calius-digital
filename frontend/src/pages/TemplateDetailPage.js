@@ -13,6 +13,7 @@ import {
   Smartphone,
   Eye,
   MessageCircle,
+  LayoutDashboard,
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { apiService } from '@/services/api';
@@ -455,6 +456,22 @@ const TemplateDetailPage = () => {
                         >
                           <Eye size={16} className="mr-2" />
                           {language === 'id' ? 'Buka Demo Full' : 'Open Full Demo'}
+                        </Button>
+                      </a>
+                    )}
+                    {template.admin_url && (
+                      <a
+                        href={template.admin_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <Button
+                          variant="ghost"
+                          className="w-full text-neutral-400 hover:text-white hover:bg-white/5 h-10"
+                        >
+                          <LayoutDashboard size={16} className="mr-2" />
+                          {language === 'id' ? 'Lihat Admin Panel' : 'View Admin Panel'}
                         </Button>
                       </a>
                     )}

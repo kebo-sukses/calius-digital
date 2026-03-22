@@ -21,7 +21,7 @@ const AdminTemplates = () => {
   const [form, setForm] = useState({
     slug: '', name: '', category: 'business', price: 0, sale_price: null,
     description_id: '', description_en: '', features: [], technologies: [],
-    demo_url: '', image: '', images: [], is_featured: false, is_bestseller: false, is_new: false
+    demo_url: '', admin_url: '', image: '', images: [], is_featured: false, is_bestseller: false, is_new: false
   });
 
   useEffect(() => { fetchTemplates(); }, []);
@@ -41,7 +41,7 @@ const AdminTemplates = () => {
     setForm({
       slug: '', name: '', category: 'business', price: 0, sale_price: null,
       description_id: '', description_en: '', features: [], technologies: [],
-      demo_url: '', image: '', images: [], is_featured: false, is_bestseller: false, is_new: false
+      demo_url: '', admin_url: '', image: '', images: [], is_featured: false, is_bestseller: false, is_new: false
     });
     setEditingId(null);
   };
@@ -202,9 +202,15 @@ const AdminTemplates = () => {
               </div>
             </div>
 
-            <div>
-              <Label>Demo URL</Label>
-              <Input value={form.demo_url} onChange={(e) => setForm({ ...form, demo_url: e.target.value })} className="bg-neutral-800 border-white/10 text-white" />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label>Demo URL</Label>
+                <Input value={form.demo_url} onChange={(e) => setForm({ ...form, demo_url: e.target.value })} className="bg-neutral-800 border-white/10 text-white" />
+              </div>
+              <div>
+                <Label>Admin Panel URL (optional)</Label>
+                <Input value={form.admin_url || ''} onChange={(e) => setForm({ ...form, admin_url: e.target.value || null })} placeholder="https://demo.example.com/admin" className="bg-neutral-800 border-white/10 text-white" />
+              </div>
             </div>
 
             <div>
