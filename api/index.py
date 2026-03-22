@@ -261,6 +261,7 @@ class TemplateCreate(BaseModel):
     demo_url: Optional[str] = None
     image: str = ""
     images: List[str] = []
+    source_repo: Optional[str] = None
     is_featured: bool = False
     is_bestseller: bool = False
     is_new: bool = False
@@ -378,25 +379,40 @@ async def get_templates(category: Optional[str] = None):
     query = {}
     if category and category != "all":
         query["category"] = category
-    templates = await db.templates.find(query, {"_id": 0}).to_list(100)
-    if not templates:
-        # Fallback to defaults but still respect category filter
-        defaults = get_default_templates()
-        if category and category != "all":
-            defaults = [t for t in defaults if t["category"] == category]
-        return defaults
-    return templates
+    db_templates = await db.templates.find(query, {"_id": 0}).to_list(100)
+    defaults = get_default_templates()
+    if category and category != "all":
+        defaults = [t for t in defaults if t["category"] == category]
+    # Merge: prefer DB version over default, include user-created templates
+    db_by_id = {t["id"]: t for t in db_templates}
+    deleted_ids = set()
+    deleted_docs = await db.deleted_templates.find({}, {"_id": 0, "id": 1}).to_list(100)
+    for d in deleted_docs:
+        deleted_ids.add(d["id"])
+    merged = []
+    seen_ids = set()
+    for t in defaults:
+        if t["id"] in deleted_ids:
+            continue
+        merged.append(db_by_id.get(t["id"], t))
+        seen_ids.add(t["id"])
+    for t in db_templates:
+        if t["id"] not in seen_ids:
+            merged.append(t)
+    return merged
 
 @api_router.get("/templates/{slug}")
 async def get_template(slug: str):
     template = await db.templates.find_one({"slug": slug}, {"_id": 0})
-    if not template:
-        defaults = get_default_templates()
-        for t in defaults:
-            if t["slug"] == slug:
+    if template:
+        return template
+    defaults = get_default_templates()
+    for t in defaults:
+        if t["slug"] == slug:
+            deleted = await db.deleted_templates.find_one({"id": t["id"]})
+            if not deleted:
                 return t
-        raise HTTPException(status_code=404, detail="Template not found")
-    return template
+    raise HTTPException(status_code=404, detail="Template not found")
 
 # Portfolio (Public)
 @api_router.get("/portfolio")
@@ -610,16 +626,22 @@ async def create_template(data: TemplateCreate, user: dict = Depends(require_edi
 async def update_template(template_id: str, data: TemplateCreate, user: dict = Depends(require_editor)):
     update_data = data.model_dump()
     update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
-    result = await db.templates.update_one({"id": template_id}, {"$set": update_data})
-    if result.modified_count == 0:
-        raise HTTPException(status_code=404, detail="Template not found")
+    await db.templates.update_one(
+        {"id": template_id},
+        {"$set": update_data, "$setOnInsert": {"id": template_id, "downloads": 0, "rating": 5.0, "created_at": datetime.now(timezone.utc).isoformat()}},
+        upsert=True
+    )
     return {"success": True}
 
 @api_router.delete("/admin/templates/{template_id}")
 async def delete_template(template_id: str, user: dict = Depends(require_editor)):
-    result = await db.templates.delete_one({"id": template_id})
-    if result.deleted_count == 0:
-        raise HTTPException(status_code=404, detail="Template not found")
+    await db.templates.delete_one({"id": template_id})
+    # Also mark as deleted so default templates don't reappear
+    await db.deleted_templates.update_one(
+        {"id": template_id},
+        {"$set": {"id": template_id, "deleted_at": datetime.now(timezone.utc).isoformat()}},
+        upsert=True
+    )
     return {"success": True}
 
 # Services Management
@@ -1060,7 +1082,8 @@ def get_default_templates():
         {"id": "2", "slug": "shopmax-ecommerce", "name": "ShopMax E-Commerce", "category": "ecommerce", "price": 1200000, "sale_price": 950000, "description_id": "Solusi e-commerce lengkap dengan keranjang belanja dan checkout.", "description_en": "Complete e-commerce solution with shopping cart and checkout.", "features": ["Product Catalog", "Shopping Cart", "Checkout System", "18 Pages"], "technologies": ["HTML5", "CSS3", "JavaScript", "Vue.js"], "demo_url": "https://demo.calius.digital/shopmax", "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800", "images": [], "downloads": 280, "rating": 4.8, "is_featured": True, "is_bestseller": True, "is_new": False},
         {"id": "3", "slug": "creative-portfolio", "name": "Creative Portfolio Pro", "category": "portfolio", "price": 600000, "sale_price": None, "description_id": "Template portfolio kreatif untuk desainer dan fotografer.", "description_en": "Creative portfolio template for designers and photographers.", "features": ["Gallery Layouts", "Project Showcase", "Smooth Animations", "8 Pages"], "technologies": ["HTML5", "CSS3", "JavaScript", "GSAP"], "demo_url": "https://demo.calius.digital/portfolio", "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800", "images": [], "downloads": 95, "rating": 5.0, "is_featured": True, "is_bestseller": False, "is_new": True},
         {"id": "4", "slug": "launchpad-landing", "name": "LaunchPad Landing Page", "category": "landing-page", "price": 450000, "sale_price": 350000, "description_id": "Landing page konversi tinggi untuk peluncuran produk.", "description_en": "High-converting landing page for product launches.", "features": ["Lead Capture", "Countdown Timer", "Pricing Tables", "1 Page"], "technologies": ["HTML5", "CSS3", "JavaScript", "Tailwind CSS"], "demo_url": "https://demo.calius.digital/launchpad", "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800", "images": [], "downloads": 320, "rating": 4.7, "is_featured": False, "is_bestseller": True, "is_new": False},
-        {"id": "5", "slug": "delicious-restaurant", "name": "Delicious Restaurant", "category": "restaurant", "price": 700000, "sale_price": None, "description_id": "Template restoran dengan menu online dan sistem reservasi.", "description_en": "Restaurant template with online menu and reservation system.", "features": ["Menu System", "Reservation Form", "Gallery", "10 Pages"], "technologies": ["HTML5", "CSS3", "JavaScript", "Bootstrap 5"], "demo_url": "https://demo.calius.digital/restaurant", "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800", "images": [], "downloads": 75, "rating": 4.9, "is_featured": True, "is_bestseller": False, "is_new": True}
+        {"id": "5", "slug": "delicious-restaurant", "name": "Delicious Restaurant", "category": "restaurant", "price": 700000, "sale_price": None, "description_id": "Template restoran dengan menu online dan sistem reservasi.", "description_en": "Restaurant template with online menu and reservation system.", "features": ["Menu System", "Reservation Form", "Gallery", "10 Pages"], "technologies": ["HTML5", "CSS3", "JavaScript", "Bootstrap 5"], "demo_url": "https://demo.calius.digital/restaurant", "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800", "images": [], "downloads": 75, "rating": 4.9, "is_featured": True, "is_bestseller": False, "is_new": True},
+        {"id": "6", "slug": "honda-dealer-landing-page", "name": "Dealer Motor Landing Page", "category": "landing-page", "price": 750000, "sale_price": 499000, "description_id": "Template landing page high-converting untuk dealer motor. Dilengkapi built-in Admin Panel CMS untuk edit konten tanpa coding. Fitur lengkap: Hero section, showcase produk dengan harga & cicilan, testimonial customer, Google Maps embed, floating WhatsApp CTA, SEO JSON-LD untuk Local Business, dan responsive design. Cocok untuk dealer resmi maupun showroom independen.", "description_en": "High-converting landing page template for motorcycle dealers. Includes built-in Admin Panel CMS for no-code content editing. Full features: Hero section, product showcase with pricing & installments, customer testimonials, Google Maps embed, floating WhatsApp CTA, SEO JSON-LD for Local Business, and responsive design. Perfect for authorized dealers and independent showrooms.", "features": ["Built-in Admin Panel CMS", "SEO JSON-LD (Local Business)", "Floating WhatsApp CTA", "Responsive Design", "Google Maps Embed", "Promo Banner (on/off)", "Product Showcase (harga + cicilan)", "Testimonial Section", "Coverage Area (Local SEO)", "Fast Performance (Next.js 14)"], "technologies": ["Next.js 14", "Tailwind CSS", "shadcn/ui", "Vercel"], "demo_url": "https://page-marketing-sepeda-motor.vercel.app", "image": "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=800", "images": [], "source_repo": "kebo-sukses/Page-Marketing-Sepeda-motor", "downloads": 0, "rating": 5.0, "is_featured": True, "is_bestseller": False, "is_new": True}
     ]
 
 def get_default_portfolio():
