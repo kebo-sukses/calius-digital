@@ -396,8 +396,9 @@ async def get_templates(category: Optional[str] = None):
         if t["id"] in deleted_ids:
             continue
         if t["id"] in db_by_id:
-            # Merge: default fields as base, DB fields override
-            merged_item = {**t, **db_by_id[t["id"]]}
+            # Merge: default fields as base, non-null DB fields override
+            db_record = {k: v for k, v in db_by_id[t["id"]].items() if v is not None}
+            merged_item = {**t, **db_record}
             merged.append(merged_item)
         else:
             merged.append(t)
@@ -413,9 +414,10 @@ async def get_template(slug: str):
     if template:
         # Merge with defaults to fill any new fields
         defaults = get_default_templates()
+        db_record = {k: v for k, v in template.items() if v is not None}
         for t in defaults:
             if t["slug"] == slug:
-                return {**t, **template}
+                return {**t, **db_record}
         return template
     defaults = get_default_templates()
     for t in defaults:
