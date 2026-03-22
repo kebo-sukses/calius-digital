@@ -384,7 +384,7 @@ async def get_templates(category: Optional[str] = None):
     defaults = get_default_templates()
     if category and category != "all":
         defaults = [t for t in defaults if t["category"] == category]
-    # Merge: prefer DB version over default, include user-created templates
+    # Merge: DB overrides defaults, but defaults fill missing fields
     db_by_id = {t["id"]: t for t in db_templates}
     deleted_ids = set()
     deleted_docs = await db.deleted_templates.find({}, {"_id": 0, "id": 1}).to_list(100)
@@ -395,7 +395,12 @@ async def get_templates(category: Optional[str] = None):
     for t in defaults:
         if t["id"] in deleted_ids:
             continue
-        merged.append(db_by_id.get(t["id"], t))
+        if t["id"] in db_by_id:
+            # Merge: default fields as base, DB fields override
+            merged_item = {**t, **db_by_id[t["id"]]}
+            merged.append(merged_item)
+        else:
+            merged.append(t)
         seen_ids.add(t["id"])
     for t in db_templates:
         if t["id"] not in seen_ids:
@@ -406,6 +411,11 @@ async def get_templates(category: Optional[str] = None):
 async def get_template(slug: str):
     template = await db.templates.find_one({"slug": slug}, {"_id": 0})
     if template:
+        # Merge with defaults to fill any new fields
+        defaults = get_default_templates()
+        for t in defaults:
+            if t["slug"] == slug:
+                return {**t, **template}
         return template
     defaults = get_default_templates()
     for t in defaults:
