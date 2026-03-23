@@ -48,6 +48,14 @@ const formatPrice = (price) => {
   }).format(price);
 };
 
+const formatPriceUSD = (price) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+  }).format(price);
+};
+
 const PREVIEW_MODES = [
   { key: 'desktop', icon: Monitor, width: '100%' },
   { key: 'tablet', icon: Tablet, width: '768px' },
@@ -399,11 +407,23 @@ const TemplateDetailPage = () => {
                         <span className="text-sm text-neutral-500 line-through">
                           {formatPrice(template.price)}
                         </span>
+                        {template.sale_price_usd && (
+                          <div className="mt-1 text-sm text-neutral-400">
+                            {formatPriceUSD(template.sale_price_usd)}
+                          </div>
+                        )}
                       </div>
                     ) : (
-                      <span className="text-3xl font-bold text-[#FF4500]">
-                        {formatPrice(template.price)}
-                      </span>
+                      <div>
+                        <span className="text-3xl font-bold text-[#FF4500]">
+                          {formatPrice(template.price)}
+                        </span>
+                        {template.price_usd && (
+                          <div className="mt-1 text-sm text-neutral-400">
+                            {formatPriceUSD(template.price_usd)}
+                          </div>
+                        )}
+                      </div>
                     )}
                   </div>
 
@@ -529,8 +549,16 @@ const TemplateDetailPage = () => {
             <div className="pt-4 border-t border-white/10">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-neutral-400">Total</span>
-                <span className="text-2xl font-bold text-[#FF4500]">
-                  {formatPrice(template.sale_price || template.price)}
+                <div className="text-right">
+                  <span className="text-2xl font-bold text-[#FF4500]">
+                    {formatPrice(template.sale_price || template.price)}
+                  </span>
+                  {(template.sale_price_usd || template.price_usd) && (
+                    <div className="text-sm text-neutral-400">
+                      {formatPriceUSD(template.sale_price_usd || template.price_usd)}
+                    </div>
+                  )}
+                </div>
                 </span>
               </div>
               <Button

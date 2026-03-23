@@ -20,6 +20,7 @@ const AdminTemplates = () => {
   const [uploading, setUploading] = useState(false);
   const [form, setForm] = useState({
     slug: '', name: '', category: 'business', price: 0, sale_price: null,
+    price_usd: null, sale_price_usd: null,
     description_id: '', description_en: '', features: [], technologies: [],
     demo_url: '', admin_url: '', image: '', images: [], is_featured: false, is_bestseller: false, is_new: false
   });
@@ -40,6 +41,7 @@ const AdminTemplates = () => {
   const resetForm = () => {
     setForm({
       slug: '', name: '', category: 'business', price: 0, sale_price: null,
+      price_usd: null, sale_price_usd: null,
       description_id: '', description_en: '', features: [], technologies: [],
       demo_url: '', admin_url: '', image: '', images: [], is_featured: false, is_bestseller: false, is_new: false
     });
@@ -47,7 +49,7 @@ const AdminTemplates = () => {
   };
 
   const handleEdit = (template) => {
-    setForm({ ...template, sale_price: template.sale_price || null });
+    setForm({ ...template, sale_price: template.sale_price || null, price_usd: template.price_usd || null, sale_price_usd: template.sale_price_usd || null });
     setEditingId(template.id);
     setDialogOpen(true);
   };
@@ -132,7 +134,12 @@ const AdminTemplates = () => {
                   <h3 className="font-semibold text-white">{template.name}</h3>
                   <p className="text-xs text-neutral-500">{template.category}</p>
                 </div>
-                <span className="text-[#FF4500] font-bold">Rp {formatPrice(template.sale_price || template.price)}</span>
+                <div className="text-right">
+                  <span className="text-[#FF4500] font-bold">Rp {formatPrice(template.sale_price || template.price)}</span>
+                  {(template.sale_price_usd || template.price_usd) && (
+                    <div className="text-xs text-neutral-400">${template.sale_price_usd || template.price_usd}</div>
+                  )}
+                </div>
               </div>
               <div className="flex gap-2 mt-4">
                 <Button size="sm" variant="outline" onClick={() => handleEdit(template)} className="flex-1 border-white/10 text-white">
@@ -178,6 +185,17 @@ const AdminTemplates = () => {
               <div>
                 <Label>Sale Price (optional)</Label>
                 <Input type="number" value={form.sale_price || ''} onChange={(e) => setForm({ ...form, sale_price: e.target.value || null })} className="bg-neutral-800 border-white/10 text-white" />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label>Price USD ($)</Label>
+                <Input type="number" value={form.price_usd || ''} onChange={(e) => setForm({ ...form, price_usd: e.target.value || null })} className="bg-neutral-800 border-white/10 text-white" placeholder="e.g. 45" />
+              </div>
+              <div>
+                <Label>Sale Price USD (optional)</Label>
+                <Input type="number" value={form.sale_price_usd || ''} onChange={(e) => setForm({ ...form, sale_price_usd: e.target.value || null })} className="bg-neutral-800 border-white/10 text-white" placeholder="e.g. 29" />
               </div>
             </div>
 

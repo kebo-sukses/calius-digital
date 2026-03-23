@@ -24,6 +24,14 @@ const formatPrice = (price) => {
   }).format(price);
 };
 
+const formatPriceUSD = (price) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+  }).format(price);
+};
+
 const categories = [
   { id: 'all', label_id: 'Semua', label_en: 'All' },
   { id: 'business', label_id: 'Bisnis', label_en: 'Business' },
@@ -292,12 +300,22 @@ const TemplatesPage = () => {
                     <div className="flex items-center justify-between pt-4 border-t border-white/10">
                       <div>
                         {template.sale_price ? (
-                          <div className="flex items-center gap-2">
-                            <span className="text-xl font-bold text-[#FF4500]">{formatPrice(template.sale_price)}</span>
-                            <span className="text-sm text-neutral-500 line-through">{formatPrice(template.price)}</span>
+                          <div className="flex flex-col">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xl font-bold text-[#FF4500]">{formatPrice(template.sale_price)}</span>
+                              <span className="text-sm text-neutral-500 line-through">{formatPrice(template.price)}</span>
+                            </div>
+                            {template.sale_price_usd && (
+                              <span className="text-xs text-neutral-400">{formatPriceUSD(template.sale_price_usd)}</span>
+                            )}
                           </div>
                         ) : (
-                          <span className="text-xl font-bold text-[#FF4500]">{formatPrice(template.price)}</span>
+                          <div className="flex flex-col">
+                            <span className="text-xl font-bold text-[#FF4500]">{formatPrice(template.price)}</span>
+                            {template.price_usd && (
+                              <span className="text-xs text-neutral-400">{formatPriceUSD(template.price_usd)}</span>
+                            )}
+                          </div>
                         )}
                       </div>
                       <div className="flex items-center gap-1 text-neutral-500">
@@ -378,8 +396,16 @@ const TemplatesPage = () => {
             <div className="pt-4 border-t border-white/10">
               <div className="flex justify-between items-center mb-4">
                 <span className="text-neutral-400">Total</span>
-                <span className="text-2xl font-bold text-[#FF4500]">
-                  {formatPrice(selectedTemplate?.sale_price || selectedTemplate?.price || 0)}
+                <div className="text-right">
+                  <span className="text-2xl font-bold text-[#FF4500]">
+                    {formatPrice(selectedTemplate?.sale_price || selectedTemplate?.price || 0)}
+                  </span>
+                  {(selectedTemplate?.sale_price_usd || selectedTemplate?.price_usd) && (
+                    <div className="text-sm text-neutral-400">
+                      {formatPriceUSD(selectedTemplate?.sale_price_usd || selectedTemplate?.price_usd)}
+                    </div>
+                  )}
+                </div>
                 </span>
               </div>
               <Button
