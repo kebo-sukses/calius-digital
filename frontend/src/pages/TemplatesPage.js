@@ -72,7 +72,7 @@ const TemplatesPage = () => {
     setCheckoutOpen(true);
   };
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     if (!checkoutForm.name || !checkoutForm.email) {
       toast({
         title: language === 'id' ? 'Error' : 'Error',
@@ -82,67 +82,19 @@ const TemplatesPage = () => {
       return;
     }
 
-    setProcessing(true);
-    try {
-      const orderId = `TPL-${Date.now()}`;
-      const amount = selectedTemplate.sale_price || selectedTemplate.price;
-
-      const response = await apiService.createPaymentToken({
-        order_id: orderId,
-        gross_amount: amount,
-        customer_email: checkoutForm.email,
-        customer_name: checkoutForm.name,
-        customer_phone: checkoutForm.phone,
-        item_details: [{
-          id: selectedTemplate.id,
-          price: amount,
-          quantity: 1,
-          name: selectedTemplate.name,
-        }],
-      });
-
-      if (response.token && window.snap) {
-        window.snap.pay(response.token, {
-          onSuccess: () => {
-            toast({
-              title: language === 'id' ? 'Pembayaran Berhasil!' : 'Payment Successful!',
-              description: language === 'id' ? 'Link download akan dikirim ke email Anda' : 'Download link will be sent to your email',
-            });
-            setCheckoutOpen(false);
-          },
-          onPending: () => {
-            toast({
-              title: language === 'id' ? 'Menunggu Pembayaran' : 'Waiting for Payment',
-              description: language === 'id' ? 'Silakan selesaikan pembayaran Anda' : 'Please complete your payment',
-            });
-          },
-          onError: () => {
-            toast({
-              title: 'Error',
-              description: language === 'id' ? 'Pembayaran gagal' : 'Payment failed',
-              variant: 'destructive',
-            });
-          },
-          onClose: () => {
-            setProcessing(false);
-          },
-        });
-      } else {
-        // Fallback to redirect URL
-        if (response.redirect_url) {
-          window.open(response.redirect_url, '_blank');
-        }
-      }
-    } catch (error) {
-      console.error('Checkout error:', error);
-      toast({
-        title: 'Error',
-        description: error.message || 'Checkout failed',
-        variant: 'destructive',
-      });
-    } finally {
-      setProcessing(false);
-    }
+    const amount = selectedTemplate.sale_price || selectedTemplate.price;
+    const amountUsd = selectedTemplate.sale_price_usd || selectedTemplate.price_usd;
+    const message = encodeURIComponent(
+      `Halo Calius Digital, saya ingin memesan template:\n\n` +
+      `Template: ${selectedTemplate.name}\n` +
+      `Harga: ${formatPrice(amount)}${amountUsd ? ` / ${formatPriceUSD(amountUsd)}` : ''}\n` +
+      `Nama: ${checkoutForm.name}\n` +
+      `Email: ${checkoutForm.email}\n` +
+      `${checkoutForm.phone ? `Telepon: ${checkoutForm.phone}\n` : ''}\n` +
+      `Mohon info pembayaran lebih lanjut. Terima kasih!`
+    );
+    window.open(`https://wa.me/628126067561?text=${message}`, '_blank');
+    setCheckoutOpen(false);
   };
 
   const handleWhatsAppOrder = (template) => {
@@ -409,11 +361,10 @@ const TemplatesPage = () => {
               </div>
               <Button
                 onClick={handleCheckout}
-                disabled={processing}
                 data-testid="checkout-submit"
-                className="w-full bg-[#FF4500] hover:bg-[#FF5722] text-white h-12 font-semibold"
+                className="w-full bg-[#25D366] hover:bg-[#1da851] text-white h-12 font-semibold"
               >
-                {processing ? (language === 'id' ? 'Memproses...' : 'Processing...') : (language === 'id' ? 'Bayar Sekarang' : 'Pay Now')}
+                {language === 'id' ? 'Pesan via WhatsApp' : 'Order via WhatsApp'}
               </Button>
             </div>
           </div>
