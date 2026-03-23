@@ -33,6 +33,17 @@ export const SiteSettingsProvider = ({ children }) => {
           if (response.site_name) {
             document.title = response.site_name;
           }
+
+          // Update google-site-verification meta tag
+          if (response.google_site_verification) {
+            let metaTag = document.querySelector('meta[name="google-site-verification"]');
+            if (!metaTag) {
+              metaTag = document.createElement('meta');
+              metaTag.name = 'google-site-verification';
+              document.head.appendChild(metaTag);
+            }
+            metaTag.content = response.google_site_verification;
+          }
         }
       } catch (error) {
         console.error('Failed to fetch site settings:', error);

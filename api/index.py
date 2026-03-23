@@ -1140,6 +1140,7 @@ class SiteSettings(BaseModel):
     meta_description: str = "Jasa pembuatan website profesional dan template premium untuk bisnis Anda."
     meta_keywords: str = "website, template, web development, digital agency"
     og_image: str = ""
+    google_site_verification: str = ""
     contact_email: str = ""
     contact_phone: str = ""
     contact_whatsapp: str = ""

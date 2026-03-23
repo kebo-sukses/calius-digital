@@ -31,6 +31,7 @@ const AdminSettings = () => {
     meta_title: '',
     meta_description: '',
     meta_keywords: '',
+    google_site_verification: '',
     og_image: '',
     contact_email: '',
     contact_phone: '',
@@ -398,6 +399,18 @@ const AdminSettings = () => {
                   onChange={(e) => handleChange('meta_keywords', e.target.value)}
                   placeholder="Kata kunci dipisahkan koma (website, template, jasa web)"
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label>Google Site Verification</Label>
+                <Input
+                  value={settings.google_site_verification || ''}
+                  onChange={(e) => handleChange('google_site_verification', e.target.value)}
+                  placeholder="Kode verifikasi dari Google Search Console"
+                />
+                <p className="text-xs text-gray-500">
+                  Masukkan nilai content dari tag meta google-site-verification
+                </p>
               </div>
 
               {/* OG Image */}
