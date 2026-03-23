@@ -559,7 +559,6 @@ const TemplateDetailPage = () => {
                     </div>
                   )}
                 </div>
-                </span>
               </div>
               <Button
                 onClick={handleCheckout}
