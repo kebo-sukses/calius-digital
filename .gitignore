@@ -92,3 +92,7 @@ frontend/node_modules/.cache/default-development/3.pack
 
 # Local deploy script (contains secret deploy hook URL)
 deploy.ps1
+
+
+#Ignore vscode AI rules
+.github\instructions\codacy.instructions.md

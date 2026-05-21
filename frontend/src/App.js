@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { SiteSettingsProvider } from "@/context/SiteSettingsContext";
@@ -15,6 +16,7 @@ import TemplateDetailPage from "@/pages/TemplateDetailPage";
 import PortfolioPage from "@/pages/PortfolioPage";
 import PricingPage from "@/pages/PricingPage";
 import BlogPage from "@/pages/BlogPage";
+import BlogDetailPage from "@/pages/BlogDetailPage";
 import ContactPage from "@/pages/ContactPage";
 
 // Admin Pages
@@ -50,6 +52,7 @@ function App() {
   }, []);
 
   return (
+    <HelmetProvider>
     <AuthProvider>
       <LanguageProvider>
         <SiteSettingsProvider>
@@ -65,7 +68,7 @@ function App() {
             <Route path="/portfolio" element={<Layout><PortfolioPage /></Layout>} />
             <Route path="/pricing" element={<Layout><PricingPage /></Layout>} />
             <Route path="/blog" element={<Layout><BlogPage /></Layout>} />
-            <Route path="/blog/:slug" element={<Layout><BlogPage /></Layout>} />
+            <Route path="/blog/:slug" element={<Layout><BlogDetailPage /></Layout>} />
             <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
 
             {/* Admin Routes */}
@@ -89,6 +92,7 @@ function App() {
         </SiteSettingsProvider>
       </LanguageProvider>
     </AuthProvider>
+    </HelmetProvider>
   );
 }
 

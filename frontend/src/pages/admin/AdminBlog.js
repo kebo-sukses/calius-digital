@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
-import { Plus, Pencil, Trash2, Upload, Eye } from 'lucide-react';
+import { Plus, Pencil, Trash2, Upload, Eye, X } from 'lucide-react';
 import RichTextEditor from '@/components/ui/RichTextEditor';
 
 const AdminBlog = () => {
@@ -21,7 +21,9 @@ const AdminBlog = () => {
   const [activeTab, setActiveTab] = useState('id');
   const [form, setForm] = useState({
     slug: '', title_id: '', title_en: '', excerpt_id: '', excerpt_en: '',
-    content_id: '', content_en: '', image: '', author: 'Calius Team', category: 'tips', tags: [], read_time: 5
+    content_id: '', content_en: '', image: '', featured_image_alt: '',
+    author: 'Tim Calius Digital', category: 'tips', tags: [], read_time: 5,
+    seo_title: '', seo_description: '', faq_items: []
   });
 
   useEffect(() => { fetchPosts(); }, []);
@@ -40,10 +42,27 @@ const AdminBlog = () => {
   const resetForm = () => {
     setForm({
       slug: '', title_id: '', title_en: '', excerpt_id: '', excerpt_en: '',
-      content_id: '', content_en: '', image: '', author: 'Calius Team', category: 'tips', tags: [], read_time: 5
+      content_id: '', content_en: '', image: '', featured_image_alt: '',
+      author: 'Tim Calius Digital', category: 'tips', tags: [], read_time: 5,
+      seo_title: '', seo_description: '', faq_items: []
     });
     setEditingId(null);
     setActiveTab('id');
+  };
+
+  const addFaqItem = () => {
+    setForm({ ...form, faq_items: [...(form.faq_items || []), { question: '', answer: '' }] });
+  };
+
+  const updateFaqItem = (index, field, value) => {
+    const updated = [...(form.faq_items || [])];
+    updated[index] = { ...updated[index], [field]: value };
+    setForm({ ...form, faq_items: updated });
+  };
+
+  const removeFaqItem = (index) => {
+    const updated = [...(form.faq_items || [])].filter((_, i) => i !== index);
+    setForm({ ...form, faq_items: updated });
   };
 
   const handleEdit = (post) => {
@@ -239,6 +258,82 @@ const AdminBlog = () => {
                 </label>
                 <Input value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} placeholder="or Image URL" className="flex-1 bg-neutral-800 border-white/10 text-white" />
               </div>
+              <div className="mt-2">
+                <Label className="text-xs text-neutral-400">Alt Text Gambar (untuk SEO & aksesibilitas)</Label>
+                <Input value={form.featured_image_alt || ''} onChange={(e) => setForm({ ...form, featured_image_alt: e.target.value })} placeholder="Deskripsi singkat gambar..." className="mt-1 bg-neutral-800 border-white/10 text-white text-sm" />
+              </div>
+            </div>
+
+            {/* SEO Section */}
+            <div className="border border-white/10 rounded-xl p-4 space-y-3">
+              <h3 className="text-sm font-semibold text-[#FF4500] uppercase tracking-wider">SEO Settings</h3>
+              <div>
+                <Label className="text-xs text-neutral-400">SEO Title (max 60 karakter — override judul di Google)</Label>
+                <Input
+                  value={form.seo_title || ''}
+                  onChange={(e) => setForm({ ...form, seo_title: e.target.value })}
+                  placeholder="Kosongkan = otomatis pakai judul artikel"
+                  className="mt-1 bg-neutral-800 border-white/10 text-white text-sm"
+                  maxLength={60}
+                />
+                <p className="text-xs text-neutral-500 mt-1">{(form.seo_title || '').length}/60 karakter</p>
+              </div>
+              <div>
+                <Label className="text-xs text-neutral-400">SEO Description (max 155 karakter — tampil di hasil Google)</Label>
+                <Textarea
+                  value={form.seo_description || ''}
+                  onChange={(e) => setForm({ ...form, seo_description: e.target.value })}
+                  placeholder="Kosongkan = otomatis pakai excerpt artikel"
+                  className="mt-1 bg-neutral-800 border-white/10 text-white text-sm"
+                  rows={2}
+                  maxLength={155}
+                />
+                <p className="text-xs text-neutral-500 mt-1">{(form.seo_description || '').length}/155 karakter</p>
+              </div>
+            </div>
+
+            {/* FAQ Section */}
+            <div className="border border-white/10 rounded-xl p-4 space-y-3">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-[#FF4500] uppercase tracking-wider">
+                  FAQ Items <span className="text-neutral-500 normal-case font-normal">(untuk FAQPage Schema Google)</span>
+                </h3>
+                <Button type="button" size="sm" onClick={addFaqItem} className="bg-white/5 hover:bg-white/10 text-white border border-white/10 text-xs">
+                  <Plus size={14} className="mr-1" /> Tambah FAQ
+                </Button>
+              </div>
+              {(!form.faq_items || form.faq_items.length === 0) && (
+                <p className="text-xs text-neutral-500 italic">Belum ada FAQ. Klik "Tambah FAQ" untuk menambahkan Q&A yang akan muncul sebagai rich snippet di Google.</p>
+              )}
+              {(form.faq_items || []).map((item, index) => (
+                <div key={index} className="p-3 rounded-lg bg-neutral-800 border border-white/5 space-y-2">
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs text-neutral-400 font-medium">FAQ #{index + 1}</span>
+                    <button type="button" onClick={() => removeFaqItem(index)} className="text-red-400 hover:text-red-300">
+                      <X size={14} />
+                    </button>
+                  </div>
+                  <div>
+                    <Label className="text-xs text-neutral-400">Pertanyaan</Label>
+                    <Input
+                      value={item.question}
+                      onChange={(e) => updateFaqItem(index, 'question', e.target.value)}
+                      placeholder="Pertanyaan yang sering diajukan..."
+                      className="mt-1 bg-neutral-900 border-white/10 text-white text-sm"
+                    />
+                  </div>
+                  <div>
+                    <Label className="text-xs text-neutral-400">Jawaban</Label>
+                    <Textarea
+                      value={item.answer}
+                      onChange={(e) => updateFaqItem(index, 'answer', e.target.value)}
+                      placeholder="Jawaban lengkap..."
+                      className="mt-1 bg-neutral-900 border-white/10 text-white text-sm"
+                      rows={2}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
 
             <div className="flex gap-4 pt-4">
