@@ -1221,6 +1221,251 @@ async def generate_sitemap():
     return Response(content=sitemap, media_type="application/xml")
 
 
+# ==================== SSR OG META INJECTION ====================
+# Renders SPA shell with per-page Open Graph meta tags so Facebook /
+# Twitter / WhatsApp / LinkedIn crawlers (which do NOT execute JS) see
+# the correct preview image, title, and description when a link to a
+# blog post or template detail page is shared.
+
+import html as _html
+
+SITE_URL_CANON = "https://www.calius.digital"
+# Stable HTTPS fallback OG image. Replace later by uploading
+# frontend/public/og-default.png (1200x630) and switching to
+# f"{SITE_URL_CANON}/og-default.png".
+DEFAULT_OG_IMAGE = "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop&q=80"
+DEFAULT_OG_TITLE = "Calius Digital - Jasa Pembuatan Website Profesional"
+DEFAULT_OG_DESC = "Bangun website profesional dengan template premium, landing page tinggi konversi, dan layanan custom dari Calius Digital."
+
+# Cache the built SPA shell so we don't re-read it on every request.
+_INDEX_HTML_CACHE: Optional[str] = None
+
+def _load_index_html() -> str:
+    """Load the built SPA index.html. Looks in several locations to be
+    compatible with local dev and Vercel's bundled function layout."""
+    global _INDEX_HTML_CACHE
+    if _INDEX_HTML_CACHE:
+        return _INDEX_HTML_CACHE
+
+    candidates = [
+        ROOT_DIR.parent / "frontend" / "build" / "index.html",
+        ROOT_DIR / "frontend" / "build" / "index.html",
+        Path("/var/task/frontend/build/index.html"),
+        Path("/var/task/api/../frontend/build/index.html"),
+    ]
+    for p in candidates:
+        try:
+            if p.exists():
+                _INDEX_HTML_CACHE = p.read_text(encoding="utf-8")
+                return _INDEX_HTML_CACHE
+        except Exception:
+            continue
+
+    # Fallback: fetch from production over HTTPS (last resort).
+    try:
+        import httpx
+        with httpx.Client(timeout=5.0, follow_redirects=True) as hc:
+            r = hc.get(f"{SITE_URL_CANON}/index.html")
+            if r.status_code == 200 and "<div id=\"root\">" in r.text:
+                _INDEX_HTML_CACHE = r.text
+                return _INDEX_HTML_CACHE
+    except Exception:
+        pass
+
+    # Absolute fallback minimal shell (SPA won't load but bots get meta).
+    return (
+        '<!doctype html><html lang="id"><head>'
+        '<meta charset="utf-8"/>'
+        '<meta name="viewport" content="width=device-width,initial-scale=1"/>'
+        '<title>Calius Digital</title>'
+        '</head><body><div id="root"></div></body></html>'
+    )
+
+
+def _esc(value: Any) -> str:
+    if value is None:
+        return ""
+    return _html.escape(str(value), quote=True)
+
+
+def _abs_url(url: str) -> str:
+    if not url:
+        return DEFAULT_OG_IMAGE
+    if url.startswith("http://") or url.startswith("https://"):
+        return url
+    if url.startswith("//"):
+        return "https:" + url
+    if url.startswith("/"):
+        return SITE_URL_CANON + url
+    return url
+
+
+def _strip_html(text: str, max_len: int = 200) -> str:
+    if not text:
+        return ""
+    import re
+    clean = re.sub(r"<[^>]+>", " ", str(text))
+    clean = re.sub(r"\s+", " ", clean).strip()
+    if len(clean) > max_len:
+        clean = clean[: max_len - 1].rsplit(" ", 1)[0] + "…"
+    return clean
+
+
+def _render_og_html(
+    *,
+    title: str,
+    description: str,
+    image: str,
+    url: str,
+    og_type: str = "website",
+    extra_meta: str = "",
+) -> "Response":
+    """Inject per-page meta tags into the SPA shell and return as HTML."""
+    from fastapi.responses import Response
+
+    shell = _load_index_html()
+
+    t = _esc(title or DEFAULT_OG_TITLE)
+    d = _esc(_strip_html(description or DEFAULT_OG_DESC, 200))
+    img = _esc(_abs_url(image or DEFAULT_OG_IMAGE))
+    u = _esc(url)
+
+    injection = (
+        f'<title>{t}</title>'
+        f'<meta name="description" content="{d}"/>'
+        f'<link rel="canonical" href="{u}"/>'
+        f'<meta property="og:type" content="{_esc(og_type)}"/>'
+        f'<meta property="og:url" content="{u}"/>'
+        f'<meta property="og:title" content="{t}"/>'
+        f'<meta property="og:description" content="{d}"/>'
+        f'<meta property="og:image" content="{img}"/>'
+        f'<meta property="og:image:secure_url" content="{img}"/>'
+        f'<meta property="og:image:width" content="1200"/>'
+        f'<meta property="og:image:height" content="630"/>'
+        f'<meta property="og:image:alt" content="{t}"/>'
+        f'<meta property="og:site_name" content="Calius Digital"/>'
+        f'<meta property="og:locale" content="id_ID"/>'
+        f'<meta name="twitter:card" content="summary_large_image"/>'
+        f'<meta name="twitter:url" content="{u}"/>'
+        f'<meta name="twitter:title" content="{t}"/>'
+        f'<meta name="twitter:description" content="{d}"/>'
+        f'<meta name="twitter:image" content="{img}"/>'
+        f'{extra_meta}'
+    )
+
+    # Strip existing duplicate tags from the shell so our injection wins.
+    import re as _re
+    shell_clean = _re.sub(
+        r"<title>[^<]*</title>",
+        "",
+        shell,
+        count=1,
+        flags=_re.IGNORECASE,
+    )
+    shell_clean = _re.sub(
+        r'<meta[^>]+(property|name)="(og:[^"]+|twitter:[^"]+|description)"[^>]*/?>',
+        "",
+        shell_clean,
+        flags=_re.IGNORECASE,
+    )
+    shell_clean = _re.sub(
+        r'<link[^>]+rel="canonical"[^>]*/?>',
+        "",
+        shell_clean,
+        flags=_re.IGNORECASE,
+    )
+
+    if "</head>" in shell_clean:
+        out = shell_clean.replace("</head>", injection + "</head>", 1)
+    else:
+        out = injection + shell_clean
+
+    return Response(
+        content=out,
+        media_type="text/html; charset=utf-8",
+        headers={"Cache-Control": "public, max-age=0, must-revalidate"},
+    )
+
+
+@app.get("/blog/{slug}")
+async def ssr_blog_detail(slug: str):
+    """Serve the SPA with proper OG meta for blog post URLs."""
+    post = await db.blog.find_one({"slug": slug}, {"_id": 0})
+    if not post:
+        for p in get_default_blog_posts():
+            if p.get("slug") == slug:
+                post = p
+                break
+
+    if not post:
+        return _render_og_html(
+            title="Artikel Tidak Ditemukan - Calius Digital",
+            description="Artikel yang Anda cari tidak tersedia.",
+            image=DEFAULT_OG_IMAGE,
+            url=f"{SITE_URL_CANON}/blog/{slug}",
+            og_type="article",
+        )
+
+    title = post.get("seo_title") or post.get("title_id") or "Calius Digital"
+    desc = post.get("seo_description") or post.get("excerpt_id") or ""
+    image = post.get("image") or DEFAULT_OG_IMAGE
+    return _render_og_html(
+        title=f"{title} - Calius Digital",
+        description=desc,
+        image=image,
+        url=f"{SITE_URL_CANON}/blog/{slug}",
+        og_type="article",
+    )
+
+
+async def _template_ssr(slug: str, path_prefix: str):
+    template = await db.templates.find_one({"slug": slug}, {"_id": 0})
+    if not template:
+        for t in get_default_templates():
+            if t.get("slug") == slug:
+                template = t
+                break
+
+    if not template:
+        return _render_og_html(
+            title="Template Tidak Ditemukan - Calius Digital",
+            description="Template yang Anda cari tidak tersedia.",
+            image=DEFAULT_OG_IMAGE,
+            url=f"{SITE_URL_CANON}/{path_prefix}/{slug}",
+            og_type="product",
+        )
+
+    name = template.get("name") or "Template Calius"
+    desc = template.get("description_id") or template.get("description_en") or ""
+    image = template.get("image") or DEFAULT_OG_IMAGE
+    price = template.get("sale_price") or template.get("price")
+    extra = ""
+    if price:
+        extra = (
+            f'<meta property="product:price:amount" content="{int(price)}"/>'
+            f'<meta property="product:price:currency" content="IDR"/>'
+        )
+    return _render_og_html(
+        title=f"{name} - Template Calius Digital",
+        description=desc,
+        image=image,
+        url=f"{SITE_URL_CANON}/{path_prefix}/{slug}",
+        og_type="product",
+        extra_meta=extra,
+    )
+
+
+@app.get("/templates/{slug}")
+async def ssr_templates_detail(slug: str):
+    """Serve the SPA with proper OG meta for /templates/:slug URLs."""
+    return await _template_ssr(slug, "templates")
+
+
+@app.get("/template/{slug}")
+async def ssr_template_detail(slug: str):
+    """Serve the SPA with proper OG meta for /template/:slug URLs."""
+    return await _template_ssr(slug, "template")
+
 
 # Include router and middleware
 app.include_router(api_router)

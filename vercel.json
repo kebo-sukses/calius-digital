@@ -2,6 +2,11 @@
   "version": 2,
   "buildCommand": "cd frontend && npm install && CI=false npm run build",
   "outputDirectory": "frontend/build",
+  "functions": {
+    "api/index.py": {
+      "includeFiles": "frontend/build/index.html"
+    }
+  },
   "redirects": [
     {
       "source": "/(.*)",
@@ -13,6 +18,9 @@
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.py" },
     { "source": "/sitemap.xml", "destination": "/api/index.py" },
+    { "source": "/blog/:slug", "destination": "/api/index.py" },
+    { "source": "/templates/:slug", "destination": "/api/index.py" },
+    { "source": "/template/:slug", "destination": "/api/index.py" },
     { "source": "/((?!static|favicon|manifest|robots|logo|data).*)", "destination": "/index.html" }
   ]
 }
