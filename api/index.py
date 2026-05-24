@@ -383,12 +383,9 @@ async def get_templates(category: Optional[str] = None):
     if category and category != "all":
         query["category"] = category
     templates = await db.templates.find(query, {"_id": 0}).to_list(100)
-    if not templates:
-        # Fallback to defaults but still respect category filter
-        defaults = get_default_templates()
-        if category and category != "all":
-            defaults = [t for t in defaults if t["category"] == category]
-        return defaults
+    if not templates and not category:
+        # Fallback to defaults only when DB is completely empty (no category filter)
+        return get_default_templates()
     return templates
 
 @api_router.get("/templates/{slug}")
@@ -1141,7 +1138,7 @@ async def update_site_settings(settings: SiteSettings, current_user: dict = Depe
 @app.get("/sitemap.xml")
 async def generate_sitemap():
     from datetime import datetime
-    base_url = "https://calius.digital"
+    base_url = "https://www.calius.digital"
     
     # Get all blog posts
     blogs = []

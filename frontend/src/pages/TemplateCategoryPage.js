@@ -61,6 +61,22 @@ const CATEGORY_META = {
     description_en: 'Templates for restaurants, cafes, and culinary businesses.',
     icon: '🍽️',
   },
+  property: {
+    slug: 'property',
+    label_id: 'Properti',
+    label_en: 'Property',
+    description_id: 'Template landing page untuk agen properti, developer, dan real estate.',
+    description_en: 'Landing page templates for real estate agents and property developers.',
+    icon: '🏠',
+  },
+  travel: {
+    slug: 'travel',
+    label_id: 'Travel & Wisata',
+    label_en: 'Travel & Tourism',
+    description_id: 'Template untuk agen travel, tour operator, dan bisnis pariwisata.',
+    description_en: 'Templates for travel agencies, tour operators, and tourism businesses.',
+    icon: '✈️',
+  },
 };
 
 const formatPrice = (price) => {

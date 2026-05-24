@@ -173,6 +173,8 @@ const AdminTemplates = () => {
                   <option value="portfolio">Portfolio</option>
                   <option value="landing-page">Landing Page</option>
                   <option value="restaurant">Restaurant</option>
+                  <option value="property">Property</option>
+                  <option value="travel">Travel</option>
                 </select>
               </div>
             </div>

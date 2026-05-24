@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Clock, ArrowLeft, User, Calendar, Tag, ChevronDown, ChevronUp } from 'lucide-react';
 import { apiService } from '@/services/api';
 
-const SITE_URL = 'https://calius.digital';
+const SITE_URL = 'https://www.calius.digital';
 const SITE_NAME = 'Calius Digital';
 
 const CATEGORY_LABELS = {
