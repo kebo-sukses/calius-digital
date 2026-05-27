@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import {
   Star,
   Download,
@@ -160,6 +161,85 @@ const TemplateDetailPage = () => {
 
   return (
     <div className="min-h-screen bg-[#050505]">
+      <Helmet>
+        <title>{template.name} - Template Website Premium | Calius Digital</title>
+        <meta name="description" content={`${language === 'id' ? template.description_id : template.description_en} | Download template ${template.name} premium dengan harga terjangkau. Rating ${template.rating}/5 dari ${template.downloads}+ pengguna.`} />
+        <meta name="keywords" content={`template ${template.name.toLowerCase()}, ${template.category}, template website premium, download template, ${template.tags?.join(', ')}`} />
+        <link rel="canonical" href={`https://www.calius.digital/templates/${category}/${slug}`} />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content={`${template.name} - Template Website Premium`} />
+        <meta property="og:description" content={language === 'id' ? template.description_id : template.description_en} />
+        <meta property="og:url" content={`https://www.calius.digital/templates/${category}/${slug}`} />
+        <meta property="og:type" content="product" />
+        <meta property="og:image" content={template.image} />
+        
+        {/* Product Schema Markup */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": template.name,
+            "description": language === 'id' ? template.description_id : template.description_en,
+            "image": template.image,
+            "sku": template.id,
+            "category": template.category,
+            "brand": {
+              "@type": "Brand",
+              "name": "Calius Digital"
+            },
+            "offers": {
+              "@type": "Offer",
+              "url": `https://www.calius.digital/templates/${category}/${slug}`,
+              "priceCurrency": "IDR",
+              "price": template.sale_price || template.price,
+              "priceValidUntil": "2026-12-31",
+              "availability": "https://schema.org/InStock",
+              "seller": {
+                "@type": "Organization",
+                "name": "Calius Digital"
+              }
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": template.rating,
+              "reviewCount": template.downloads,
+              "bestRating": "5",
+              "worstRating": "1"
+            },
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.calius.digital/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Templates",
+                  "item": "https://www.calius.digital/templates"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": categoryLabel,
+                  "item": `https://www.calius.digital/templates/${category}`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "name": template.name,
+                  "item": `https://www.calius.digital/templates/${category}/${slug}`
+                }
+              ]
+            }
+          })}
+        </script>
+      </Helmet>
+      
       {/* Header */}
       <section className="pt-32 pb-8 bg-gradient-to-b from-[#0a0a0a] to-[#050505]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">

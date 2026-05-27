@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/context/LanguageContext';
 import { apiService } from '@/services/api';
 
@@ -36,6 +37,47 @@ const PortfolioPage = () => {
 
   return (
     <div className="min-h-screen bg-[#050505]">
+      <Helmet>
+        <title>Portfolio Proyek Website Terbaik - Calius Digital</title>
+        <meta name="description" content="Lihat 50+ portfolio website & landing page yang telah kami buat: Company Profile, E-Commerce, Landing Page, Blog. Hasil kerja profesional dengan konversi tinggi." />
+        <meta name="keywords" content="portfolio website, contoh landing page, website company profile, portfolio web developer, jasa website" />
+        <link rel="canonical" href="https://www.calius.digital/portfolio" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Portfolio Proyek Website Terbaik - Calius Digital" />
+        <meta property="og:description" content="50+ portfolio website & landing page profesional dengan hasil nyata dan konversi tinggi" />
+        <meta property="og:url" content="https://www.calius.digital/portfolio" />
+        <meta property="og:type" content="website" />
+        
+        {/* Structured Data - ItemList for Portfolio */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Portfolio Website & Landing Page",
+            "description": "Koleksi portfolio website profesional yang telah kami buat untuk berbagai klien",
+            "url": "https://www.calius.digital/portfolio",
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.calius.digital/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Portfolio",
+                  "item": "https://www.calius.digital/portfolio"
+                }
+              ]
+            }
+          })}
+        </script>
+      </Helmet>
+      
       {/* Header */}
       <section className="pt-32 pb-16 bg-gradient-to-b from-[#0a0a0a] to-[#050505]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">

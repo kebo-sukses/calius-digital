@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Star, Download, ExternalLink, ShoppingCart } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/context/LanguageContext';
 import { apiService } from '@/services/api';
 import { Button } from '@/components/ui/button';
@@ -149,6 +150,47 @@ const TemplatesPage = () => {
 
   return (
     <div className="min-h-screen bg-[#050505]">
+      <Helmet>
+        <title>Template Website Premium Gratis & Berbayar - Calius Digital</title>
+        <meta name="description" content="Download template website premium gratis ✓ Landing Page ✓ Company Profile ✓ E-Commerce ✓ Portfolio ✓ Restaurant. Template responsive, modern, dan mudah digunakan." />
+        <meta name="keywords" content="template website gratis, template landing page, download template, template company profile, template e-commerce premium" />
+        <link rel="canonical" href="https://www.calius.digital/templates" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Template Website Premium Gratis & Berbayar" />
+        <meta property="og:description" content="Download template website premium dengan desain modern dan responsive" />
+        <meta property="og:url" content="https://www.calius.digital/templates" />
+        <meta property="og:type" content="website" />
+        
+        {/* Structured Data - ItemList */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "name": "Template Website Premium",
+            "description": "Koleksi template website profesional untuk berbagai kebutuhan bisnis",
+            "url": "https://www.calius.digital/templates",
+            "breadcrumb": {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": "https://www.calius.digital/"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Templates",
+                  "item": "https://www.calius.digital/templates"
+                }
+              ]
+            }
+          })}
+        </script>
+      </Helmet>
+      
       {/* Header */}
       <section className="pt-32 pb-16 bg-gradient-to-b from-[#0a0a0a] to-[#050505]">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 text-center">

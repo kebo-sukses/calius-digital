@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowRight, Star, Building2, ShoppingCart, Rocket, Code2, ChevronRight, Download, ExternalLink } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/context/LanguageContext';
 import { apiService } from '@/services/api';
 import { Button } from '@/components/ui/button';
@@ -51,6 +52,12 @@ const HomePage = () => {
 
   return (
     <div className="bg-[#050505]">
+      <Helmet>
+        <title>Calius Digital - Jasa Pembuatan Website & Landing Page Profesional | Template Gratis</title>
+        <meta name="description" content="Jasa Pembuatan Website & Landing Page Profesional ✓ Template Premium Gratis ✓ Harga Terjangkau ✓ 50+ Project Selesai ✓ Company Profile, E-Commerce, Landing Page. Konsultasi Gratis!" />
+        <link rel="canonical" href="https://www.calius.digital/" />
+      </Helmet>
+      
       {/* Hero Section */}
       <section data-testid="hero-section" className="relative min-h-[90vh] flex items-center overflow-hidden">
         {/* Background */}
