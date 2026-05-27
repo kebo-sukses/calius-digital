@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Star, Building2, ShoppingCart, Rocket, Code2, ChevronRight, Download } from 'lucide-react';
+import { ArrowRight, Star, Building2, ShoppingCart, Rocket, Code2, ChevronRight, Download, ExternalLink } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { apiService } from '@/services/api';
 import { Button } from '@/components/ui/button';
@@ -304,6 +304,22 @@ const HomePage = () => {
                   alt={item.title}
                   className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+                
+                {/* External Link Overlay */}
+                {item.url && (
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 z-10">
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-4 rounded-full bg-[#FF4500] hover:bg-[#FF5722] text-white transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <ExternalLink size={24} />
+                    </a>
+                  </div>
+                )}
+                
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-0 left-0 right-0 p-6">
                     <span className="text-xs text-[#FF4500] font-semibold uppercase tracking-wider">{item.category}</span>
