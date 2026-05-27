@@ -10,6 +10,7 @@ const categories = [
   { id: 'e-commerce', label_id: 'E-Commerce', label_en: 'E-Commerce' },
   { id: 'landing-page', label_id: 'Landing Page', label_en: 'Landing Page' },
   { id: 'restaurant', label_id: 'Restoran', label_en: 'Restaurant' },
+  { id: 'blog', label_id: 'Blog', label_en: 'Blog' },
 ];
 
 const PortfolioPage = () => {
