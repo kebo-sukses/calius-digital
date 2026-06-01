@@ -65,6 +65,63 @@ const webpackConfig = {
       if (config.enableHealthCheck && healthPluginInstance) {
         webpackConfig.plugins.push(healthPluginInstance);
       }
+
+      // Production optimizations
+      if (process.env.NODE_ENV === 'production') {
+        // Split vendor chunks for better caching
+        webpackConfig.optimization = {
+          ...webpackConfig.optimization,
+          splitChunks: {
+            chunks: 'all',
+            maxInitialRequests: 20,
+            minSize: 20000,
+            cacheGroups: {
+              // React core - very stable, cache long
+              react: {
+                test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+                name: 'vendor.react',
+                chunks: 'all',
+                priority: 40,
+                enforce: true,
+              },
+              // Router - stable
+              router: {
+                test: /[\\/]node_modules[\\/](react-router|react-router-dom|@remix-run)[\\/]/,
+                name: 'vendor.router',
+                chunks: 'all',
+                priority: 35,
+                enforce: true,
+              },
+              // Framer Motion - large, async only
+              framerMotion: {
+                test: /[\\/]node_modules[\\/]framer-motion[\\/]/,
+                name: 'vendor.framer-motion',
+                chunks: 'async',
+                priority: 30,
+                enforce: true,
+              },
+              // Radix UI / shadcn
+              radix: {
+                test: /[\\/]node_modules[\\/]@radix-ui[\\/]/,
+                name: 'vendor.radix',
+                chunks: 'async',
+                priority: 25,
+                enforce: true,
+              },
+              // Other vendors
+              vendors: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendor.libs',
+                chunks: 'async',
+                priority: 10,
+                minChunks: 2,
+                reuseExistingChunk: true,
+              },
+            },
+          },
+        };
+      }
+
       return webpackConfig;
     },
   },

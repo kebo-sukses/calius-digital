@@ -1,40 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="id">
     <head>
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-E9TDC6RLKJ"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-E9TDC6RLKJ');
-        </script>
-        <!-- Meta Pixel Code -->
-        <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '475068881530748');
-        fbq('track', 'PageView');
-        </script>
-        <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=475068881530748&ev=PageView&noscript=1"
-        /></noscript>
-        <!-- End Meta Pixel Code -->
-
-        <!-- Google AdSense -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7911744590560254"
-             crossorigin="anonymous"></script>
-        <!-- End Google AdSense -->
-
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#FF4500" />
+
+        <!-- Critical resource hints - load before everything else -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://app.sandbox.midtrans.com" />
+
+        <!-- Critical inline CSS to avoid FOUC -->
+        <style>
+          *,::before,::after{box-sizing:border-box}
+          html{scroll-behavior:smooth}
+          body{margin:0;background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+          #root{min-height:100vh}
+          @keyframes spin{to{transform:rotate(360deg)}}
+        </style>
+
         <meta name="description" content="Jasa Pembuatan Website & Landing Page Profesional ✓ Template Premium Gratis ✓ Harga Terjangkau ✓ 50+ Project Selesai ✓ Company Profile, E-Commerce, Landing Page. Konsultasi Gratis!" />
         <meta name="keywords" content="jasa pembuatan website, landing page, template website gratis, harga website, web agency, pembuatan landing page, website bisnis, company profile, e-commerce, calius digital" />
         <meta name="author" content="Calius Digital - Jeslius" />
@@ -192,16 +180,50 @@
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root"></div>
-        <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+        <!-- Google Analytics - deferred to avoid render blocking -->
+        <script>
+          window.addEventListener('load', function() {
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=G-E9TDC6RLKJ';
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-E9TDC6RLKJ', { send_page_view: true });
+            window.gtag = gtag;
+          });
+        </script>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+        <!-- Meta Pixel - deferred to avoid render blocking -->
+        <script>
+          window.addEventListener('load', function() {
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '475068881530748');
+            fbq('track', 'PageView');
+          });
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=475068881530748&ev=PageView&noscript=1"
+        /></noscript>
 
+        <!-- Google AdSense - deferred to avoid render blocking -->
+        <script>
+          window.addEventListener('load', function() {
+            var s = document.createElement('script');
+            s.async = true;
+            s.crossOrigin = 'anonymous';
+            s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7911744590560254';
+            document.head.appendChild(s);
+          });
+        </script>
     </body>
 </html>

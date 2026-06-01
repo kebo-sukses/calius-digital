@@ -302,6 +302,11 @@ const TemplatesPage = () => {
                       <img
                         src={template.image}
                         alt={template.name}
+                        width="400"
+                        height="224"
+                        loading="eager"
+                        decoding="async"
+                        fetchpriority="high"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         onError={(e) => {
                           // Fallback gradient image if preview.png doesn't exist
@@ -483,6 +488,10 @@ const TemplatesPage = () => {
                     <img
                       src={template.image}
                       alt={template.name}
+                      width="400"
+                      height="224"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent" />
