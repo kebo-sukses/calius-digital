@@ -232,6 +232,160 @@ const TemplatesPage = () => {
         </div>
       </section>
 
+      {/* Featured Free Template */}
+      <section className="py-20 relative">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#FF4500]/10 via-neutral-900/50 to-neutral-900 border border-[#FF4500]/20">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSw2OSwwLDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-50"></div>
+            
+            <div className="relative z-10 p-8 lg:p-12">
+              <div className="flex flex-wrap gap-3 mb-6">
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#FF4500] text-white">
+                  <Star className="w-3 h-3" /> FREE TEMPLATE
+                </span>
+                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-green-500/20 text-green-400 border border-green-500/30">
+                  NEW
+                </span>
+              </div>
+
+              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div>
+                  <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+                    {language === 'id' ? 'Portfolio Template - Download Gratis' : 'Portfolio Template - Free Download'}
+                  </h2>
+                  <p className="text-lg text-neutral-300 mb-6">
+                    {language === 'id' 
+                      ? 'Template portfolio modern dengan Next.js 14 dan TypeScript. Siap pakai dalam 10 menit, tinggal edit satu file konfigurasi!'
+                      : 'Modern portfolio template with Next.js 14 and TypeScript. Ready to use in 10 minutes, just edit one config file!'}
+                  </p>
+
+                  <div className="grid sm:grid-cols-2 gap-3 mb-8">
+                    {[
+                      { id: 1, text: language === 'id' ? 'Next.js 14 + TypeScript + Tailwind CSS' : 'Next.js 14 + TypeScript + Tailwind CSS' },
+                      { id: 2, text: language === 'id' ? '6 section siap pakai' : '6 ready-to-use sections' },
+                      { id: 3, text: language === 'id' ? 'Single config file untuk kustomisasi' : 'Single config file for customization' },
+                      { id: 4, text: language === 'id' ? 'Fully responsive & SEO optimized' : 'Fully responsive & SEO optimized' },
+                      { id: 5, text: language === 'id' ? 'Integrasi WhatsApp' : 'WhatsApp integration' },
+                      { id: 6, text: language === 'id' ? 'Dokumentasi lengkap' : 'Complete documentation' },
+                    ].map((feature) => (
+                      <div key={feature.id} className="flex items-start gap-2">
+                        <svg className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span className="text-sm text-neutral-300">{feature.text}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap gap-4">
+                    <a
+                      href="https://github.com/kebo-sukses/portfolio-template-free/archive/refs/heads/main.zip"
+                      download
+                      onClick={() => {
+                        if (typeof window.gtag !== 'undefined') {
+                          window.gtag('event', 'download', {
+                            event_category: 'template',
+                            event_label: 'portfolio-template-free',
+                            value: 0
+                          });
+                        }
+                        toast({
+                          title: language === 'id' ? 'Download Dimulai!' : 'Download Started!',
+                          description: language === 'id' ? 'Template akan didownload sebagai ZIP file' : 'Template will be downloaded as ZIP file',
+                        });
+                      }}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#FF4500] hover:bg-[#FF4500]/90 text-white font-semibold transition-all transform hover:scale-105 shadow-lg shadow-[#FF4500]/25"
+                    >
+                      <Download className="w-5 h-5" />
+                      {language === 'id' ? 'Download Gratis' : 'Download Free'}
+                    </a>
+                    <a
+                      href="https://github.com/kebo-sukses/portfolio-template-free"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-semibold transition-all border border-white/10"
+                    >
+                      <ExternalLink className="w-5 h-5" />
+                      {language === 'id' ? 'Lihat di GitHub' : 'View on GitHub'}
+                    </a>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-6 mt-6 pt-6 border-t border-white/10">
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-[#FF4500]">FREE</div>
+                      <div className="text-xs text-neutral-400">{language === 'id' ? '100% Gratis' : '100% Free'}</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white">10 min</div>
+                      <div className="text-xs text-neutral-400">{language === 'id' ? 'Setup Time' : 'Setup Time'}</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white">MIT</div>
+                      <div className="text-xs text-neutral-400">{language === 'id' ? 'License' : 'License'}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <div className="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-neutral-800">
+                    <div className="flex items-center gap-2 px-4 py-3 bg-neutral-900 border-b border-white/10">
+                      <div className="flex gap-2">
+                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      </div>
+                      <div className="flex-1 text-center">
+                        <div className="text-xs text-neutral-400">portfolio.example.com</div>
+                      </div>
+                    </div>
+                    <div className="aspect-[4/3] bg-gradient-to-br from-neutral-900 to-neutral-800 p-8">
+                      <div className="h-full flex flex-col items-center justify-center text-center space-y-4">
+                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#FF4500] to-orange-600 flex items-center justify-center text-3xl font-bold text-white">
+                          A
+                        </div>
+                        <div className="space-y-2">
+                          <div className="h-4 w-48 bg-white/10 rounded"></div>
+                          <div className="h-3 w-32 bg-white/5 rounded mx-auto"></div>
+                        </div>
+                        <div className="flex gap-2 pt-4">
+                          <div className="h-10 w-24 bg-[#FF4500]/20 rounded-lg"></div>
+                          <div className="h-10 w-24 bg-white/5 rounded-lg"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-[#FF4500]/20 rounded-full blur-3xl"></div>
+                  <div className="absolute -top-4 -left-4 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl"></div>
+                </div>
+              </div>
+
+              <div className="mt-8 pt-8 border-t border-white/10">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-6 text-sm text-neutral-400">
+                    <span className="flex items-center gap-2">
+                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                      {language === 'id' ? 'Star on GitHub' : 'Star on GitHub'}
+                    </span>
+                    <span>•</span>
+                    <span>{language === 'id' ? '13,000+ baris kode' : '13,000+ lines of code'}</span>
+                    <span>•</span>
+                    <span>{language === 'id' ? 'Updated May 2026' : 'Updated May 2026'}</span>
+                  </div>
+                  <a
+                    href="https://wa.me/628126067561?text=Halo%2C%20saya%20tertarik%20dengan%20deployment%20service%20untuk%20portfolio%20template"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-[#FF4500] hover:text-[#FF4500]/80 font-medium transition-colors"
+                  >
+                    {language === 'id' ? 'Butuh bantuan deployment? Hubungi kami →' : 'Need deployment help? Contact us →'}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Templates Grid */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
