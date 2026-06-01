@@ -79,6 +79,21 @@ const CATEGORY_META = {
   },
 };
 
+// Optimize image URLs for Cloudinary, thum.io, and Unsplash
+const optimizeImageUrl = (url) => {
+  if (!url) return url;
+  if (url.includes('cloudinary.com')) {
+    return url.replace('/upload/', '/upload/w_600,h_400,c_fill,f_auto,q_auto/');
+  }
+  if (url.includes('thum.io')) {
+    return url.replace('/width/1200', '/width/600').replace('/crop/800', '/crop/400').replace('/crop/630', '/crop/400');
+  }
+  if (url.includes('unsplash.com')) {
+    return url.split('?')[0] + '?w=600&fm=webp&auto=format&q=70';
+  }
+  return url;
+};
+
 const formatPrice = (price) => {
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -125,6 +140,14 @@ const TemplateCategoryPage = () => {
   }, [category, categoryMeta, navigate]);
 
   const handleBuyNow = (template) => {
+    // Load Midtrans Snap on demand (702 KiB — only when needed)
+    if (!document.getElementById('midtrans-snap')) {
+      const script = document.createElement('script');
+      script.id = 'midtrans-snap';
+      script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
+      script.setAttribute('data-client-key', process.env.REACT_APP_MIDTRANS_CLIENT_KEY || '');
+      document.head.appendChild(script);
+    }
     setSelectedTemplate(template);
     setCheckoutOpen(true);
   };
@@ -313,8 +336,12 @@ const TemplateCategoryPage = () => {
                   {/* Image */}
                   <div className="relative h-56 overflow-hidden">
                     <img
-                      src={template.image}
+                      src={optimizeImageUrl(template.image)}
                       alt={template.name}
+                      width="400"
+                      height="224"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 to-transparent" />

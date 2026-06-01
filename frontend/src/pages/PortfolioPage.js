@@ -130,8 +130,20 @@ const PortfolioPage = () => {
                 >
                   <div className="relative h-64 overflow-hidden">
                     <img
-                      src={item.image}
+                      src={
+                        item.image && item.image.includes('thum.io')
+                          ? item.image.replace('/width/1200', '/width/600').replace('/crop/800', '/crop/400')
+                          : item.image && item.image.includes('cloudinary.com')
+                          ? item.image.replace('/upload/', '/upload/w_600,h_400,c_fill,f_auto,q_auto/')
+                          : item.image && item.image.includes('unsplash.com')
+                          ? item.image.split('?')[0] + '?w=600&fm=webp&auto=format&q=70'
+                          : item.image
+                      }
                       alt={item.title}
+                      width="600"
+                      height="256"
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />

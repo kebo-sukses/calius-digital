@@ -48,8 +48,13 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-2" data-testid="logo">
             {settings.logo_url ? (
               <img 
-                src={settings.logo_url} 
+                src={settings.logo_url.includes('cloudinary.com')
+                  ? settings.logo_url.replace('/upload/', '/upload/w_140,h_140,c_limit,f_auto,q_auto/')
+                  : settings.logo_url
+                }
                 alt={settings.site_name || 'Calius'} 
+                width="140"
+                height="40"
                 className="h-10 w-auto object-contain"
               />
             ) : (

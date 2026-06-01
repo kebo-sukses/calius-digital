@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, lazy } from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "@/context/LanguageContext";
@@ -42,23 +42,7 @@ const PageLoader = () => (
   </div>
 );
 
-// Load Midtrans Snap script
-const loadMidtransScript = () => {
-  const existingScript = document.getElementById('midtrans-snap');
-  if (existingScript) return;
-
-  const script = document.createElement('script');
-  script.id = 'midtrans-snap';
-  script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
-  script.setAttribute('data-client-key', process.env.REACT_APP_MIDTRANS_CLIENT_KEY || '');
-  document.head.appendChild(script);
-};
-
 function App() {
-  useEffect(() => {
-    loadMidtransScript();
-  }, []);
-
   return (
     <HelmetProvider>
     <AuthProvider>

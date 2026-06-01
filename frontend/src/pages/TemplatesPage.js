@@ -17,6 +17,21 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 
+// Optimize image URLs for Cloudinary, thum.io, and Unsplash
+const optimizeImageUrl = (url) => {
+  if (!url) return url;
+  if (url.includes('cloudinary.com')) {
+    return url.replace('/upload/', '/upload/w_600,h_400,c_fill,f_auto,q_auto/');
+  }
+  if (url.includes('thum.io')) {
+    return url.replace('/width/1200', '/width/600').replace('/crop/800', '/crop/400').replace('/crop/630', '/crop/400');
+  }
+  if (url.includes('unsplash.com')) {
+    return url.split('?')[0] + '?w=600&fm=webp&auto=format&q=70';
+  }
+  return url;
+};
+
 const formatPrice = (price) => {
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
@@ -45,7 +60,7 @@ const freeTemplate = {
   category: 'free',
   description: 'Modern portfolio template with Next.js 14 and TypeScript. Ready to use in 10 minutes, just edit one config file!',
   description_id: 'Template portfolio modern dengan Next.js 14 dan TypeScript. Siap pakai dalam 10 menit, tinggal edit satu file konfigurasi!',
-  image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80',
+  image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=450&fit=crop&fm=webp&auto=format&q=60',
   price: 0,
   sale_price: 0,
   is_featured: true,
@@ -101,6 +116,14 @@ const TemplatesPage = () => {
   }, [activeCategory]);
 
   const handleBuyNow = (template) => {
+    // Load Midtrans Snap on demand (702 KiB — only when needed)
+    if (!document.getElementById('midtrans-snap')) {
+      const script = document.createElement('script');
+      script.id = 'midtrans-snap';
+      script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
+      script.setAttribute('data-client-key', process.env.REACT_APP_MIDTRANS_CLIENT_KEY || '');
+      document.head.appendChild(script);
+    }
     setSelectedTemplate(template);
     setCheckoutOpen(true);
   };
@@ -486,7 +509,7 @@ const TemplatesPage = () => {
                   {/* Image */}
                   <div className="relative h-56 overflow-hidden">
                     <img
-                      src={template.image}
+                      src={optimizeImageUrl(template.image)}
                       alt={template.name}
                       width="400"
                       height="224"

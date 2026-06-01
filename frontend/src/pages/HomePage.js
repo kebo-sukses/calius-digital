@@ -68,19 +68,15 @@ const HomePage = () => {
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl"
-          >
+          {/* LCP element: render immediately, no animation delay */}
+          <div className="max-w-3xl">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8">
               <span className="w-2 h-2 rounded-full bg-[#FF4500] animate-pulse" />
               <span className="text-sm text-neutral-300">{t('hero.badge')}</span>
             </div>
 
-            {/* Title */}
+            {/* Title - LCP element, no motion wrapper */}
             <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight mb-6">
               {t('hero.title')}{' '}
               <span className="text-gradient">{t('hero.titleHighlight')}</span>
@@ -130,7 +126,7 @@ const HomePage = () => {
                 <div className="text-neutral-500">Years Experience</div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -307,8 +303,18 @@ const HomePage = () => {
                 className="group relative overflow-hidden rounded-2xl"
               >
                 <img
-                  src={item.image}
+                  src={
+                    item.image && item.image.includes('thum.io')
+                      ? item.image.replace('/width/1200', '/width/600').replace('/crop/800', '/crop/400')
+                      : item.image && item.image.includes('cloudinary.com')
+                      ? item.image.replace('/upload/', '/upload/w_600,h_400,c_fill,f_auto,q_auto/')
+                      : item.image
+                  }
                   alt={item.title}
+                  width="600"
+                  height="288"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 
