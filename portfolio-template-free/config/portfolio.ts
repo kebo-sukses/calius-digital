@@ -16,7 +16,7 @@ export const portfolioConfig = {
     email: "john@example.com",
     phone: "+62 812 3456 7890",
     location: "Jakarta, Indonesia",
-    photo: "/images/profile.jpg", // Upload foto Anda ke public/images/profile.jpg
+    photo: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=400&h=400&fit=crop&q=80", // Professional headshot
     bio: `Halo! Saya seorang Frontend Developer dengan 3+ tahun pengalaman dalam membangun aplikasi web modern. 
     
 Saya passionate tentang menciptakan user experience yang intuitif dan performa aplikasi yang cepat. Spesialisasi saya adalah React, Next.js, dan TypeScript.
@@ -68,7 +68,7 @@ Selalu excited untuk belajar teknologi baru dan collaborate dengan tim yang soli
       id: 1,
       title: "E-Commerce Platform",
       description: "Full-stack toko online dengan payment gateway Midtrans dan dashboard admin. Fitur: product management, order tracking, analytics.",
-      image: "/images/projects/project-1.jpg",
+      image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=1200&h=800&fit=crop&q=80",
       tags: ["Next.js", "TypeScript", "Tailwind", "Midtrans"],
       liveUrl: "https://ecommerce-demo.vercel.app",
       githubUrl: "https://github.com/johndoe/ecommerce",
@@ -78,7 +78,7 @@ Selalu excited untuk belajar teknologi baru dan collaborate dengan tim yang soli
       id: 2,
       title: "Company Profile Website",
       description: "Website company profile responsive dengan CMS untuk easy content management. Landing page yang fast dan SEO-friendly.",
-      image: "/images/projects/project-2.jpg",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&q=80",
       tags: ["React", "Sanity CMS", "Vercel"],
       liveUrl: "https://company-profile-demo.com",
       githubUrl: null, // Kalau repo private, set null
@@ -88,7 +88,7 @@ Selalu excited untuk belajar teknologi baru dan collaborate dengan tim yang soli
       id: 3,
       title: "Task Management App",
       description: "Aplikasi todo list dengan drag & drop, kategorisasi task, dan daily reminder notification.",
-      image: "/images/projects/project-3.jpg",
+      image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=1200&h=800&fit=crop&q=80",
       tags: ["React", "Firebase", "Material-UI"],
       liveUrl: "https://taskapp-demo.vercel.app",
       githubUrl: "https://github.com/johndoe/task-app",
@@ -98,7 +98,7 @@ Selalu excited untuk belajar teknologi baru dan collaborate dengan tim yang soli
       id: 4,
       title: "Weather Dashboard",
       description: "Real-time weather dashboard dengan forecast 7 hari, maps integration, dan weather alerts.",
-      image: "/images/projects/project-4.jpg",
+      image: "https://images.unsplash.com/photo-1592210454359-9043f067919b?w=1200&h=800&fit=crop&q=80",
       tags: ["Next.js", "OpenWeather API", "Chart.js"],
       liveUrl: "https://weather-demo.vercel.app",
       githubUrl: "https://github.com/johndoe/weather-dashboard",
@@ -108,7 +108,7 @@ Selalu excited untuk belajar teknologi baru dan collaborate dengan tim yang soli
       id: 5,
       title: "Blog Platform",
       description: "Platform blogging dengan markdown editor, syntax highlighting untuk code, dan comment system.",
-      image: "/images/projects/project-5.jpg",
+      image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=800&fit=crop&q=80",
       tags: ["Next.js", "MDX", "Prisma", "PostgreSQL"],
       liveUrl: "https://blog-demo.vercel.app",
       githubUrl: "https://github.com/johndoe/blog-platform",
@@ -118,7 +118,7 @@ Selalu excited untuk belajar teknologi baru dan collaborate dengan tim yang soli
       id: 6,
       title: "Landing Page Builder",
       description: "Drag & drop landing page builder dengan template library dan export to HTML feature.",
-      image: "/images/projects/project-6.jpg",
+      image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1200&h=800&fit=crop&q=80",
       tags: ["React", "DnD Kit", "TailwindCSS"],
       liveUrl: null, // Kalau belum deploy, set null
       githubUrl: "https://github.com/johndoe/landing-builder",
@@ -157,7 +157,7 @@ Selalu excited untuk belajar teknologi baru dan collaborate dengan tim yang soli
       "web developer portfolio",
       "jakarta developer",
     ],
-    ogImage: "/images/og-image.jpg", // Image untuk social media share (1200x630px)
+    ogImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=80", // Image untuk social media share (1200x630px)
     siteUrl: "https://johndoe.dev",
   },
 
