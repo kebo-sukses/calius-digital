@@ -27,6 +27,7 @@ const formatPrice = (price) => {
 
 const categories = [
   { id: 'all', label_id: 'Semua', label_en: 'All' },
+  { id: 'free', label_id: 'Gratis', label_en: 'Free' },
   { id: 'business', label_id: 'Bisnis', label_en: 'Business' },
   { id: 'ecommerce', label_id: 'E-Commerce', label_en: 'E-Commerce' },
   { id: 'portfolio', label_id: 'Portfolio', label_en: 'Portfolio' },
@@ -35,6 +36,33 @@ const categories = [
   { id: 'property', label_id: 'Properti', label_en: 'Property' },
   { id: 'travel', label_id: 'Travel', label_en: 'Travel' },
 ];
+
+const freeTemplate = {
+  id: 'portfolio-template-free',
+  slug: 'portfolio-template-free',
+  name: 'Portfolio Template',
+  name_id: 'Template Portfolio',
+  category: 'free',
+  description: 'Modern portfolio template with Next.js 14 and TypeScript. Ready to use in 10 minutes, just edit one config file!',
+  description_id: 'Template portfolio modern dengan Next.js 14 dan TypeScript. Siap pakai dalam 10 menit, tinggal edit satu file konfigurasi!',
+  image: 'https://raw.githubusercontent.com/kebo-sukses/portfolio-template-free/main/public/preview.png',
+  price: 0,
+  sale_price: 0,
+  is_featured: true,
+  is_new: true,
+  is_free: true,
+  demo_url: 'https://portfolio-template-free-plum.vercel.app/',
+  download_url: 'https://github.com/kebo-sukses/portfolio-template-free/archive/refs/heads/main.zip',
+  github_url: 'https://github.com/kebo-sukses/portfolio-template-free',
+  features: [
+    'Next.js 14 + TypeScript + Tailwind CSS',
+    '6 section siap pakai',
+    'Single config file untuk kustomisasi',
+    'Fully responsive & SEO optimized',
+    'Integrasi WhatsApp',
+    'Dokumentasi lengkap'
+  ]
+};
 
 const TemplatesPage = () => {
   const { t, language } = useLanguage();
@@ -51,10 +79,20 @@ const TemplatesPage = () => {
     const fetchTemplates = async () => {
       setLoading(true);
       try {
-        const data = await apiService.getTemplates(activeCategory);
-        setTemplates(data);
+        const data = await apiService.getTemplates(activeCategory === 'free' ? 'all' : activeCategory);
+        
+        // Inject free template for 'all' and 'free' categories
+        if (activeCategory === 'all' || activeCategory === 'free') {
+          setTemplates(activeCategory === 'free' ? [freeTemplate] : [freeTemplate, ...data]);
+        } else {
+          setTemplates(data);
+        }
       } catch (error) {
         console.error('Error:', error);
+        // Show free template even if API fails
+        if (activeCategory === 'all' || activeCategory === 'free') {
+          setTemplates([freeTemplate]);
+        }
       } finally {
         setLoading(false);
       }
@@ -204,14 +242,16 @@ const TemplatesPage = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((cat) => (
-              cat.id === 'all' ? (
+              cat.id === 'all' || cat.id === 'free' ? (
                 <button
                   key={cat.id}
-                  onClick={() => setActiveCategory('all')}
+                  onClick={() => setActiveCategory(cat.id)}
                   data-testid={`filter-${cat.id}`}
                   className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
-                    activeCategory === 'all'
-                      ? 'bg-[#FF4500] text-white'
+                    activeCategory === cat.id
+                      ? cat.id === 'free' 
+                        ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg shadow-purple-500/25'
+                        : 'bg-[#FF4500] text-white'
                       : 'bg-white/5 text-neutral-400 hover:bg-white/10 hover:text-white border border-white/10'
                   }`}
                 >
@@ -232,160 +272,6 @@ const TemplatesPage = () => {
         </div>
       </section>
 
-      {/* Featured Free Template */}
-      <section className="py-20 relative">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#FF4500]/10 via-neutral-900/50 to-neutral-900 border border-[#FF4500]/20">
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSw2OSwwLDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=')] opacity-50"></div>
-            
-            <div className="relative z-10 p-8 lg:p-12">
-              <div className="flex flex-wrap gap-3 mb-6">
-                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-[#FF4500] text-white">
-                  <Star className="w-3 h-3" /> FREE TEMPLATE
-                </span>
-                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-green-500/20 text-green-400 border border-green-500/30">
-                  NEW
-                </span>
-              </div>
-
-              <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <div>
-                  <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
-                    {language === 'id' ? 'Portfolio Template - Download Gratis' : 'Portfolio Template - Free Download'}
-                  </h2>
-                  <p className="text-lg text-neutral-300 mb-6">
-                    {language === 'id' 
-                      ? 'Template portfolio modern dengan Next.js 14 dan TypeScript. Siap pakai dalam 10 menit, tinggal edit satu file konfigurasi!'
-                      : 'Modern portfolio template with Next.js 14 and TypeScript. Ready to use in 10 minutes, just edit one config file!'}
-                  </p>
-
-                  <div className="grid sm:grid-cols-2 gap-3 mb-8">
-                    {[
-                      { id: 1, text: language === 'id' ? 'Next.js 14 + TypeScript + Tailwind CSS' : 'Next.js 14 + TypeScript + Tailwind CSS' },
-                      { id: 2, text: language === 'id' ? '6 section siap pakai' : '6 ready-to-use sections' },
-                      { id: 3, text: language === 'id' ? 'Single config file untuk kustomisasi' : 'Single config file for customization' },
-                      { id: 4, text: language === 'id' ? 'Fully responsive & SEO optimized' : 'Fully responsive & SEO optimized' },
-                      { id: 5, text: language === 'id' ? 'Integrasi WhatsApp' : 'WhatsApp integration' },
-                      { id: 6, text: language === 'id' ? 'Dokumentasi lengkap' : 'Complete documentation' },
-                    ].map((feature) => (
-                      <div key={feature.id} className="flex items-start gap-2">
-                        <svg className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        <span className="text-sm text-neutral-300">{feature.text}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap gap-4">
-                    <a
-                      href="https://github.com/kebo-sukses/portfolio-template-free/archive/refs/heads/main.zip"
-                      download
-                      onClick={() => {
-                        if (typeof window.gtag !== 'undefined') {
-                          window.gtag('event', 'download', {
-                            event_category: 'template',
-                            event_label: 'portfolio-template-free',
-                            value: 0
-                          });
-                        }
-                        toast({
-                          title: language === 'id' ? 'Download Dimulai!' : 'Download Started!',
-                          description: language === 'id' ? 'Template akan didownload sebagai ZIP file' : 'Template will be downloaded as ZIP file',
-                        });
-                      }}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#FF4500] hover:bg-[#FF4500]/90 text-white font-semibold transition-all transform hover:scale-105 shadow-lg shadow-[#FF4500]/25"
-                    >
-                      <Download className="w-5 h-5" />
-                      {language === 'id' ? 'Download Gratis' : 'Download Free'}
-                    </a>
-                    <a
-                      href="https://github.com/kebo-sukses/portfolio-template-free"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white font-semibold transition-all border border-white/10"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                      {language === 'id' ? 'Lihat di GitHub' : 'View on GitHub'}
-                    </a>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-6 mt-6 pt-6 border-t border-white/10">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-[#FF4500]">FREE</div>
-                      <div className="text-xs text-neutral-400">{language === 'id' ? '100% Gratis' : '100% Free'}</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-white">10 min</div>
-                      <div className="text-xs text-neutral-400">{language === 'id' ? 'Setup Time' : 'Setup Time'}</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-white">MIT</div>
-                      <div className="text-xs text-neutral-400">{language === 'id' ? 'License' : 'License'}</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <div className="relative rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-neutral-800">
-                    <div className="flex items-center gap-2 px-4 py-3 bg-neutral-900 border-b border-white/10">
-                      <div className="flex gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                      </div>
-                      <div className="flex-1 text-center">
-                        <div className="text-xs text-neutral-400">portfolio.example.com</div>
-                      </div>
-                    </div>
-                    <div className="aspect-[4/3] bg-gradient-to-br from-neutral-900 to-neutral-800 p-8">
-                      <div className="h-full flex flex-col items-center justify-center text-center space-y-4">
-                        <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#FF4500] to-orange-600 flex items-center justify-center text-3xl font-bold text-white">
-                          A
-                        </div>
-                        <div className="space-y-2">
-                          <div className="h-4 w-48 bg-white/10 rounded"></div>
-                          <div className="h-3 w-32 bg-white/5 rounded mx-auto"></div>
-                        </div>
-                        <div className="flex gap-2 pt-4">
-                          <div className="h-10 w-24 bg-[#FF4500]/20 rounded-lg"></div>
-                          <div className="h-10 w-24 bg-white/5 rounded-lg"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-[#FF4500]/20 rounded-full blur-3xl"></div>
-                  <div className="absolute -top-4 -left-4 w-32 h-32 bg-purple-500/20 rounded-full blur-3xl"></div>
-                </div>
-              </div>
-
-              <div className="mt-8 pt-8 border-t border-white/10">
-                <div className="flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex items-center gap-6 text-sm text-neutral-400">
-                    <span className="flex items-center gap-2">
-                      <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                      {language === 'id' ? 'Star on GitHub' : 'Star on GitHub'}
-                    </span>
-                    <span>•</span>
-                    <span>{language === 'id' ? '13,000+ baris kode' : '13,000+ lines of code'}</span>
-                    <span>•</span>
-                    <span>{language === 'id' ? 'Updated May 2026' : 'Updated May 2026'}</span>
-                  </div>
-                  <a
-                    href="https://wa.me/628126067561?text=Halo%2C%20saya%20tertarik%20dengan%20deployment%20service%20untuk%20portfolio%20template"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-[#FF4500] hover:text-[#FF4500]/80 font-medium transition-colors"
-                  >
-                    {language === 'id' ? 'Butuh bantuan deployment? Hubungi kami →' : 'Need deployment help? Contact us →'}
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Templates Grid */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -398,6 +284,192 @@ const TemplatesPage = () => {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {templates.map((template, index) => (
+                template.is_free ? (
+                  // Free Template Card with Special Design
+                  <motion.div
+                    key={template.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    data-testid={`template-card-${template.slug}`}
+                    className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-900/30 via-neutral-900 to-blue-900/30 border-2 border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 shadow-lg hover:shadow-purple-500/20"
+                  >
+                    {/* Decorative gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 opacity-50"></div>
+                    
+                    {/* Image */}
+                    <div className="relative h-56 overflow-hidden">
+                      <img
+                        src={template.image}
+                        alt={template.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        onError={(e) => {
+                          // Fallback gradient image if preview.png doesn't exist
+                          e.target.style.display = 'none';
+                          e.target.parentElement.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                          e.target.parentElement.innerHTML = `
+                            <div class="h-full flex flex-col items-center justify-center text-center space-y-4 p-6">
+                              <div class="w-24 h-24 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-4xl font-bold text-white">
+                                P
+                              </div>
+                              <div class="space-y-2">
+                                <div class="h-4 w-48 bg-white/20 rounded mx-auto"></div>
+                                <div class="h-3 w-32 bg-white/10 rounded mx-auto"></div>
+                              </div>
+                              <div class="flex gap-2 pt-4">
+                                <div class="h-10 w-24 bg-white/20 rounded-lg"></div>
+                                <div class="h-10 w-24 bg-white/10 rounded-lg"></div>
+                              </div>
+                            </div>
+                          `;
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/50 to-transparent" />
+                      
+                      {/* Badges */}
+                      <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                        <span className="px-4 py-1.5 text-xs font-bold rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg flex items-center gap-1">
+                          <Star className="w-3 h-3 fill-white" />
+                          {language === 'id' ? 'GRATIS 100%' : 'FREE 100%'}
+                        </span>
+                        {template.is_new && (
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-500/90 text-white backdrop-blur-sm">
+                            NEW
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Hover Actions */}
+                      <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br from-purple-900/80 via-black/60 to-blue-900/80 backdrop-blur-sm">
+                        <a
+                          href={template.demo_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="p-3 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all backdrop-blur-sm transform hover:scale-110"
+                          title={language === 'id' ? 'Lihat Demo' : 'View Demo'}
+                        >
+                          <ExternalLink size={20} />
+                        </a>
+                        <a
+                          href={template.download_url}
+                          download
+                          onClick={(e) => {
+                            if (typeof window.gtag !== 'undefined') {
+                              window.gtag('event', 'download', {
+                                event_category: 'template',
+                                event_label: template.slug,
+                                value: 0
+                              });
+                            }
+                            toast({
+                              title: language === 'id' ? 'Download Dimulai!' : 'Download Started!',
+                              description: language === 'id' ? 'Template akan didownload sebagai ZIP file' : 'Template will be downloaded as ZIP file',
+                            });
+                          }}
+                          className="p-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white transition-all backdrop-blur-sm transform hover:scale-110 shadow-lg"
+                          title={language === 'id' ? 'Download' : 'Download'}
+                        >
+                          <Download size={20} />
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative p-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <span className="text-xs font-medium text-purple-400 uppercase tracking-wider">
+                          {language === 'id' ? 'Template Gratis' : 'Free Template'}
+                        </span>
+                        <span className="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400 border border-green-500/30">
+                          MIT License
+                        </span>
+                      </div>
+                      
+                      <h3 className="text-xl font-bold text-white mb-2">
+                        {language === 'id' ? template.name_id : template.name}
+                      </h3>
+                      <p className="text-sm text-neutral-300 line-clamp-2 mb-4">
+                        {language === 'id' ? template.description_id : template.description}
+                      </p>
+
+                      {/* Features */}
+                      <div className="space-y-2 mb-4">
+                        {template.features?.slice(0, 3).map((feature, idx) => (
+                          <div key={idx} className="flex items-start gap-2">
+                            <svg className="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                            </svg>
+                            <span className="text-xs text-neutral-400">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Stats */}
+                      <div className="flex items-center gap-4 mb-4 pb-4 border-b border-white/10">
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-purple-400">FREE</div>
+                          <div className="text-xs text-neutral-500">{language === 'id' ? '100% Gratis' : '100% Free'}</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-white">10 min</div>
+                          <div className="text-xs text-neutral-500">{language === 'id' ? 'Setup' : 'Setup'}</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-lg font-bold text-blue-400">Next.js</div>
+                          <div className="text-xs text-neutral-500">TypeScript</div>
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="space-y-2">
+                        <a
+                          href={template.demo_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold transition-all transform hover:scale-105 shadow-lg shadow-purple-500/25"
+                        >
+                          <ExternalLink size={16} />
+                          {language === 'id' ? 'Lihat Demo' : 'View Demo'}
+                        </a>
+                        <div className="grid grid-cols-2 gap-2">
+                          <a
+                            href={template.download_url}
+                            download
+                            onClick={(e) => {
+                              if (typeof window.gtag !== 'undefined') {
+                                window.gtag('event', 'download', {
+                                  event_category: 'template',
+                                  event_label: template.slug,
+                                  value: 0
+                                });
+                              }
+                              toast({
+                                title: language === 'id' ? 'Download Dimulai!' : 'Download Started!',
+                                description: language === 'id' ? 'Template akan didownload sebagai ZIP file' : 'Template will be downloaded as ZIP file',
+                              });
+                            }}
+                            className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all border border-white/10"
+                          >
+                            <Download size={14} />
+                            {language === 'id' ? 'Download' : 'Download'}
+                          </a>
+                          <a
+                            href={template.github_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all border border-white/10"
+                          >
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            GitHub
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ) : (
+                  // Regular Template Card
                 <motion.div
                   key={template.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -524,6 +596,7 @@ const TemplatesPage = () => {
                     </div>
                   </div>
                 </motion.div>
+                )
               ))}
             </div>
           )}
