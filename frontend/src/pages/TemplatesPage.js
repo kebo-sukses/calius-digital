@@ -45,7 +45,7 @@ const freeTemplate = {
   category: 'free',
   description: 'Modern portfolio template with Next.js 14 and TypeScript. Ready to use in 10 minutes, just edit one config file!',
   description_id: 'Template portfolio modern dengan Next.js 14 dan TypeScript. Siap pakai dalam 10 menit, tinggal edit satu file konfigurasi!',
-  image: 'https://raw.githubusercontent.com/kebo-sukses/portfolio-template-free/main/public/preview.png',
+  image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80',
   price: 0,
   sale_price: 0,
   is_featured: true,
