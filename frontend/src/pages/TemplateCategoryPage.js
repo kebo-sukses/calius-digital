@@ -20,7 +20,68 @@ import { useToast } from '@/hooks/use-toast';
  * Category metadata configuration
  * Centralized definition for all template categories — easy to extend
  */
+const FREE_TEMPLATES = [
+  {
+    id: 'portfolio-template-free',
+    slug: 'portfolio-template-free',
+    name: 'Portfolio Template',
+    name_id: 'Template Portfolio',
+    category: 'free',
+    description: 'Modern portfolio template with Next.js 14 and TypeScript. Ready to use in 10 minutes, just edit one config file!',
+    description_id: 'Template portfolio modern dengan Next.js 14 dan TypeScript. Siap pakai dalam 10 menit, tinggal edit satu file konfigurasi!',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=450&fit=crop&fm=webp&auto=format&q=60',
+    price: 0,
+    is_featured: true,
+    is_new: true,
+    is_free: true,
+    demo_url: 'https://portfolio-template-free-plum.vercel.app/',
+    download_url: 'https://github.com/kebo-sukses/portfolio-template-free/archive/refs/heads/main.zip',
+    github_url: 'https://github.com/kebo-sukses/portfolio-template-free',
+    features: [
+      'Next.js 14 + TypeScript + Tailwind CSS',
+      '6 section siap pakai',
+      'Single config file untuk kustomisasi',
+      'Fully responsive & SEO optimized',
+      'Integrasi WhatsApp',
+      'Dokumentasi lengkap',
+    ],
+  },
+  {
+    id: 'company-profil-free-page',
+    slug: 'company-profil-free-page',
+    name: 'Company Profile Template',
+    name_id: 'Template Company Profile',
+    category: 'free',
+    description: 'Professional company profile landing page with 9 sections, SEO-optimized, JSON-LD schema, breadcrumb. Edit one config file to customize everything.',
+    description_id: 'Landing page company profile profesional dengan 9 section, SEO lengkap, JSON-LD schema, breadcrumb. Edit satu file konfigurasi untuk kustomisasi penuh.',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=450&fit=crop&fm=webp&auto=format&q=60',
+    price: 0,
+    is_featured: true,
+    is_new: true,
+    is_free: true,
+    demo_url: 'https://company-profil-free-page.vercel.app/',
+    download_url: 'https://github.com/kebo-sukses/company-profil-free-page/archive/refs/heads/main.zip',
+    github_url: 'https://github.com/kebo-sukses/company-profil-free-page',
+    features: [
+      'Next.js 14 + TypeScript + Tailwind CSS',
+      '9 section: Hero, Layanan, Portfolio, Tim, FAQ, CTA',
+      'SEO lengkap: JSON-LD, sitemap, robots.txt',
+      'Breadcrumb schema sesuai standar Google',
+      'Single config file untuk kustomisasi',
+      'Animasi Framer Motion + dark theme',
+    ],
+  },
+];
+
 const CATEGORY_META = {
+  free: {
+    slug: 'free',
+    label_id: 'Gratis',
+    label_en: 'Free',
+    description_id: 'Template website gratis 100% — download, modifikasi, dan gunakan sesuka hati.',
+    description_en: '100% free website templates — download, customize, and use freely.',
+    icon: '🎁',
+  },
   business: {
     slug: 'business',
     label_id: 'Bisnis',
@@ -121,6 +182,13 @@ const TemplateCategoryPage = () => {
   useEffect(() => {
     if (!categoryMeta) {
       navigate('/templates', { replace: true });
+      return;
+    }
+
+    // Free category: use static list, no API call needed
+    if (category === 'free') {
+      setTemplates(FREE_TEMPLATES);
+      setLoading(false);
       return;
     }
 
@@ -325,7 +393,95 @@ const TemplateCategoryPage = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {templates.map((template, index) => (
+              {templates.map((template, index) => template.is_free ? (
+                // ── Free Template Card ──
+                <motion.div
+                  key={template.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-900/30 via-neutral-900 to-blue-900/30 border-2 border-purple-500/30 hover:border-purple-500/60 transition-all duration-300 shadow-lg hover:shadow-purple-500/20"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 opacity-50" />
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={template.image}
+                      alt={language === 'id' ? template.name_id : template.name}
+                      width="400" height="224"
+                      loading="lazy" decoding="async"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-neutral-900 via-neutral-900/50 to-transparent" />
+                    <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+                      <span className="px-4 py-1.5 text-xs font-bold rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg flex items-center gap-1">
+                        <Star className="w-3 h-3 fill-white" />
+                        {language === 'id' ? 'GRATIS 100%' : 'FREE 100%'}
+                      </span>
+                      {template.is_new && (
+                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-green-500/90 text-white">NEW</span>
+                      )}
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br from-purple-900/80 via-black/60 to-blue-900/80 backdrop-blur-sm">
+                      <a href={template.demo_url} target="_blank" rel="noopener noreferrer"
+                        className="p-3 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all"
+                        title={language === 'id' ? 'Lihat Demo' : 'View Demo'}>
+                        <ExternalLink size={20} />
+                      </a>
+                      <a href={template.download_url} download
+                        className="p-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white transition-all shadow-lg"
+                        title="Download">
+                        <Download size={20} />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="relative p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-medium text-purple-400 uppercase tracking-wider">
+                        {language === 'id' ? 'Template Gratis' : 'Free Template'}
+                      </span>
+                      <span className="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400 border border-green-500/30">MIT License</span>
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      {language === 'id' ? template.name_id : template.name}
+                    </h3>
+                    <p className="text-sm text-neutral-300 line-clamp-2 mb-4">
+                      {language === 'id' ? template.description_id : template.description}
+                    </p>
+                    <div className="space-y-2 mb-5">
+                      {template.features?.slice(0, 3).map((feature, idx) => (
+                        <div key={idx} className="flex items-start gap-2">
+                          <svg className="w-4 h-4 text-purple-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                          <span className="text-xs text-neutral-400">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="space-y-2">
+                      <a href={template.demo_url} target="_blank" rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold transition-all shadow-lg shadow-purple-500/25">
+                        <ExternalLink size={16} />
+                        {language === 'id' ? 'Lihat Demo' : 'View Demo'}
+                      </a>
+                      <div className="grid grid-cols-2 gap-2">
+                        <a href={template.download_url} download
+                          className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all border border-white/10">
+                          <Download size={14} />
+                          Download
+                        </a>
+                        <a href={template.github_url} target="_blank" rel="noopener noreferrer"
+                          className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all border border-white/10">
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                          </svg>
+                          GitHub
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                // ── Regular Template Card ──
                 <motion.div
                   key={template.id}
                   initial={{ opacity: 0, y: 20 }}

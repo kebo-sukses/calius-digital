@@ -52,32 +52,60 @@ const categories = [
   { id: 'travel', label_id: 'Travel', label_en: 'Travel' },
 ];
 
-const freeTemplate = {
-  id: 'portfolio-template-free',
-  slug: 'portfolio-template-free',
-  name: 'Portfolio Template',
-  name_id: 'Template Portfolio',
-  category: 'free',
-  description: 'Modern portfolio template with Next.js 14 and TypeScript. Ready to use in 10 minutes, just edit one config file!',
-  description_id: 'Template portfolio modern dengan Next.js 14 dan TypeScript. Siap pakai dalam 10 menit, tinggal edit satu file konfigurasi!',
-  image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=450&fit=crop&fm=webp&auto=format&q=60',
-  price: 0,
-  sale_price: 0,
-  is_featured: true,
-  is_new: true,
-  is_free: true,
-  demo_url: 'https://portfolio-template-free-plum.vercel.app/',
-  download_url: 'https://github.com/kebo-sukses/portfolio-template-free/archive/refs/heads/main.zip',
-  github_url: 'https://github.com/kebo-sukses/portfolio-template-free',
-  features: [
-    'Next.js 14 + TypeScript + Tailwind CSS',
-    '6 section siap pakai',
-    'Single config file untuk kustomisasi',
-    'Fully responsive & SEO optimized',
-    'Integrasi WhatsApp',
-    'Dokumentasi lengkap'
-  ]
-};
+const freeTemplates = [
+  {
+    id: 'portfolio-template-free',
+    slug: 'portfolio-template-free',
+    name: 'Portfolio Template',
+    name_id: 'Template Portfolio',
+    category: 'free',
+    description: 'Modern portfolio template with Next.js 14 and TypeScript. Ready to use in 10 minutes, just edit one config file!',
+    description_id: 'Template portfolio modern dengan Next.js 14 dan TypeScript. Siap pakai dalam 10 menit, tinggal edit satu file konfigurasi!',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=450&fit=crop&fm=webp&auto=format&q=60',
+    price: 0,
+    sale_price: 0,
+    is_featured: true,
+    is_new: true,
+    is_free: true,
+    demo_url: 'https://portfolio-template-free-plum.vercel.app/',
+    download_url: 'https://github.com/kebo-sukses/portfolio-template-free/archive/refs/heads/main.zip',
+    github_url: 'https://github.com/kebo-sukses/portfolio-template-free',
+    features: [
+      'Next.js 14 + TypeScript + Tailwind CSS',
+      '6 section siap pakai',
+      'Single config file untuk kustomisasi',
+      'Fully responsive & SEO optimized',
+      'Integrasi WhatsApp',
+      'Dokumentasi lengkap'
+    ]
+  },
+  {
+    id: 'company-profil-free-page',
+    slug: 'company-profil-free-page',
+    name: 'Company Profile Template',
+    name_id: 'Template Company Profile',
+    category: 'free',
+    description: 'Professional company profile landing page with 9 sections, SEO-optimized, JSON-LD schema, breadcrumb. Edit one config file to customize everything.',
+    description_id: 'Landing page company profile profesional dengan 9 section, SEO lengkap, JSON-LD schema, breadcrumb. Edit satu file konfigurasi untuk kustomisasi penuh.',
+    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=450&fit=crop&fm=webp&auto=format&q=60',
+    price: 0,
+    sale_price: 0,
+    is_featured: true,
+    is_new: true,
+    is_free: true,
+    demo_url: 'https://company-profil-free-page.vercel.app/',
+    download_url: 'https://github.com/kebo-sukses/company-profil-free-page/archive/refs/heads/main.zip',
+    github_url: 'https://github.com/kebo-sukses/company-profil-free-page',
+    features: [
+      'Next.js 14 + TypeScript + Tailwind CSS',
+      '9 section: Hero, Layanan, Portfolio, Tim, FAQ, CTA',
+      'SEO lengkap: JSON-LD, sitemap, robots.txt',
+      'Breadcrumb schema sesuai standar Google',
+      'Single config file untuk kustomisasi',
+      'Animasi Framer Motion + dark theme'
+    ]
+  },
+];
 
 const TemplatesPage = () => {
   const { t, language } = useLanguage();
@@ -94,20 +122,11 @@ const TemplatesPage = () => {
     const fetchTemplates = async () => {
       setLoading(true);
       try {
-        const data = await apiService.getTemplates(activeCategory === 'free' ? 'all' : activeCategory);
-        
-        // Inject free template for 'all' and 'free' categories
-        if (activeCategory === 'all' || activeCategory === 'free') {
-          setTemplates(activeCategory === 'free' ? [freeTemplate] : [freeTemplate, ...data]);
-        } else {
-          setTemplates(data);
-        }
+        const data = await apiService.getTemplates(activeCategory);
+        setTemplates([...freeTemplates, ...data]);
       } catch (error) {
         console.error('Error:', error);
-        // Show free template even if API fails
-        if (activeCategory === 'all' || activeCategory === 'free') {
-          setTemplates([freeTemplate]);
-        }
+        setTemplates([...freeTemplates]);
       } finally {
         setLoading(false);
       }
@@ -265,16 +284,14 @@ const TemplatesPage = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-wrap gap-3 justify-center">
             {categories.map((cat) => (
-              cat.id === 'all' || cat.id === 'free' ? (
+              cat.id === 'all' ? (
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
                   data-testid={`filter-${cat.id}`}
                   className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
                     activeCategory === cat.id
-                      ? cat.id === 'free' 
-                        ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg shadow-purple-500/25'
-                        : 'bg-[#FF4500] text-white'
+                      ? 'bg-[#FF4500] text-white'
                       : 'bg-white/5 text-neutral-400 hover:bg-white/10 hover:text-white border border-white/10'
                   }`}
                 >
@@ -285,7 +302,11 @@ const TemplatesPage = () => {
                   key={cat.id}
                   to={`/templates/${cat.id}`}
                   data-testid={`filter-${cat.id}`}
-                  className="px-5 py-2.5 rounded-full text-sm font-medium transition-all bg-white/5 text-neutral-400 hover:bg-white/10 hover:text-white border border-white/10"
+                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all ${
+                    cat.id === 'free'
+                      ? 'bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg shadow-purple-500/25 hover:from-purple-600 hover:to-blue-600'
+                      : 'bg-white/5 text-neutral-400 hover:bg-white/10 hover:text-white border border-white/10'
+                  }`}
                 >
                   {language === 'id' ? cat.label_id : cat.label_en}
                 </Link>
