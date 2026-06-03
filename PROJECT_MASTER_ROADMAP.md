@@ -1,7 +1,7 @@
 # 📊 CALIUS DIGITAL - MASTER PROJECT ROADMAP 2026
 
 > **Dokumen Utama** untuk seluruh strategi SEO, konten, dan pengembangan produk Calius Digital.  
-> **Last Updated:** 31 Mei 2026
+> **Last Updated:** 4 Juni 2026
 
 ---
 
@@ -657,41 +657,29 @@ Estimasi selesai: 1x24 jam kerja.
 ### 🔥 URGENT (This Week)
 
 #### 1. Upload Article #1 to Production Database
-**Status:** Content ready, pending credentials
-**File:** `artikel_panduan_lengkap_landing_page.html`
-**Script:** `upload_artikel_final.py`
-
-**Command:**
-```powershell
-# Set admin credentials
-$env:CALIUS_USER = "admin"
-$env:CALIUS_PASS = "your_password"
-
-# Upload article
-python upload_artikel_final.py
-```
-
-**Expected Result:** Article live at `https://www.calius.digital/blog/panduan-lengkap-landing-page-2026`
+**Status:** ✅ SELESAI — 4 Juni 2026
+**URL:** https://www.calius.digital/blog/panduan-lengkap-landing-page-2026
+**ID:** `b990feb9-e208-48f3-93b9-4d26f9581479`
 
 ---
 
 #### 2. Update 5 Existing Articles with Reciprocal Links
-**Timeline:** Today/Tomorrow
-**Action:** Add links to new main pillar article in strategic sections
+**Status:** ✅ SELESAI — 4 Juni 2026
+**Script:** `update_internal_links.py`
 **Checklist:**
-- [ ] biaya-admin-marketplace (Solusi section)
-- [ ] cara-jualan-online (Langkah 1 section)
-- [ ] template-rental-mobil (7 Fitur section)
-- [ ] contoh-landing-page-umroh (new H2 at end)
-- [ ] website-toko-lemot (Solusi section)
+- [x] biaya-admin-marketplace (Solusi section) — 5415 → 5608 chars
+- [x] cara-jualan-online (Langkah 1 section) — 5143 → 5346 chars
+- [x] template-rental-mobil (7 Fitur section) — 5112 → 5311 chars
+- [x] contoh-landing-page-umroh (new H2 at end) — 5464 → 5844 chars
+- [x] website-toko-lemot (Solusi section) — 6150 → 6343 chars
 
 ---
 
 #### 3. Submit to Google Search Console
-**Timeline:** Within 1 hour after article is live
+**Timeline:** Segera
 **Actions:**
 - [ ] Submit URL: `https://www.calius.digital/blog/panduan-lengkap-landing-page-2026`
-- [ ] Request indexing
+- [ ] Request indexing ← **NEXT ACTION**
 - [ ] Check mobile usability
 - [ ] Test rich results (Article + FAQ schema)
 
@@ -995,8 +983,11 @@ This master roadmap consolidates all strategic planning for Calius Digital's gro
 ---
 
 **Document Created:** May 31, 2026  
-**Last Updated:** May 31, 2026  
-**Version:** 1.0  
+**Last Updated:** June 4, 2026  
+**Version:** 1.1  
 **Owner:** Calius Digital Team
 
-**Status:** ✅ Ready for execution - All systems go! 🚀
+### 📋 Changelog
+- **v1.1 (June 4, 2026):** Article #1 confirmed live. Internal links di-update di 5 artikel via `update_internal_links.py`. Next: GSC indexing request + Article #2 "Web E-Commerce".
+
+**Status:** ✅ Execution in progress 🚀
