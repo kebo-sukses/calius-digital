@@ -18,20 +18,23 @@ const CATEGORY_LABELS = {
 function FaqItem({ question, answer }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-white/10 rounded-xl overflow-hidden">
+    <div className="border border-white/10 rounded-xl overflow-hidden" itemScope itemType="https://schema.org/Question">
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between px-6 py-4 text-left text-white font-medium hover:bg-white/5 transition-colors"
         aria-expanded={open}
       >
-        <span>{question}</span>
+        <span itemProp="name">{question}</span>
         {open ? <ChevronUp size={18} className="text-[#FF4500] flex-shrink-0 ml-4" /> : <ChevronDown size={18} className="text-neutral-400 flex-shrink-0 ml-4" />}
       </button>
-      {open && (
-        <div className="px-6 pb-5 text-neutral-300 text-sm leading-relaxed border-t border-white/10 pt-4">
-          {answer}
-        </div>
-      )}
+      <div
+        itemScope
+        itemType="https://schema.org/Answer"
+        itemProp="acceptedAnswer"
+        className={`px-6 pb-5 text-neutral-300 text-sm leading-relaxed border-t border-white/10 pt-4 ${open ? 'block' : 'hidden'}`}
+      >
+        <span itemProp="text">{answer}</span>
+      </div>
     </div>
   );
 }
@@ -155,11 +158,13 @@ const BlogDetailPage = () => {
     ? {
         '@context': 'https://schema.org',
         '@type': 'FAQPage',
-        mainEntity: post.faq_items.map(item => ({
-          '@type': 'Question',
-          name: item.question,
-          acceptedAnswer: { '@type': 'Answer', text: item.answer },
-        })),
+        mainEntity: post.faq_items
+          .filter(item => (item.question || item.name) && (item.answer || item.text))
+          .map(item => ({
+            '@type': 'Question',
+            name: (item.question || item.name || '').trim(),
+            acceptedAnswer: { '@type': 'Answer', text: (item.answer || item.text || '').trim() },
+          })),
       }
     : null;
 
