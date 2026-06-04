@@ -18,7 +18,7 @@
 
 ## 🎯 PROJECT OVERVIEW & CURRENT STATUS
 
-### ✅ Completed Milestones (May 2026)
+### ✅ Completed Milestones (May–June 2026)
 
 #### Technical Infrastructure:
 - [x] Website live: https://www.calius.digital
@@ -28,18 +28,29 @@
 - [x] Google AdSense monetization active (ca-pub-7911744590560254)
 - [x] Schema markup optimized (Organization, no duplicate FAQPage)
 - [x] HTTPS + Service Area Business schema
+- [x] **FAQ accordion fix** — Googlebot dapat crawl jawaban FAQ (4 Juni 2026)
 
-#### Content Assets:
-- [x] 5 blog articles published
-- [x] Article #1 "Panduan Lengkap Landing Page 2026" ready (10,000+ words)
-- [x] Upload scripts & documentation complete
-- [x] Internal linking strategy documented
+#### Content Assets (June 4, 2026):
+- [x] 7 blog articles live di production
+- [x] Article #1 "Panduan Lengkap Landing Page 2026" live — `/blog/panduan-lengkap-landing-page-2026`
+- [x] Article #2 "Web E-Commerce" live — `/blog/web-ecommerce-panduan-toko-online-2026`
+- [x] Internal linking 5 → pillar article selesai
+- [x] Internal linking pillar article → 5 artikel selesai
+- [x] Template showcase block di semua 7 artikel (link langsung ke `/templates/{slug}`)
+- [x] Backlink Article #2 di 3 artikel terkait
+- [x] FAQ schema bug fixed ("Item tanpa nama" di GSC)
 
 #### SEO Foundation:
 - [x] Google Search Console connected
 - [x] Query "landing page umroh" → Position 11 (page 2)
 - [x] Query "calius" → Position 21.5
 - [x] E-E-A-T framework implemented
+- [x] FAQ rich results fix deployed ke production
+
+#### Codebase Cleanup (June 4, 2026):
+- [x] 12 file obsolete dihapus dari root (one-time scripts selesai dijalankan)
+- [x] 2 file dengan hardcoded credentials dihapus (security risk teratasi)
+- [x] Scripts yang tersisa: `update_blog.py`, `update_internal_links.py`, `add_template_links.py`, `add_backlinks_artikel2.py`
 
 ---
 
@@ -249,9 +260,12 @@ CLS (Cumulative Layout Shift): < 0.1
 
 #### 🗓️ BULAN 1 (Minggu 1-4): Foundation - Tier 1 Keywords
 
-##### ✅ Minggu 1: Main Pillar Article (COMPLETED)
+##### ✅ Minggu 1: Main Pillar Article (SELESAI ✅)
 **Article:** "Panduan Lengkap Landing Page: Cara Membuat, Contoh & Template Gratis 2026"
-- **Status:** ✅ Content ready, pending upload
+- **Status:** ✅ LIVE — https://www.calius.digital/blog/panduan-lengkap-landing-page-2026
+- **ID:** `b990feb9-e208-48f3-93b9-4d26f9581479`
+- **Upload Date:** 1 Juni 2026
+- **FAQ Fix:** 4 Juni 2026 (Googlebot crawlable)
 - **File:** `artikel_panduan_lengkap_landing_page.html`
 - **Target Keyword:** "apa itu landing page" (5,000/month)
 - **Word Count:** 10,000+ words
@@ -285,29 +299,38 @@ CLS (Cumulative Layout Shift): < 0.1
   - External citations to trusted sources
   - Video embeds (optional)
 
-##### Minggu 2: Supporting Article 1
-**Article:** "Web E-Commerce: Panduan Membangun Toko Online Sukses 2026"
-- **Target:** "web ecommerce" (5,000/month, +900% trend)
-- **Word Count:** 5,000+ words
-- **Focus:** E-commerce tanpa marketplace, payment gateway Indonesia
-- **Internal Links:** Link to main pillar, existing marketplace articles
-- **E-E-A-T:** Portfolio of e-commerce projects
+##### ✅ Minggu 2: Supporting Article 1 (SELESAI ✅)
+**Article:** "Web E-Commerce: Panduan Lengkap Membangun Toko Online Sukses 2026"
+- **Status:** ✅ LIVE — https://www.calius.digital/blog/web-ecommerce-panduan-toko-online-2026
+- **ID:** `29e06695-7d8a-4f50-9f1a-f0a63fa67b21`
+- **Upload Date:** 4 Juni 2026
+- **Target Keyword:** "web ecommerce" (5,000/month)
+- **Word Count:** ~3,500 words
+- **SEO Title:** "Web E-Commerce: Panduan Toko Online Sukses 2026" (47 chars ✅)
+- **Meta Desc:** 152 chars + CTA ✅
+- **Internal Links:** 6 links ke artikel existing ✅
+- **External Links:** 2 (Google Merchant Center, developers.google.com) ✅
+- **FAQ Schema:** 8 items ✅
+- **Template Showcase:** Skincare E-Commerce block ✅
+- **Backlinks dari:** cara-jualan-online, biaya-marketplace, website-lemot ✅
 
-##### Minggu 3: Supporting Article 2
+##### ⏳ Minggu 3: Supporting Article 2 (BELUM DIMULAI)
 **Article:** "Landing Page Adalah: Pengertian, Fungsi, dan Cara Optimasinya"
 - **Target:** "landing page adalah" (5,000/month)
 - **Word Count:** 4,000+ words
 - **Internal Links:** Link to main pillar, pricing articles
 - **Schema:** Article + FAQ schema
 - **CTA:** Lead to template downloads
+- **Status:** ⏳ Dijadwalkan Minggu 3 Juni 2026
 
-##### Minggu 4: Quick Win Long-tail
+##### ⏳ Minggu 4: Quick Win Long-tail (BELUM DIMULAI)
 **Article:** "15+ Template Landing Page Gratis Terbaik (Download HTML/CSS)"
 - **Target:** "template landing page gratis" (50/month, low competition)
 - **Word Count:** 3,000+ words
 - **Lead Magnet:** ZIP file with 5 free HTML/CSS templates
 - **Email Capture:** Required for download
 - **Expected:** Rank top 3 within 1-2 months
+- **Status:** ⏳ Dijadwalkan Minggu 4 Juni 2026
 
 ---
 
@@ -656,97 +679,131 @@ Estimasi selesai: 1x24 jam kerja.
 
 ### 🔥 URGENT (This Week)
 
-#### 1. Upload Article #1 to Production Database
-**Status:** ✅ SELESAI — 4 Juni 2026
+#### 1. Upload Article #1 — Panduan Lengkap Landing Page 2026
+**Status:** ✅ SELESAI — 1 Juni 2026
 **URL:** https://www.calius.digital/blog/panduan-lengkap-landing-page-2026
 **ID:** `b990feb9-e208-48f3-93b9-4d26f9581479`
 
 ---
 
-#### 2. Update 5 Existing Articles with Reciprocal Links
+#### 2. Upload Article #2 — Web E-Commerce
+**Status:** ✅ SELESAI — 4 Juni 2026
+**URL:** https://www.calius.digital/blog/web-ecommerce-panduan-toko-online-2026
+**ID:** `29e06695-7d8a-4f50-9f1a-f0a63fa67b21`
+**Script:** `upload_artikel_2.py`
+
+---
+
+#### 3. Update 5 Artikel dengan Reciprocal Links ke Pillar
 **Status:** ✅ SELESAI — 4 Juni 2026
 **Script:** `update_internal_links.py`
-**Checklist:**
-- [x] biaya-admin-marketplace (Solusi section) — 5415 → 5608 chars
-- [x] cara-jualan-online (Langkah 1 section) — 5143 → 5346 chars
-- [x] template-rental-mobil (7 Fitur section) — 5112 → 5311 chars
-- [x] contoh-landing-page-umroh (new H2 at end) — 5464 → 5844 chars
-- [x] website-toko-lemot (Solusi section) — 6150 → 6343 chars
+- [x] biaya-admin-marketplace (Solusi section)
+- [x] cara-jualan-online (Langkah 1 section)
+- [x] template-rental-mobil (7 Fitur section)
+- [x] contoh-landing-page-umroh (new H2 at end)
+- [x] website-toko-lemot (Solusi section)
 
 ---
 
-#### 3. Submit to Google Search Console
-**Timeline:** Segera
-**Actions:**
-- [ ] Submit URL: `https://www.calius.digital/blog/panduan-lengkap-landing-page-2026`
-- [ ] Request indexing ← **NEXT ACTION**
-- [ ] Check mobile usability
-- [ ] Test rich results (Article + FAQ schema)
+#### 4. Fix FAQ Schema Error di Google Search Console
+**Status:** ✅ SELESAI — 4 Juni 2026
+**Root cause:** `{open && <div>}` menyebabkan Googlebot tidak bisa crawl jawaban
+**Fix:** `className={open ? 'block' : 'hidden'}` + microdata itemProp
+**File:** `frontend/src/pages/BlogDetailPage.js`
+- [x] Accordion selalu ada di DOM (hidden via CSS)
+- [x] itemScope/itemProp microdata ditambahkan
+- [x] JSON-LD filter item kosong
+- [x] Build + deploy ke Vercel ✅
 
 ---
 
-#### 4. Social Media Promotion
-**Timeline:** This week
-**Channels:**
-- [ ] Facebook Page post with key takeaways
-- [ ] Instagram carousel (10 slides with highlights)
-- [ ] LinkedIn article excerpt + link
-- [ ] Relevant Facebook groups (5-10 groups)
-- [ ] Telegram groups (if applicable)
+#### 5. Template Showcase Block di Semua Artikel
+**Status:** ✅ SELESAI — 4 Juni 2026
+**Script:** `add_template_links.py`
+- [x] web-ecommerce → Skincare E-Commerce
+- [x] contoh-umroh → Umroh Premium + TravelGo
+- [x] template-rental-mobil → Dealer Motor
+- [x] panduan-landing-page → Skincare + TravelGo + Sepeda Listrik
+- [x] cara-jualan-online → Skincare E-Commerce
+- [x] biaya-marketplace → Skincare E-Commerce
+- [x] website-lemot → Skincare E-Commerce
+
+---
+
+#### 6. Backlink Article #2 ke 3 Artikel Terkait
+**Status:** ✅ SELESAI — 4 Juni 2026
+**Script:** `add_backlinks_artikel2.py`
+- [x] cara-jualan-online → link ke Article #2
+- [x] biaya-marketplace → link ke Article #2
+- [x] website-lemot → link ke Article #2
+
+---
+
+#### 7. Codebase Cleanup
+**Status:** ✅ SELESAI — 4 Juni 2026
+- [x] 12 file obsolete dihapus
+- [x] 2 file dengan hardcoded credentials dihapus
+
+---
+
+### 🔥 URGENT — NEXT ACTIONS (Minggu Ini)
+
+#### 8. Submit ke Google Search Console
+**Status:** ⏳ BELUM
+- [ ] Request indexing: `https://www.calius.digital/blog/panduan-lengkap-landing-page-2026`
+- [ ] Request indexing: `https://www.calius.digital/blog/web-ecommerce-panduan-toko-online-2026`
+- [ ] Test FAQ rich results setelah fix (URL Inspection tool)
+- [ ] Check mobile usability kedua artikel
+
+---
+
+#### 9. Social Media Promotion Article #1 & #2
+**Status:** ⏳ BELUM
+- [ ] Facebook Page post dengan key takeaways
+- [ ] Instagram carousel (10 slides highlights)
+- [ ] Relevant Facebook groups (5–10 groups)
+- [ ] WhatsApp broadcast ke existing contacts
 
 ---
 
 ### 📅 NEXT 2 WEEKS
 
-#### 5. Monitor & Optimize Article #1
+#### 10. Monitoring Article #1 & #2
 **Daily Check:**
-- [ ] Google Search Console impressions (target: 50-100 in week 1)
-- [ ] CTR percentage (target: 3-5%)
-- [ ] Average position for "apa itu landing page"
-- [ ] Page speed (target: <3s)
+- [ ] GSC impressions (target: 50–100/minggu per artikel)
+- [ ] CTR (target: 3–5%)
+- [ ] Average position untuk "apa itu landing page" dan "web ecommerce"
 - [ ] Bounce rate (target: <60%)
-
-**Optimization Actions:**
-- If bounce rate high → Improve intro section
-- If CTR low → Update meta description
-- If ranking stuck → Add more backlinks
 
 ---
 
-#### 6. Start Article #2: "Web E-Commerce"
-**Target Publish:** Week 2
-**Preparation:**
-- [ ] Keyword research for "web ecommerce"
-- [ ] Outline structure (10 H2 sections)
-- [ ] Collect case study data
-- [ ] Source images from Unsplash
-- [ ] Draft 5,000+ words
-- [ ] Add 6-8 internal links
-- [ ] Create FAQ schema
+#### 11. Article #3 — "Landing Page Adalah"
+**Target Publish:** Minggu 3 Juni 2026
+- [ ] Outline (8–10 H2)
+- [ ] Draft 4,000+ words
+- [ ] 6+ internal links
+- [ ] FAQ schema 6–8 items
+- [ ] Template showcase block
 
 ---
 
 ### 📆 NEXT MONTH
 
-#### 7. Publish Articles #3 & #4
-- **Week 3:** "Landing Page Adalah" (4,000 words)
-- **Week 4:** "Template Landing Page Gratis" (3,000 words + ZIP download)
+#### 12. Article #4 — "Template Landing Page Gratis"
+- **Target:** Minggu 4 Juni 2026
+- [ ] 3,000+ words + ZIP download lead magnet
+- [ ] Email capture form
 
-#### 8. Build Backlinks
-**Target:** 5-10 backlinks in first month
-**Actions:**
-- [ ] Write 1 guest post for tech blog
-- [ ] Answer 5 Quora questions with article links
-- [ ] Submit to 3 web directories
-- [ ] Reach out to 2 influencers for collaboration
+#### 13. Build Backlinks
+- [ ] 1 guest post di tech blog Indonesia
+- [ ] 5 Quora Indonesia answers dengan article links
+- [ ] 3 web directories submission
 
-#### 9. Add Honda Template to Marketplace
-**Actions:**
-- [ ] Login to admin panel
-- [ ] Add template with data (see Template Product Plan section)
+#### 14. Add Honda Template ke Marketplace Admin Panel
+- [ ] Login admin → tambah template Honda Dealer
 - [ ] Upload demo screenshots
-- [ ] Set "Pesan via WhatsApp" button with pre-filled message
-- [ ] Test purchase flow
+- [ ] Set WhatsApp order button dengan pre-filled message
+- [ ] Test purchase flow end-to-end
 
 ---
 
@@ -928,13 +985,17 @@ ACTION ITEMS:
 
 ### 📁 Key Files
 
-| File | Purpose | Location |
-|------|---------|----------|
-| **artikel_panduan_lengkap_landing_page.html** | Article #1 content (10,000+ words) | Root directory |
-| **upload_artikel_final.py** | Upload script with auth | Root directory |
-| **UPLOAD_GUIDE.md** | Step-by-step upload instructions | Root directory |
-| **RUN_UPLOAD.ps1** | Quick command script | Root directory |
-| **PROJECT_MASTER_ROADMAP.md** | This master document | Root directory |
+| File | Purpose | Status |
+|------|---------|--------|
+| **artikel_panduan_lengkap_landing_page.html** | Article #1 source content (10,000+ words) | Backup — artikel sudah live |
+| **update_internal_links.py** | Update 5 artikel dengan link ke pillar | ✅ Sudah dijalankan |
+| **update_blog.py** | General update artikel (headings, spacing, links) | Tersedia untuk update future |
+| **upload_artikel_2.py** | Upload Article #2 web-ecommerce | ✅ Sudah dijalankan |
+| **add_backlinks_artikel2.py** | Backlink Article #2 ke artikel lain | ✅ Sudah dijalankan |
+| **add_template_links.py** | Sisipkan template showcase block ke semua artikel | ✅ Sudah dijalankan |
+| **admin_backend_test.py** | Testing admin API endpoints | Testing tool |
+| **backend_test.py** | Testing public API endpoints | Testing tool |
+| **PROJECT_MASTER_ROADMAP.md** | This master document | 🟢 v1.2 aktif |
 
 ### 🔗 Important URLs
 
@@ -984,10 +1045,18 @@ This master roadmap consolidates all strategic planning for Calius Digital's gro
 
 **Document Created:** May 31, 2026  
 **Last Updated:** June 4, 2026  
-**Version:** 1.1  
+**Version:** 1.2  
 **Owner:** Calius Digital Team
 
 ### 📋 Changelog
-- **v1.1 (June 4, 2026):** Article #1 confirmed live. Internal links di-update di 5 artikel via `update_internal_links.py`. Next: GSC indexing request + Article #2 "Web E-Commerce".
+- **v1.0 (May 31, 2026):** Initial roadmap — strategi SEO, content calendar, template plan, KPIs.
+- **v1.1 (June 4, 2026):** Article #1 confirmed live. Internal links di-update di 5 artikel via `update_internal_links.py`.
+- **v1.2 (June 4, 2026):**
+  - ✅ Article #2 "Web E-Commerce" live (`/blog/web-ecommerce-panduan-toko-online-2026`)
+  - ✅ FAQ schema bug fixed ("Item tanpa nama" di GSC) — FaqItem accordion fix
+  - ✅ Template showcase block ditambahkan ke semua 7 artikel
+  - ✅ Backlink Article #2 di 3 artikel terkait
+  - ✅ Codebase cleanup: 12 file obsolete + 2 file credential leak dihapus
+  - ⏳ Next: GSC indexing request, social media promo, Article #3
 
-**Status:** ✅ Execution in progress 🚀
+**Status:** ✅ Execution in progress — 2 artikel live, FAQ fix deployed 🚀
