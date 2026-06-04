@@ -57,6 +57,6 @@
     { "source": "/blog/:slug", "destination": "/api/index.py" },
     { "source": "/templates/:slug", "destination": "/api/index.py" },
     { "source": "/template/:slug", "destination": "/api/index.py" },
-    { "source": "/((?!static|favicon|manifest|robots|logo|data).*)", "destination": "/index.html" }
+    { "source": "/((?!static|favicon|manifest|robots|ads|logo|data).*)", "destination": "/index.html" }
   ]
 }
