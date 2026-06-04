@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --font-playfair: var(--font-playfair);
+  --font-plus-jakarta: var(--font-plus-jakarta);
+  --color-gold: #D4AF37;
+  --color-gold-light: #E8D07A;
+  --color-gold-dark: #A88A1A;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-zinc-800 bg-white antialiased;
+  }
+}
