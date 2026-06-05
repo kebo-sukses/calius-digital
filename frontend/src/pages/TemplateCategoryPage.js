@@ -71,6 +71,31 @@ const FREE_TEMPLATES = [
       'Animasi Framer Motion + dark theme',
     ],
   },
+  {
+    id: 'fashion-template-free',
+    slug: 'fashion-template-free',
+    name: 'Fashion Template',
+    name_id: 'Template Fashion',
+    category: 'free',
+    description: 'Premium fashion marketplace template built with Next.js 16, TypeScript, Tailwind CSS v4, and Framer Motion. Feels like a $150 template — completely free!',
+    description_id: 'Template fashion marketplace premium dengan Next.js 16, TypeScript, Tailwind CSS v4, dan Framer Motion. Terasa seperti template senilai $150 — gratis untuk semua!',
+    image: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=600&h=450&fit=crop&fm=webp&auto=format&q=60',
+    price: 0,
+    is_featured: true,
+    is_new: true,
+    is_free: true,
+    demo_url: 'https://fashion-template-free.vercel.app/',
+    download_url: 'https://github.com/kebo-sukses/fashion-template-free/archive/refs/heads/main.zip',
+    github_url: 'https://github.com/kebo-sukses/fashion-template-free',
+    features: [
+      'Next.js 16 (App Router) + TypeScript + Tailwind CSS v4',
+      'Flash Sale section dengan countdown timer & stock progress bar',
+      'Announcement bar sliding marquee + sticky glassmorphism navbar',
+      'Hero split layout, Category showcase, Testimonial masonry grid',
+      'FAQ accordion + Footer dengan payment badges (GoPay, OVO, DANA, QRIS)',
+      'Framer Motion animations + Playfair Display typography',
+    ],
+  },
 ];
 
 const CATEGORY_META = {
@@ -185,10 +210,20 @@ const TemplateCategoryPage = () => {
       return;
     }
 
-    // Free category: use static list, no API call needed
+    // Free category: merge hardcoded + any DB-added free templates
     if (category === 'free') {
       setTemplates(FREE_TEMPLATES);
       setLoading(false);
+      // Also fetch from DB to include any newly added free templates
+      apiService.getTemplates('free').then((data) => {
+        if (data && data.length > 0) {
+          const hardcodedSlugs = new Set(FREE_TEMPLATES.map((t) => t.slug));
+          const dbOnly = data.filter((t) => !hardcodedSlugs.has(t.slug));
+          if (dbOnly.length > 0) {
+            setTemplates([...FREE_TEMPLATES, ...dbOnly]);
+          }
+        }
+      }).catch(() => {});
       return;
     }
 
@@ -442,7 +477,12 @@ const TemplateCategoryPage = () => {
                       <span className="text-xs px-2 py-1 rounded-full bg-green-500/20 text-green-400 border border-green-500/30">MIT License</span>
                     </div>
                     <h3 className="text-xl font-bold text-white mb-2">
-                      {language === 'id' ? template.name_id : template.name}
+                      <Link
+                        to={`/templates/free/${template.slug}`}
+                        className="hover:text-purple-300 transition-colors"
+                      >
+                        {language === 'id' ? template.name_id : template.name}
+                      </Link>
                     </h3>
                     <p className="text-sm text-neutral-300 line-clamp-2 mb-4">
                       {language === 'id' ? template.description_id : template.description}
@@ -458,6 +498,12 @@ const TemplateCategoryPage = () => {
                       ))}
                     </div>
                     <div className="space-y-2">
+                      <Link
+                        to={`/templates/free/${template.slug}`}
+                        className="flex items-center justify-center gap-2 w-full px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-neutral-300 text-sm font-medium transition-all border border-white/10"
+                      >
+                        {language === 'id' ? 'Lihat Detail →' : 'View Details →'}
+                      </Link>
                       <a href={template.demo_url} target="_blank" rel="noopener noreferrer"
                         className="flex items-center justify-center gap-2 w-full px-4 py-2.5 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-semibold transition-all shadow-lg shadow-purple-500/25">
                         <ExternalLink size={16} />

@@ -38,6 +38,7 @@ export const adminApi = {
   createTemplate: (data) => api.post('/admin/templates', data).then(res => res.data),
   updateTemplate: (id, data) => api.put(`/admin/templates/${id}`, data).then(res => res.data),
   deleteTemplate: (id) => api.delete(`/admin/templates/${id}`).then(res => res.data),
+  seedFreeTemplates: () => api.post('/admin/seed-free-templates').then(res => res.data),
 
   // Portfolio
   getPortfolio: () => api.get('/portfolio').then(res => res.data),

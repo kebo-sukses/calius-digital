@@ -22,7 +22,8 @@ const AdminTemplates = () => {
     slug: '', name: '', category: 'business', price: 0, sale_price: null,
     price_usd: null, sale_price_usd: null,
     description_id: '', description_en: '', features: [], technologies: [],
-    demo_url: '', admin_url: '', image: '', images: [], is_featured: false, is_bestseller: false, is_new: false
+    demo_url: '', admin_url: '', download_url: '', github_url: '',
+    image: '', images: [], is_featured: false, is_bestseller: false, is_new: false, is_free: false
   });
 
   useEffect(() => { fetchTemplates(); }, []);
@@ -43,13 +44,14 @@ const AdminTemplates = () => {
       slug: '', name: '', category: 'business', price: 0, sale_price: null,
       price_usd: null, sale_price_usd: null,
       description_id: '', description_en: '', features: [], technologies: [],
-      demo_url: '', admin_url: '', image: '', images: [], is_featured: false, is_bestseller: false, is_new: false
+      demo_url: '', admin_url: '', download_url: '', github_url: '',
+      image: '', images: [], is_featured: false, is_bestseller: false, is_new: false, is_free: false
     });
     setEditingId(null);
   };
 
   const handleEdit = (template) => {
-    setForm({ ...template, sale_price: template.sale_price || null, price_usd: template.price_usd || null, sale_price_usd: template.sale_price_usd || null });
+    setForm({ ...template, sale_price: template.sale_price || null, price_usd: template.price_usd || null, sale_price_usd: template.sale_price_usd || null, download_url: template.download_url || '', github_url: template.github_url || '', is_free: template.is_free || false });
     setEditingId(template.id);
     setDialogOpen(true);
   };
@@ -110,6 +112,16 @@ const AdminTemplates = () => {
 
   if (loading) return <div className="flex justify-center py-12"><div className="animate-spin w-8 h-8 border-2 border-[#FF4500] border-t-transparent rounded-full" /></div>;
 
+  const handleSeedFreeTemplates = async () => {
+    try {
+      const result = await adminApi.seedFreeTemplates();
+      toast({ title: 'Success', description: result.message });
+      fetchTemplates();
+    } catch (error) {
+      toast({ title: 'Error', description: 'Failed to seed free templates', variant: 'destructive' });
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
@@ -119,6 +131,9 @@ const AdminTemplates = () => {
         </div>
         <Button onClick={() => { resetForm(); setDialogOpen(true); }} className="bg-[#FF4500] hover:bg-[#FF5722]">
           <Plus size={18} className="mr-2" /> Add Template
+        </Button>
+        <Button onClick={handleSeedFreeTemplates} variant="outline" className="border-purple-500/50 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300">
+          <Plus size={18} className="mr-2" /> Seed Free Templates
         </Button>
       </div>
 
@@ -135,9 +150,15 @@ const AdminTemplates = () => {
                   <p className="text-xs text-neutral-500">{template.category}</p>
                 </div>
                 <div className="text-right">
-                  <span className="text-[#FF4500] font-bold">Rp {formatPrice(template.sale_price || template.price)}</span>
-                  {(template.sale_price_usd || template.price_usd) && (
-                    <div className="text-xs text-neutral-400">${template.sale_price_usd || template.price_usd}</div>
+                  {template.is_free ? (
+                    <span className="text-xs font-bold px-2 py-1 rounded-full bg-gradient-to-r from-purple-500 to-blue-500 text-white">GRATIS</span>
+                  ) : (
+                    <>
+                      <span className="text-[#FF4500] font-bold">Rp {formatPrice(template.sale_price || template.price)}</span>
+                      {(template.sale_price_usd || template.price_usd) && (
+                        <div className="text-xs text-neutral-400">${template.sale_price_usd || template.price_usd}</div>
+                      )}
+                    </>
                   )}
                 </div>
               </div>
@@ -168,6 +189,7 @@ const AdminTemplates = () => {
               <div>
                 <Label>Category</Label>
                 <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="w-full h-10 px-3 rounded-md bg-neutral-800 border border-white/10 text-white">
+                  <option value="free">Free / Gratis</option>
                   <option value="business">Business</option>
                   <option value="ecommerce">E-Commerce</option>
                   <option value="portfolio">Portfolio</option>
@@ -233,6 +255,17 @@ const AdminTemplates = () => {
               </div>
             </div>
 
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label>Download URL (for free templates)</Label>
+                <Input value={form.download_url || ''} onChange={(e) => setForm({ ...form, download_url: e.target.value || '' })} placeholder="https://github.com/.../archive/main.zip" className="bg-neutral-800 border-white/10 text-white" />
+              </div>
+              <div>
+                <Label>GitHub URL (for free templates)</Label>
+                <Input value={form.github_url || ''} onChange={(e) => setForm({ ...form, github_url: e.target.value || '' })} placeholder="https://github.com/kebo-sukses/..." className="bg-neutral-800 border-white/10 text-white" />
+              </div>
+            </div>
+
             <div>
               <Label>Image</Label>
               <div className="flex gap-4 items-center mt-2">
@@ -247,6 +280,10 @@ const AdminTemplates = () => {
             </div>
 
             <div className="flex gap-6">
+              <label className="flex items-center gap-2">
+                <Switch checked={form.is_free} onCheckedChange={(v) => setForm({ ...form, is_free: v })} />
+                <span className="text-neutral-300">Free / Gratis</span>
+              </label>
               <label className="flex items-center gap-2">
                 <Switch checked={form.is_featured} onCheckedChange={(v) => setForm({ ...form, is_featured: v })} />
                 <span className="text-neutral-300">Featured</span>

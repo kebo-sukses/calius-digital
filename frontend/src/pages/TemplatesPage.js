@@ -105,6 +105,32 @@ const freeTemplates = [
       'Animasi Framer Motion + dark theme'
     ]
   },
+  {
+    id: 'fashion-template-free',
+    slug: 'fashion-template-free',
+    name: 'Fashion Template',
+    name_id: 'Template Fashion',
+    category: 'free',
+    description: 'Premium fashion marketplace template built with Next.js 16, TypeScript, Tailwind CSS v4, and Framer Motion. Feels like a $150 template — completely free!',
+    description_id: 'Template fashion marketplace premium dengan Next.js 16, TypeScript, Tailwind CSS v4, dan Framer Motion. Terasa seperti template senilai $150 — gratis untuk semua!',
+    image: 'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=600&h=450&fit=crop&fm=webp&auto=format&q=60',
+    price: 0,
+    sale_price: 0,
+    is_featured: true,
+    is_new: true,
+    is_free: true,
+    demo_url: 'https://fashion-template-free.vercel.app/',
+    download_url: 'https://github.com/kebo-sukses/fashion-template-free/archive/refs/heads/main.zip',
+    github_url: 'https://github.com/kebo-sukses/fashion-template-free',
+    features: [
+      'Next.js 16 (App Router) + TypeScript + Tailwind CSS v4',
+      'Flash Sale section dengan countdown timer & stock progress bar',
+      'Announcement bar sliding marquee + sticky glassmorphism navbar',
+      'Hero split layout, Category showcase, Testimonial masonry grid',
+      'FAQ accordion + Footer dengan payment badges (GoPay, OVO, DANA, QRIS)',
+      'Framer Motion animations + Playfair Display typography'
+    ]
+  },
 ];
 
 const TemplatesPage = () => {

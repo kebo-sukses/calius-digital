@@ -254,16 +254,22 @@ class TemplateCreate(BaseModel):
     category: str
     price: int
     sale_price: Optional[int] = None
+    price_usd: Optional[int] = None
+    sale_price_usd: Optional[int] = None
     description_id: str
     description_en: str
     features: List[str] = []
     technologies: List[str] = []
     demo_url: Optional[str] = None
+    admin_url: Optional[str] = None
+    download_url: Optional[str] = None
+    github_url: Optional[str] = None
     image: str = ""
     images: List[str] = []
     is_featured: bool = False
     is_bestseller: bool = False
     is_new: bool = False
+    is_free: bool = False
 
 class PortfolioCreate(BaseModel):
     title: str
@@ -383,9 +389,11 @@ async def get_templates(category: Optional[str] = None):
     if category and category != "all":
         query["category"] = category
     templates = await db.templates.find(query, {"_id": 0}).to_list(100)
-    if not templates and not category:
-        # Fallback to defaults only when DB is completely empty (no category filter)
-        return get_default_templates()
+    if not templates:
+        defaults = get_default_templates()
+        if not category or category == "all":
+            return defaults
+        return [t for t in defaults if t.get("category") == category]
     return templates
 
 @api_router.get("/templates/{slug}")
@@ -622,6 +630,21 @@ async def delete_template(template_id: str, user: dict = Depends(require_editor)
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Template not found")
     return {"success": True}
+
+@api_router.post("/admin/seed-free-templates")
+async def seed_free_templates(user: dict = Depends(require_editor)):
+    free_defaults = [t for t in get_default_templates() if t.get("is_free")]
+    seeded = []
+    skipped = []
+    for t in free_defaults:
+        existing = await db.templates.find_one({"slug": t["slug"]})
+        if not existing:
+            template_data = {**t, "id": str(uuid.uuid4()), "created_at": datetime.now(timezone.utc).isoformat()}
+            await db.templates.insert_one(template_data)
+            seeded.append(t["slug"])
+        else:
+            skipped.append(t["slug"])
+    return {"seeded": seeded, "skipped": skipped, "message": f"Seeded {len(seeded)} templates, skipped {len(skipped)} (already exist)"}
 
 # Services Management
 @api_router.post("/admin/services")
@@ -1057,6 +1080,9 @@ def get_default_services():
 
 def get_default_templates():
     return [
+        {"id": "free-1", "slug": "portfolio-template-free", "name": "Portfolio Template", "category": "free", "price": 0, "sale_price": None, "price_usd": None, "sale_price_usd": None, "is_free": True, "description_id": "Template portfolio modern dengan Next.js 14 dan TypeScript. Siap pakai dalam 10 menit, tinggal edit satu file konfigurasi!", "description_en": "Modern portfolio template with Next.js 14 and TypeScript. Ready to use in 10 minutes, just edit one config file!", "features": ["Next.js 14 + TypeScript + Tailwind CSS", "6 section siap pakai", "Single config file untuk kustomisasi", "Fully responsive & SEO optimized", "Integrasi WhatsApp", "Dokumentasi lengkap"], "technologies": ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion"], "demo_url": "https://portfolio-template-free-plum.vercel.app/", "download_url": "https://github.com/kebo-sukses/portfolio-template-free/archive/refs/heads/main.zip", "github_url": "https://github.com/kebo-sukses/portfolio-template-free", "admin_url": None, "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", "images": [], "downloads": 0, "rating": 5.0, "is_featured": True, "is_bestseller": False, "is_new": True},
+        {"id": "free-2", "slug": "company-profil-free-page", "name": "Company Profile Template", "category": "free", "price": 0, "sale_price": None, "price_usd": None, "sale_price_usd": None, "is_free": True, "description_id": "Landing page company profile profesional dengan 9 section, SEO lengkap, JSON-LD schema, breadcrumb. Edit satu file konfigurasi untuk kustomisasi penuh.", "description_en": "Professional company profile landing page with 9 sections, SEO-optimized, JSON-LD schema, breadcrumb. Edit one config file to customize everything.", "features": ["Next.js 14 + TypeScript + Tailwind CSS", "9 section: Hero, Layanan, Portfolio, Tim, FAQ, CTA", "SEO lengkap: JSON-LD, sitemap, robots.txt", "Breadcrumb schema sesuai standar Google", "Single config file untuk kustomisasi", "Animasi Framer Motion + dark theme"], "technologies": ["Next.js 14", "TypeScript", "Tailwind CSS", "Framer Motion"], "demo_url": "https://company-profil-free-page.vercel.app/", "download_url": "https://github.com/kebo-sukses/company-profil-free-page/archive/refs/heads/main.zip", "github_url": "https://github.com/kebo-sukses/company-profil-free-page", "admin_url": None, "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800", "images": [], "downloads": 0, "rating": 5.0, "is_featured": True, "is_bestseller": False, "is_new": True},
+        {"id": "free-3", "slug": "fashion-template-free", "name": "Fashion Template", "category": "free", "price": 0, "sale_price": None, "price_usd": None, "sale_price_usd": None, "is_free": True, "description_id": "Template fashion marketplace premium dengan Next.js 16, TypeScript, Tailwind CSS v4, dan Framer Motion. Terasa seperti template senilai $150 — gratis untuk semua!", "description_en": "Premium fashion marketplace template built with Next.js 16, TypeScript, Tailwind CSS v4, and Framer Motion. Feels like a $150 template — completely free!", "features": ["Next.js 16 (App Router) + TypeScript + Tailwind CSS v4", "Flash Sale section dengan countdown timer & stock progress bar", "Announcement bar sliding marquee + sticky glassmorphism navbar", "Hero split layout, Category showcase, Testimonial masonry grid", "FAQ accordion + Footer dengan payment badges (GoPay, OVO, DANA, QRIS)", "Framer Motion animations + Playfair Display typography"], "technologies": ["Next.js 16", "TypeScript", "Tailwind CSS v4", "Framer Motion", "Lucide React"], "demo_url": "https://fashion-template-free.vercel.app/", "download_url": "https://github.com/kebo-sukses/fashion-template-free/archive/refs/heads/main.zip", "github_url": "https://github.com/kebo-sukses/fashion-template-free", "admin_url": None, "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800", "images": [], "downloads": 0, "rating": 5.0, "is_featured": True, "is_bestseller": False, "is_new": True},
         {"id": "1", "slug": "corporate-pro", "name": "Corporate Pro Business", "category": "business", "price": 750000, "sale_price": None, "description_id": "Template bisnis korporat profesional dengan desain modern.", "description_en": "Professional corporate business template with modern design.", "features": ["Responsive Design", "SEO Optimized", "Contact Form", "12 Pages"], "technologies": ["HTML5", "CSS3", "JavaScript", "Bootstrap 5"], "demo_url": "https://demo.calius.digital/corporate-pro", "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800", "images": [], "downloads": 150, "rating": 4.9, "is_featured": True, "is_bestseller": False, "is_new": True},
         {"id": "2", "slug": "shopmax-ecommerce", "name": "ShopMax E-Commerce", "category": "ecommerce", "price": 1200000, "sale_price": 950000, "description_id": "Solusi e-commerce lengkap dengan keranjang belanja dan checkout.", "description_en": "Complete e-commerce solution with shopping cart and checkout.", "features": ["Product Catalog", "Shopping Cart", "Checkout System", "18 Pages"], "technologies": ["HTML5", "CSS3", "JavaScript", "Vue.js"], "demo_url": "https://demo.calius.digital/shopmax", "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800", "images": [], "downloads": 280, "rating": 4.8, "is_featured": True, "is_bestseller": True, "is_new": False},
         {"id": "3", "slug": "creative-portfolio", "name": "Creative Portfolio Pro", "category": "portfolio", "price": 600000, "sale_price": None, "description_id": "Template portfolio kreatif untuk desainer dan fotografer.", "description_en": "Creative portfolio template for designers and photographers.", "features": ["Gallery Layouts", "Project Showcase", "Smooth Animations", "8 Pages"], "technologies": ["HTML5", "CSS3", "JavaScript", "GSAP"], "demo_url": "https://demo.calius.digital/portfolio", "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800", "images": [], "downloads": 95, "rating": 5.0, "is_featured": True, "is_bestseller": False, "is_new": True},
